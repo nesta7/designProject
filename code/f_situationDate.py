@@ -22,16 +22,21 @@ import string
 import time
 import datetime
 import csv
+#Pour tester le type d'OS : peut-etre inutile
 import platform
-
 typeOS=platform.system()
+#definition des differents chemins
 
+pathProject=QgsProject.instance().readPath(".")
+pathCode=os.path.join(pathProject,'code')
+pathDonnee=os.path.join(pathProject,'donnees')
+pathGeneration=os.path.join(pathDonnee,'generees')
 #Fonctions
-os.chdir(QgsProject.instance().readPath("./"))
-os.chdir('./code')
+
+os.chdir(pathCode)
 #os.chdir('/Users/Akio/Desktop/Dropbox/Design2014/code')
 
-#Exécute les différents fichiers liés (définitions de fonctions)
+#ExÃÂ©cute les diffÃÂ©rents fichiers liÃÂ©s (dÃÂ©finitions de fonctions)
 execfile('f_fetchData.py')
 execfile('f_array2raster.py')
 execfile('f_ModeleLarve.py')
@@ -44,26 +49,28 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
     col_L2 = 190
     col_L3 = 127
     col_L4 = 63
-    #création de dossier
+    '''
+    #crÃÂ©ation de dossier
     project_dir = QgsProject.instance().readPath("./")
     #Pour windows
     #dossier_dir = os.path.join(project_dir, '.\donnees\generees')
     #UNIX
     dossier_dir = os.path.join(project_dir, './donnees/generees')
-    
+
     os.chdir(QgsProject.instance().readPath("./"))
     dir_name ='.'
     #    dir_name = '/Users/Akio/Desktop/Dropbox/Design2014/donnees/generees'
-    
+
     #Windows
     #os.chdir( '.\donnees\generees')
     #Unix
     os.chdir('./donnees/generees')
-    
+    '''
+    os.chdir(pathGeneration)
     dossier = fetchDate()
-    dossier2 = 'situation' +dossier[-4:]+dossier[3:5]+dossier[:2]
+    dossier2 = 'situation_' +dossier[-4:]+dossier[3:5]+dossier[:2]
     dir_name = os.path.join(dir_name,dossier2)
-    dir_name_ori = dir_name
+    dir_name_ori = dir_name #WTF?
     k = 0
     while os.path.isdir(dir_name):
         k +=1
@@ -75,11 +82,11 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
 
     '''
     ## *************************************************************
-    ## Initialisation des données de NIVEAU et de TEMPERATURE du lac
+    ## Initialisation des donnees de NIVEAU et de TEMPERATURE du lac
     ## *************************************************************
 
     Lecture du fichier CSV contenant les mesures de hauteur 
-    et de température (Rossens) du lac
+    et de tempÃÂ©rature (Rossens) du lac
     '''
     
     csvPath = os.path.join(os.path.join(QgsProject.instance().readPath("./"),'code'),"Hauteur_Temp.csv")
@@ -108,7 +115,11 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
     os.chdir(QgsProject.instance().readPath("./"))
     rasterfn = os.path.relpath("./donnees/MNT/MNT_broc.tif")
 #    rasterfn = os.path.abspath("Users/Akio/Desktop/Dropbox/Design2014/donnees/SIG-Broc/MNT/MNT_broc.tif")
-    '''Lecture du MNT'''
+    '''
+    ## *********************************
+    ## Initialisation des donnees du MNT
+    ## *********************************
+    '''
     ds1 = gdal.Open(rasterfn)
     band1 = ds1.GetRasterBand(1)
     nodata = band1.GetNoDataValue()
@@ -118,7 +129,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
     
     '''
     ## ***********************************************
-    ## Initialisation des données raster de VEGETATION
+    ## Initialisation des donnÃÂ©es raster de VEGETATION
     ## ***********************************************
     '''
     
@@ -138,7 +149,8 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
     ## *************************************
     
     my_timestamp = 0
-    ##enregistre les cohortes devant être supprimées lorsquelles sont passees au stade adulte
+    ##enregistre les cohortes devant ÃÂªtre supprimÃÂ©es lorsquelles sont passees au stade adulte
+    ##Pas tout compris ?
     to_del = [] 
     temp_list = []
     haut_list = []
@@ -169,8 +181,8 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
             temp_list.append(float(list_temp[i])) ## ajout des temperatures du csv dans la liste de temperature
             haut_list.append(float(list_level[i]))## ajout de la hauteur d'eau du csv dans la liste des hauteurs d'eau
             niveau_aujourdhui = float(list_level[i])
-            #Mise à jour des temperatures cumulees pour la journee a venir
-            if len(timestamp_all) != 0: ##ajout des données de temps si certains stades de développement existent
+            #Mise à  jour des temperatures cumulees pour la journee a venir
+            if len(timestamp_all) != 0: ##ajout des données de temps si certains stades de dÃÂ©veloppement existent
                 array_inonde = 250*((array1 > niveau_critique) & (array1 != nodata) & (array1_vege != nodata_vege) & (array1 < niveau_aujourdhui)) ## creation des zones inondees si alt(zone)<niveau eau, zone dans le MNT, zone dans la zone d'habitat
                 #nom et chemin du raster inondation
                 tail2 = 'inonde_'+list_date[i][:10] + '.tif'
@@ -180,7 +192,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
                 #print newRasterfn42 #DBG
                 array2raster(newRasterfn42,rasterfn,array_inonde) ##transformation des tableau en raster
                 #ajout des degres_cumules et temperatures moyennes
-                deg_cumul_all = [x+temp_list[-1] for x in deg_cumul_all] ##actualisation du nombre de degres cumulés
+                deg_cumul_all = [x+temp_list[-1] for x in deg_cumul_all] ##actualisation du nombre de degres cumulÃÂ©s
                 moy_temp_all = [deg_cumul_all[x]/(my_timestamp-timestamp_all[x]) for x in range(len(deg_cumul_all))] ##actualisation des temperatures moyennes pour une zone
             #Datum à 674.5
             if niveau_hier < niveau_critique :
@@ -191,7 +203,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
                 array_all.append(array)
                 timestamp_all.append(my_timestamp)
                 if isinstance(temp_list[-1],float):
-                    deg_cumul_all.append(temp_list[-1]) ##ajout d'une nouvelle cohorte ayant les mêmes degres-jours
+                    deg_cumul_all.append(temp_list[-1]) ##ajout d'une nouvelle cohorte ayant les mÃÂªmes degres-jours
                     moy_temp_all.append(temp_list[-1])
                 else:
                     deg_cumul_all.append(15) ## valeur arbitraire
@@ -217,7 +229,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, niveau_critique
                     to_del.append(k)
                     #print to_del
             
-            ## Version simplifiée avec le temps uniquement
+            ## Version simplifiÃÂ©e avec le temps uniquement
             # for k in range(len(timestamp_all)):
                 # if (my_timestamp-timestamp_all[k]<4): ##Condition L1
                     # array_L11 += array_all[k]
