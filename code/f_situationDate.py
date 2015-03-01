@@ -38,7 +38,7 @@ typeOS=platform.system()
 ## ***********************************************
 '''
 
-#definition des differents chemins d'accÃÂÃÂ¨s aux dossiers
+#definition des differents chemins d'acces aux dossiers
 
 pathProject=QgsProject.instance().readPath(".")
 pathCode=os.path.join(pathProject,'code')
@@ -68,9 +68,9 @@ execfile('f_array2raster.py')
 execfile('f_ModeleLarve.py')
 
 '''
-## *******************************
+## ******************************************************
 ## Fonction de simulation
-## *******************************
+## ******************************************************
 '''
 
 def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.5, airePixel = 9):
@@ -78,10 +78,10 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
     Fonction narrant la situation d'inondation, Enregistrement des zones de cohortes
         Entrer les dates en 'jj/mm/aaaa'
 
-        INPUT :     startDate   date de dÃÂÃÂ©but d'analyse
+        INPUT :     startDate   date de debut d'analyse
                     endDate     date de fin d'analyse
                     timestep    interval de simulation [m] DEFAUT : 1
-                    nvCritique  niveau auquel les premiÃÂÃÂ¨res zones sont inondÃÂÃÂ©es [m.s.m] DEFAUT : 674.5
+                    nvCritique  niveau auquel les premieres zones sont inondees [m.s.m] DEFAUT : 674.5
                     airePixel   surface d'un pixel du MNT [m] DEFAUT : 9
 
         OUTPUT :
@@ -112,7 +112,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
 
     dossier = fetchDate()
     dossier2 = 'situation_' +dossier[-4:]+dossier[3:5]+dossier[:2]
-    dir_name = os.path.join(pathDonnee,dossier2)
+    dir_name = os.path.join(pathGeneration,dossier2)
     dir_name_ori = dir_name #WTF?
     k = 0
     while os.path.isdir(dir_name):
