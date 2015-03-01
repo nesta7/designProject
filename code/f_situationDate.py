@@ -50,6 +50,7 @@ pathHabitat=os.path.join(pathDonnee,'habitat')
 #Nom des fichiers des donnees a extraire
 nameMNT='MNT_broc.tif'
 nameVegetation='habitat_raster3.tif'
+
 '''
 ## *********************************************************
 ## Scripts de definitions de fonctions
@@ -57,6 +58,7 @@ nameVegetation='habitat_raster3.tif'
 
 Execution des differents scripts de definition de fonctions
 '''
+
 os.chdir(pathCode)
 #Fonctions d'importation de données
 execfile('f_fetchData.py')
