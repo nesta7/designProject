@@ -233,10 +233,10 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
             arrayTemp.append(float(listTemp[i])) ## ajout des temperatures du csv dans la liste de temperature
             arrayAltitude.append(float(listLevel[i]))## ajout de la hauteur d'eau du csv dans la liste des hauteurs d'eau
             niveau_aujourdhui = float(listLevel[i])
-            #Mise ÃÂÃÂ ÃÂÃÂ  jour des temperatures cumulees pour la journee a venir
+            #Mise a jour des temperatures cumulees pour la journee a venir
             if len(arrayTimestampAll) != 0: ##ajout des donnÃÂÃÂ©es de temps si certains stades de dÃÂÃÂ©vellopement existent
                 arrayInnonde = 250*((array1 > nvCritique) & (array1 != nodata) & (array1_vege != nodataVegetation) & (array1 < niveau_aujourdhui)) ## creation des zones inondees si alt(zone)<niveau eau, zone dans le MNT, zone dans la zone d'habitat
-                #nom et chemin du raster inondation
+                #nom et chemin du raster innondation
                 #MO : pas compris ce que c'est ils n'apparaissent nul part !
                 tail2 = 'inonde_'+listDate[i][:10] + '.tif'
                 dir_name3 = os.path.join(pathGeneration,dir_name)
@@ -256,7 +256,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
                 arrayAll.append(array)
                 arrayTimestampAll.append(my_timestamp)
                 if isinstance(arrayTemp[-1],float):
-                    arrayDegCumulAll.append(arrayTemp[-1]) ##ajout d'une nouvelle cohorte ayant les mÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂªmes degres-jours
+                    arrayDegCumulAll.append(arrayTemp[-1]) ##ajout d'une nouvelle cohorte ayant les memes degres-jours
                     arrayMoyTempAll.append(arrayTemp[-1])
                 else:
                     arrayDegCumulAll.append(15) ## valeur arbitraire
