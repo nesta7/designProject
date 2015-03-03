@@ -10,7 +10,7 @@ import time
 import datetime
 from urllib import urlopen
 
-urlLac="http://www.groupe-e.ch/node/683"
+urlLac="http://www.groupee.ch/node/683"
 urlMeteo="http://www.meteoswiss.admin.ch/web/en/weather/detailed_forecast/local_forecasts.html?language=en&plz=broc&x=0&y=0"
 
 def fetchLevel(whichDay = 'n'):

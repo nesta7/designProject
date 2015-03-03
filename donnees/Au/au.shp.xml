@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<metadata>
+	<TF>
+		<HEADERSECTION VERSION="2.2" SENDER="">
+			<ALIAS>
+			</ALIAS>
+		</HEADERSECTION>
+		<DS>
+			<GM3C BID="xBIDx1">
+				<GM3C.MD_Distribution TID="xDistribx0"/>
+				<GM3C.MD_Metadata TID="xMetadatax4740">
+					<fileIdentifier>au</fileIdentifier>
+					<language>de</language>
+					<characterSet>a8859part1</characterSet>
+					<dateStamp>2010:02:11</dateStamp>
+					<metadataStandardName>GM03Core</metadataStandardName>
+					<hierarchyLevel>
+						<GM03Core.Core.MD_ScopeCode_>
+							<value>dataset</value>
+						</GM03Core.Core.MD_ScopeCode_>
+					</hierarchyLevel>
+					<distributionInfo REF="xDistribx0"/>
+					<metadataStandardVersion>GM03 BAFU</metadataStandardVersion><hierarchyLevelName><GM3C.CharacterString_><value>dataset</value></GM3C.CharacterString_></hierarchyLevelName><dataSetURI>http://www.bafu.admin.ch/gis/02911/07403/index.html?lang=de</dataSetURI></GM3C.MD_Metadata>
+				<GM3C.CI_Citation TID="xCitationx3225x1">
+					<title><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Bundesinventar der Auengebiete von nationaler Bedeutung</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></title>
+				</GM3C.CI_Citation>
+				<GM3C.CI_Date TID="xDatex3225">
+					<date>2007:07:01</date>
+					<dateType>revision</dateType>
+					<CI_Citation REF="xCitationx3225x1"/>
+				</GM3C.CI_Date>
+				<GM3C.MD_DataIdentification TID="xDataIdentx4740">
+					<status><GM3C.MD_ProgressCode_><value>onGoing</value></GM3C.MD_ProgressCode_></status>
+					<abstract><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Auen sind als natürliche Lebensräume im Überschwemmungsbereich von Gewässern im Rückgang begriffen. Der Bundesrat setzte 1992 das Bundesinventar die  Auenverordnung mit dem  Bundesinventar mit einer ersten Serie von 169 Objekten in Kraft, welches nach der 1. Ergänzung mit 65 Gletschervorfeldern und alpinen Schwemmebenen 2001 insgesamt 227 Objekte umfasste. Nach einer systematischen Überprüfung der Auen unterhalb 1800 m wurde 2003 eine 2. Ergänzung rechtkräftig, nach einer Revision 2007 enthält das Inventar 283 Objekte. Das Bundesinventar bildet den Anhang 2 der Verordnung und enthält die genauen Gebietsabgrenzungen und die Beschreibungen der einzelnen Objekte.
+Das Aueninventar enthält Auengebiete natürlicher oder naturnaher Gewässer von mindestens 2 ha, Auengebiete an korrigierten Gewässern von mindestens 5 ha Fläche und Gletschervorfelder und alpine Schwemmebenen  von mindestens 2500 m² glazifluvial oder fluvial geprägter Auenbereich. Diese Minimalfläche weist typische Auenvegetation und steht in unmittelbarer Berührung mit dem natürlichen Gewässer oder steht in Beziehung zu einem Gewässer (Grundwasser, Ablauf usw.).</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></abstract>
+					<purpose><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText></plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></purpose>
+					<MD_Metadata REF="xMetadatax4740"/>
+					<citation REF="xCitationx3225x1"/>
+					<spatialRepresentationType>
+						<GM3C.MD_SpatialRepresentationTypeCode_>
+							<value>vector</value>
+						</GM3C.MD_SpatialRepresentationTypeCode_>
+					</spatialRepresentationType>
+					<language>
+						<CodeISO.LanguageCodeISO_>
+							<value>de<GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>de</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></value>
+						</CodeISO.LanguageCodeISO_>
+					</language>
+					<topicCategory><GM3C.MD_TopicCategoryCode_><value>environment</value></GM3C.MD_TopicCategoryCode_></topicCategory>
+				</GM3C.MD_DataIdentification>
+				<GM3C.MD_Format TID="xFormatx1">
+					<name>ESRI Shape (.shp)</name>
+					<version>9.2</version>
+				</GM3C.MD_Format>
+				<GM3C.MD_Format TID="xFormatx2">
+					<name>ESRI Geodatabase (MDB) (.mdb)</name>
+					<version>9.2</version>
+				</GM3C.MD_Format>
+				<GM3C.MD_Format TID="xFormatx3">
+					<name/>
+					<version/>
+				</GM3C.MD_Format>
+				<GM3C.MD_DistributiondistributionFormat TID="xDistrxFormatx1">
+					<MD_Distribution REF="xDistribx0"/>
+					<distributionFormat REF="xFormatx1"/>
+				</GM3C.MD_DistributiondistributionFormat>
+				<GM3C.MD_DistributiondistributionFormat TID="xDistrxFormatx2">
+					<MD_Distribution REF="xDistribx0"/>
+					<distributionFormat REF="xFormatx2"/>
+				</GM3C.MD_DistributiondistributionFormat>
+				<GM3C.MD_DistributiondistributionFormat TID="xDistrxFormatx3">
+					<MD_Distribution REF="xDistribx0"/>
+					<distributionFormat REF="xFormatx3"/>
+				</GM3C.MD_DistributiondistributionFormat>
+				<GM3C.MD_RepresentativeFraction TID="xRepFractx201">
+					<denominator>25000</denominator>
+				</GM3C.MD_RepresentativeFraction>
+				<GM3C.MD_Resolution TID="xResolx4740x0">
+					<MD_DataIdentification REF="xDataIdentx4740"/>
+					<equivalentScale REF="xRepFractx201"/>
+					<distance></distance></GM3C.MD_Resolution>
+				<GM3C.DQ_DataQuality TID="xDataQualx4740x0">
+					<MD_Metadata REF="xMetadatax4740"/>
+				</GM3C.DQ_DataQuality>
+				<GM3C.LI_Lineage TID="xLineagex4740x0">
+					<statement><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText></plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></statement>
+					<DQ_DataQuality REF="xDataQualx4740x0"/>
+				</GM3C.LI_Lineage>
+				<GM3C.RS_Identifier TID="xRsIdentx1">
+					<code><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>CH1903 (LV03)</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></code>
+				</GM3C.RS_Identifier>
+				<GM3C.MD_ReferenceSystem TID="xRefSystemx1">
+					<referenceSystemIdentifier REF="xRsIdentx1"/>
+				</GM3C.MD_ReferenceSystem>
+				<GM3C.referenceSystemInfoMD_Metadata TID="xRefSystemMetadatax4740">
+					<referenceSystemInfo REF="xRefSystemx1"/>
+					<MD_Metadata REF="xMetadatax4740"/>
+				</GM3C.referenceSystemInfoMD_Metadata>
+				<GM3C.EX_Extent TID="xExtentx4740">
+					<description><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Basiert wie die Landeskarten der Schweiz, auf dem Referenzsystem CH1903. CH1903 verwendet das Ellipsoid von Bessel (1841). Die schweizerische Kartenprojektion ist eine winkeltreue, schiefachsige Zylinderprojektion.</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></description>
+					<MD_DataIdentification REF="xDataIdentx4740"/>
+				</GM3C.EX_Extent>
+				<GM3C.EX_GeographicBoundingBox TID="xBBoxx4740">
+					<extentTypeCode>false</extentTypeCode>
+					<northBoundLatitude>47.81536</northBoundLatitude>
+					<southBoundLatitude>45.78990</southBoundLatitude>
+					<eastBoundLongitude>10.56035</eastBoundLongitude>
+					<westBoundLongitude>5.90971</westBoundLongitude>
+				</GM3C.EX_GeographicBoundingBox>
+				<GM3C.EX_ExtentgeographicElement TID="xExtentElemx4740">
+					<EX_Extent REF="xExtentx4740"/>
+					<geographicElement REF="xBBoxx4740"/>
+				</GM3C.EX_ExtentgeographicElement>
+				<GM3C.CI_Address TID="xAddressx1">
+					<streetName></streetName>
+					<streetNumber></streetNumber>
+					<postalCode>3003</postalCode>
+					<city>Bern</city>
+					<country>Schweiz</country>
+					<postBox></postBox><administrativeArea></administrativeArea><addressLine></addressLine></GM3C.CI_Address>
+				<GM3C.CI_ResponsibleParty TID="xRespPartyx1">
+					<individualFirstName>Jürg</individualFirstName>
+					<individualLastName>Schenker</individualLastName>
+					<electronicalMailAddress><GM3C.URL_><value>juerg.schenker@bafu.admin.ch</value></GM3C.URL_></electronicalMailAddress>
+					<organisationName><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Bundesamt für Umwelt BAFU</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></organisationName>
+					<organisationAcronym><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText></plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></organisationAcronym>
+					<address REF="xAddressx1"/>
+					<contactInfo/>
+					<positionName><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Verantwortl. GIS Artenmanagement</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></positionName></GM3C.CI_ResponsibleParty>
+				<GM3C.CI_Telephone TID="xTelephonex1">
+					<number>+41 31 322 80 05</number>
+					<numberType>directNumber</numberType>
+					<CI_ResponsibleParty REF="xRespPartyx1"/>
+				</GM3C.CI_Telephone>
+				<GM3C.MD_Metadatacontact TID="xMetadataContactx1">
+					<contact REF="xRespPartyx1"/>
+					<MD_Metadata REF="xMetadatax4740"/>
+					<role>
+						<GM3C.CI_RoleCode_>
+							<value>pointOfContact</value>
+						</GM3C.CI_RoleCode_>
+					</role>
+				</GM3C.MD_Metadatacontact>
+				<GM3C.CI_Address TID="xAddressx2">
+					<streetName></streetName>
+					<streetNumber></streetNumber>
+					<postalCode>3003</postalCode>
+					<city>Bern</city>
+					<country>Schweiz</country>
+					<postBox></postBox><administrativeArea></administrativeArea><addressLine></addressLine></GM3C.CI_Address>
+				<GM3C.CI_ResponsibleParty TID="xRespPartyx2">
+					<individualFirstName></individualFirstName>
+					<individualLastName>Fachstelle für Geo- und Umweltdatenmanagement</individualLastName>
+					<electronicalMailAddress><GM3C.URL_><value>gis@bafu.admin.ch</value></GM3C.URL_></electronicalMailAddress>
+					<organisationName><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Bundesamt für Umwelt BAFU</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></organisationName>
+					<organisationAcronym><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText></plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></organisationAcronym>
+					<address REF="xAddressx2"/>
+					<contactInfo/>
+					<positionName><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText></plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></positionName></GM3C.CI_ResponsibleParty>
+				<GM3C.CI_Telephone TID="xTelephonex2">
+					<number>+41 31 324 71 03</number>
+					<numberType>directNumber</numberType>
+					<CI_ResponsibleParty REF="xRespPartyx2"/>
+				</GM3C.CI_Telephone>
+				<GM3C.MD_Metadatacontact TID="xMetadataContactx2">
+					<contact REF="xRespPartyx2"/>
+					<MD_Metadata REF="xMetadatax4740"/>
+					<role><GM3C.CI_RoleCode_><value>distributor</value></GM3C.CI_RoleCode_></role>
+				</GM3C.MD_Metadatacontact>
+				<GM3C.CI_Address TID="xAddressx3">
+					<streetName/>
+					<streetNumber/>
+					<postalCode/>
+					<city/>
+					<country>CH</country>
+				</GM3C.CI_Address>
+				<GM3C.CI_ResponsibleParty TID="xRespPartyx3">
+					<individualFirstName/>
+					<individualLastName/>
+					<electronicalMailAddress/>
+					<organisationName/>
+					<organisationAcronym/>
+					<address REF="xAddressx3"/>
+					<contactInfo/>
+				</GM3C.CI_ResponsibleParty>
+				<GM3C.CI_Telephone TID="xTelephonex3">
+					<number/>
+					<numberType/>
+					<CI_ResponsibleParty REF="xRespPartyx3"/>
+				</GM3C.CI_Telephone>
+				<GM3C.MD_Metadatacontact TID="xMetadataContactx3">
+					<contact REF="xRespPartyx3"/>
+					<MD_Metadata REF="xMetadatax4740"/>
+					<role/>
+				</GM3C.MD_Metadatacontact>
+				<GM3C.CI_Contact><contactInstructions><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText></plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></contactInstructions><hoursOfService></hoursOfService></GM3C.CI_Contact><GM3C.MD_Identifier><code><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Schweiz</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></code></GM3C.MD_Identifier><GM3C.EX_TemporalExtent><extent><GM03Core.Core.TM_Primitive><begin></begin><end></end></GM03Core.Core.TM_Primitive></extent></GM3C.EX_TemporalExtent><GM3C.CI_Contact><contactInstructions><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText></plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></contactInstructions><hoursOfService></hoursOfService></GM3C.CI_Contact><GM3C.MD_Keywords TID="xKeywordsx0"><keyword><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Inventar</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></keyword></GM3C.MD_Keywords><GM3C.descriptiveKeywordsMD_Identification TID="xKeywordsIdentx0"><descriptiveKeywords REF="xKeywordsx0"></descriptiveKeywords><MD_Identification REF="xDataIdentx4740"></MD_Identification></GM3C.descriptiveKeywordsMD_Identification><GM3C.MD_Keywords TID="xKeywordsx1"><keyword><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Biotop</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></keyword></GM3C.MD_Keywords><GM3C.descriptiveKeywordsMD_Identification TID="xKeywordsIdentx1"><descriptiveKeywords REF="xKeywordsx1"></descriptiveKeywords><MD_Identification REF="xDataIdentx4740"></MD_Identification></GM3C.descriptiveKeywordsMD_Identification><GM3C.MD_Keywords TID="xKeywordsx2"><keyword><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Feuchtgebiet</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></keyword></GM3C.MD_Keywords><GM3C.descriptiveKeywordsMD_Identification TID="xKeywordsIdentx2"><descriptiveKeywords REF="xKeywordsx2"></descriptiveKeywords><MD_Identification REF="xDataIdentx4740"></MD_Identification></GM3C.descriptiveKeywordsMD_Identification></GM3C>
+		</DS>
+	</TF>
+	<idinfo><native Sync="TRUE">Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 3; ESRI ArcCatalog 9.3.1.3000</native><descript><langdata Sync="TRUE">de</langdata></descript><citation><citeinfo><title Sync="TRUE">au</title><ftname Sync="TRUE">au</ftname><geoform Sync="TRUE">vector digital data</geoform><onlink Sync="TRUE">\\uvekv1010\UVEK$\GIS\ESRI\Transfer\GIS_Fachstelle\JZ\Geodaten_BAFU\BAFU_Geodaten_100614\Biodiversität_neu\bundesinventare\au.shp</onlink></citeinfo></citation><natvform Sync="TRUE">Shapefile</natvform><spdom><lboundng><leftbc Sync="TRUE">485410.000100</leftbc><rightbc Sync="TRUE">829931.624900</rightbc><bottombc Sync="TRUE">83431.359400</bottombc><topbc Sync="TRUE">291915.500000</topbc></lboundng><bounding><westbc Sync="TRUE">5.910727</westbc><eastbc Sync="TRUE">10.506141</eastbc><northbc Sync="TRUE">47.779212</northbc><southbc Sync="TRUE">45.864611</southbc></bounding></spdom></idinfo><dataIdInfo><envirDesc Sync="TRUE">Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 3; ESRI ArcCatalog 9.3.1.3000</envirDesc><dataLang><languageCode Sync="TRUE" value="de"></languageCode></dataLang><idCitation><resTitle Sync="TRUE">au</resTitle><presForm><PresFormCd Sync="TRUE" value="005"></PresFormCd></presForm></idCitation><spatRpType><SpatRepTypCd Sync="TRUE" value="001"></SpatRepTypCd></spatRpType><dataExt><geoEle><GeoBndBox esriExtentType="native"><westBL Sync="TRUE">485410.0001</westBL><eastBL Sync="TRUE">829931.6249</eastBL><northBL Sync="TRUE">291915.5</northBL><southBL Sync="TRUE">83431.3594</southBL><exTypeCode Sync="TRUE">1</exTypeCode></GeoBndBox></geoEle></dataExt><geoBox esriExtentType="decdegrees"><westBL Sync="TRUE">5.910727</westBL><eastBL Sync="TRUE">10.506141</eastBL><northBL Sync="TRUE">47.779212</northBL><southBL Sync="TRUE">45.864611</southBL><exTypeCode Sync="TRUE">1</exTypeCode></geoBox></dataIdInfo><metainfo><langmeta Sync="TRUE">de</langmeta><metstdn Sync="TRUE">FGDC Content Standards for Digital Geospatial Metadata</metstdn><metstdv Sync="TRUE">FGDC-STD-001-1998</metstdv><mettc Sync="TRUE">local time</mettc><metd Sync="TRUE">20100727</metd><metextns><onlink Sync="TRUE">http://www.esri.com/metadata/esriprof80.html</onlink><metprof Sync="TRUE">ESRI Metadata Profile</metprof></metextns></metainfo><mdLang><languageCode Sync="TRUE" value="de"></languageCode></mdLang><mdStanName Sync="TRUE">ISO 19115 Geographic Information - Metadata</mdStanName><mdStanVer Sync="TRUE">DIS_ESRI1.0</mdStanVer><mdChar><CharSetCd Sync="TRUE" value="004"></CharSetCd></mdChar><mdHrLv><ScopeCd Sync="TRUE" value="005"></ScopeCd></mdHrLv><mdHrLvName Sync="TRUE">dataset</mdHrLvName><distinfo><resdesc Sync="TRUE">Downloadable Data</resdesc><stdorder><digform><digtinfo><transize Sync="TRUE">1.996</transize><dssize Sync="TRUE">1.996</dssize></digtinfo></digform></stdorder></distinfo><distInfo><distributor><distorTran><onLineSrc><orDesc Sync="TRUE">002</orDesc><linkage Sync="TRUE">file://\\uvekv1010\UVEK$\GIS\ESRI\Transfer\GIS_Fachstelle\JZ\Geodaten_BAFU\BAFU_Geodaten_100614\Biodiversität_neu\bundesinventare\au.shp</linkage><protocol Sync="TRUE">Local Area Network</protocol></onLineSrc><transSize Sync="TRUE">1.996</transSize></distorTran><distorFormat><formatName Sync="TRUE">Shapefile</formatName></distorFormat></distributor></distInfo><spdoinfo><direct Sync="TRUE">Vector</direct><ptvctinf><esriterm Name="au"><efeatyp Sync="TRUE">Simple</efeatyp><efeageom Sync="TRUE">Polygon</efeageom><esritopo Sync="TRUE">FALSE</esritopo><efeacnt Sync="TRUE">303</efeacnt><spindex Sync="TRUE">TRUE</spindex><linrefer Sync="TRUE">FALSE</linrefer></esriterm><sdtsterm Name="au"><sdtstype Sync="TRUE">G-polygon</sdtstype><ptvctcnt Sync="TRUE">303</ptvctcnt></sdtsterm></ptvctinf></spdoinfo><spatRepInfo><VectSpatRep><topLvl><TopoLevCd Sync="TRUE" value="001"></TopoLevCd></topLvl><geometObjs Name="au"><geoObjTyp><GeoObjTypCd Sync="TRUE" value="001"></GeoObjTypCd></geoObjTyp><geoObjCnt Sync="TRUE">303</geoObjCnt></geometObjs></VectSpatRep></spatRepInfo><eainfo><detailed Name="au"><attr><attrlabl Sync="TRUE">AU_VERSION</attrlabl><attalias Sync="TRUE">AU_VERSION</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">10</attwidth></attr><attr><attrlabl Sync="TRUE">FID</attrlabl><attalias Sync="TRUE">FID</attalias><attrtype Sync="TRUE">OID</attrtype><attwidth Sync="TRUE">4</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Internal feature number.</attrdef><attrdefs Sync="TRUE">ESRI</attrdefs><attrdomv><udom Sync="TRUE">Sequential unique whole numbers that are automatically generated.</udom></attrdomv></attr><enttyp><enttypl Sync="TRUE">au</enttypl><enttypt Sync="TRUE">Feature Class</enttypt><enttypc Sync="TRUE">303</enttypc></enttyp><attr><attrlabl Sync="TRUE">Shape</attrlabl><attalias Sync="TRUE">Shape</attalias><attrtype Sync="TRUE">Geometry</attrtype><attwidth Sync="TRUE">0</attwidth><atprecis Sync="TRUE">0</atprecis><attscale Sync="TRUE">0</attscale><attrdef Sync="TRUE">Feature geometry.</attrdef><attrdefs Sync="TRUE">ESRI</attrdefs><attrdomv><udom Sync="TRUE">Coordinates defining the features.</udom></attrdomv></attr><attr><attrlabl Sync="TRUE">AREA</attrlabl><attalias Sync="TRUE">AREA</attalias><attrtype Sync="TRUE">Float</attrtype><attwidth Sync="TRUE">19</attwidth><atnumdec Sync="TRUE">11</atnumdec></attr><attr><attrlabl Sync="TRUE">PERIMETER</attrlabl><attalias Sync="TRUE">PERIMETER</attalias><attrtype Sync="TRUE">Float</attrtype><attwidth Sync="TRUE">19</attwidth><atnumdec Sync="TRUE">11</atnumdec></attr><attr><attrlabl Sync="TRUE">AU_</attrlabl><attalias Sync="TRUE">AU_</attalias><attrtype Sync="TRUE">Number</attrtype><attwidth Sync="TRUE">9</attwidth></attr><attr><attrlabl Sync="TRUE">AU_ID</attrlabl><attalias Sync="TRUE">AU_ID</attalias><attrtype Sync="TRUE">Number</attrtype><attwidth Sync="TRUE">9</attwidth></attr><attr><attrlabl Sync="TRUE">AU_OBJ</attrlabl><attalias Sync="TRUE">AU_OBJ</attalias><attrtype Sync="TRUE">Number</attrtype><attwidth Sync="TRUE">9</attwidth></attr><attr><attrlabl Sync="TRUE">AU_NAME</attrlabl><attalias Sync="TRUE">AU_NAME</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">60</attwidth></attr><attr><attrlabl Sync="TRUE">AU_OBJTYP</attrlabl><attalias Sync="TRUE">AU_OBJTYP</attalias><attrtype Sync="TRUE">String</attrtype><attwidth Sync="TRUE">20</attwidth></attr><attr><attrlabl Sync="TRUE">AU_FL</attrlabl><attalias Sync="TRUE">AU_FL</attalias><attrtype Sync="TRUE">Float</attrtype><attwidth Sync="TRUE">13</attwidth><atnumdec Sync="TRUE">11</atnumdec></attr><attr><attrlabl Sync="TRUE">AU_GF</attrlabl><attalias Sync="TRUE">AU_GF</attalias><attrtype Sync="TRUE">Float</attrtype><attwidth Sync="TRUE">19</attwidth><atnumdec Sync="TRUE">11</atnumdec></attr><attr><attrlabl Sync="TRUE">Shape_Leng</attrlabl><attalias Sync="TRUE">Shape_Leng</attalias><attrtype Sync="TRUE">Float</attrtype><attwidth Sync="TRUE">19</attwidth><atnumdec Sync="TRUE">11</atnumdec></attr><attr><attrlabl Sync="TRUE">Shape_Area</attrlabl><attalias Sync="TRUE">Shape_Area</attalias><attrtype Sync="TRUE">Float</attrtype><attwidth Sync="TRUE">19</attwidth><attrdef Sync="TRUE">Area of feature in internal units squared.</attrdef><attrdefs Sync="TRUE">ESRI</attrdefs><attrdomv><udom Sync="TRUE">Positive real numbers that are automatically generated.</udom></attrdomv><atnumdec Sync="TRUE">11</atnumdec></attr></detailed></eainfo><Esri><SyncDate>20100727</SyncDate><SyncTime>15544900</SyncTime><ModDate>20100727</ModDate><ModTime>15544900</ModTime><DataProperties><lineage><Process ToolSource="C:\Program Files (x86)\ArcGIS\ArcToolbox\Toolboxes\Data Management Tools.tbx\CopyFeatures" Date="20090212" Time="085833">CopyFeatures U:\GIS\ESRI\Grundlagen\BUWIN\bundinv\au070701.shp W:\GIS\Grundlagen\Lebensräume.gdb\Inventare\au070701_1 # 0 0 0</Process><Process Name="Select_1" ToolSource="C:\Program Files (x86)\ArcGIS\ArcToolbox\Toolboxes\Analysis Tools.tbx\Select" Date="20100330" Time="151304">Select Auengebiete W:\GIS\Grundlagen\Lebensräume.gdb\Inventare\au_noInsel ""AU_OBJTYP" &lt;&gt; ' '"</Process><Process ToolSource="C:\Program Files\ArcGIS\ArcToolbox\Toolboxes\Data Management Tools.tbx\CopyFeatures" Date="20100624" Time="125648">CopyFeatures W:\Grundlagen\Lebensräume.gdb\Inventare\au U:\GIS\ESRI\Transfer\GIS_Fachstelle\JZ\Geodaten_BAFU\BAFU_Geodaten_100614\Biodiversität_neu\au.shp # 0 0 0</Process></lineage></DataProperties></Esri><mdDateSt Sync="TRUE">20100727</mdDateSt><GM03Core_Profile><MD_SupplementalInfo><Description>Feature Class : au, Z=False, M=False
+FeatureType : esriFTSimple
+HasSpatialIndex : True
+RelationshipClasses : 
+ShapeFieldName : Shape
+ShapeType : esriGeometryPolygon</Description></MD_SupplementalInfo><EX_NativeBoundingBox><northBound>295935.00000</northBound><westBound>485412.34375</westBound><eastBound>833840.70000</eastBound><southBound>75270.00000</southBound></EX_NativeBoundingBox><MD_MaintenanceInformation><dateOfNextUpdate></dateOfNextUpdate><maintenanceNote><GM3C.PT_FreeText><textGroup><GM3C.PT_Group><plainText>Abhängig vom Gesetzesauftrag.</plainText></GM3C.PT_Group></textGroup></GM3C.PT_FreeText></maintenanceNote><maintenanceandupdateFrequency>userDefined</maintenanceandupdateFrequency></MD_MaintenanceInformation><MD_Revision><dateOfLastUpdate>2007:07:01</dateOfLastUpdate><revisionNote></revisionNote></MD_Revision><MD_LegalConstraints><otherConstraints></otherConstraints><Access></Access><Use></Use></MD_LegalConstraints><MD_SecurityConstraints><Description></Description></MD_SecurityConstraints><MD_Attributes><MD_Attribute><name>FID</name><description>esriFieldTypeOID(4)</description></MD_Attribute><MD_Attribute><name>Shape</name><description>esriFieldTypeGeometry(0)</description></MD_Attribute><MD_Attribute><name>AREA</name><description>esriFieldTypeDouble(19)</description></MD_Attribute><MD_Attribute><name>PERIMETER</name><description>esriFieldTypeDouble(19)</description></MD_Attribute><MD_Attribute><name>AU_</name><description>esriFieldTypeInteger(9)</description></MD_Attribute><MD_Attribute><name>AU_ID</name><description>esriFieldTypeInteger(9)</description></MD_Attribute><MD_Attribute><name>AU_OBJ</name><description>esriFieldTypeInteger(9) / Objektnummer</description></MD_Attribute><MD_Attribute><name>AU_NAME</name><description>esriFieldTypeString(60) / Name des Objektes</description></MD_Attribute><MD_Attribute><name>AU_OBJTYP</name><description>esriFieldTypeString(20) / Gewässertyp</description></MD_Attribute><MD_Attribute><name>AU_FL</name><description>esriFieldTypeSingle(13) / Fläche des aktuellen Polygons in ha</description></MD_Attribute><MD_Attribute><name>AU_GF</name><description>esriFieldTypeDouble(19) / Gesamtfläche des Objektes in ha</description></MD_Attribute><MD_Attribute><name>AU_VERSION</name><description>esriFieldTypeString(10) / Datum der letzten Aktualisierung</description></MD_Attribute><MD_Attribute><name>OBJECTID</name><description>esriFieldTypeOID(4)</description></MD_Attribute><MD_Attribute><name>Shape_Length</name><description>esriFieldTypeDouble(8)</description></MD_Attribute><MD_Attribute><name>Shape_Area</name><description>esriFieldTypeDouble(8)</description></MD_Attribute><MD_Attribute><name>Shape_Leng</name><description>esriFieldTypeDouble(19)</description></MD_Attribute></MD_Attributes></GM03Core_Profile><spref><horizsys><cordsysn><geogcsn Sync="TRUE">GCS_CH1903</geogcsn><projcsn Sync="TRUE">CH1903_LV03</projcsn></cordsysn><planar><planci><plance Sync="TRUE">coordinate pair</plance><plandu Sync="TRUE">meters</plandu><coordrep><absres Sync="TRUE">0.000000</absres><ordres Sync="TRUE">0.000000</ordres></coordrep></planci><mapproj><mapprojn Sync="TRUE">Oblique Mercator</mapprojn><obqmerc><sfctrlin Sync="TRUE">1.000000</sfctrlin><obqlazim><azimangl Sync="TRUE">90.000000</azimangl><azimptl Sync="TRUE">7.439583</azimptl></obqlazim><latprjo Sync="TRUE">46.952406</latprjo><feast Sync="TRUE">600000.000000</feast><fnorth Sync="TRUE">200000.000000</fnorth></obqmerc></mapproj></planar><geodetic><horizdn Sync="TRUE">D_CH1903</horizdn><ellips Sync="TRUE">Bessel_1841</ellips><semiaxis Sync="TRUE">6377397.155000</semiaxis><denflat Sync="TRUE">299.152813</denflat></geodetic></horizsys><vertdef><altsys><altenc Sync="TRUE">Explicit elevation coordinate included with horizontal coordinates</altenc><altres Sync="TRUE">0.000100</altres></altsys></vertdef></spref><refSysInfo><RefSystem><refSysID><identCode Sync="TRUE">CH1903_LV03</identCode></refSysID></RefSystem></refSysInfo><dataqual><lineage><procstep><procdesc Sync="TRUE">Dataset moved.</procdesc><srcused Sync="TRUE">U:\GIS\ESRI\Transfer\GIS_Fachstelle\JZ\Geodaten_BAFU\BAFU_Geodaten_100614\Biodiversität_neu\au</srcused><procdate Sync="TRUE">20100624</procdate><proctime Sync="TRUE">13035200</proctime></procstep></lineage></dataqual></metadata>

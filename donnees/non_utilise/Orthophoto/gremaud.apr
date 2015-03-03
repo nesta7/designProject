@@ -1,0 +1,382 @@
+/3.2
+(ODB.1
+	Dependencies:	"$AVEXT/jfif.avx\n"
+	FirstRootClassName:	"Project"
+	Roots:	2
+	Version:	32
+)
+
+(Project.2
+	Name:	"gremaud.apr"
+	CreationDate:	"lundi, 12. janvier 2004 08:53:36"
+	GUIName:	"Project"
+	Win:	3
+	CSMgr:	4
+	DocExts:	5
+	VisGUIWidth:	70
+	Doc:	6
+	ActiveDoc:	6
+	Buttons:	47
+	Buttons:	48
+	Buttons:	49
+	Dependencies:	50
+	Scripts:	51
+	Prefs:	52
+	WorkDir:	878
+	WinX:	-4
+	WinY:	-3
+	WinW:	1288
+	WinH:	1001
+	SerialNumber:	"899931106533"
+	SelColor:	879
+	GUINames:	880
+	GUINames:	881
+	GUINames:	882
+	GUINames:	883
+	GUINames:	884
+	GUINames:	885
+	GUINames:	886
+	TocWidthScale:	1.00000000000000
+)
+
+(DocWin.3
+	Owner:	2
+	Open:	1
+	X:	5
+	Y:	5
+	W:	238
+	H:	324
+)
+
+(CSMgr.4
+)
+
+(DocAct.5
+	Doc:	2
+)
+
+(View.6
+	Name:	"View1"
+	CreationDate:	"lundi, 12. janvier 2004 08:53:38"
+	GUIName:	"View"
+	Win:	7
+	CSMgr:	8
+	DocExts:	10
+	DocExts:	11
+	Graphics:	12
+	Theme:	19
+	Theme:	33
+	LastScale:	7265.00516695297480
+	Dpy:	13
+	TOCWidth:	150
+	CoordPrecision:	2
+)
+
+(DocWin.7
+	Owner:	6
+	Open:	1
+	X:	-4
+	Y:	-4
+	W:	1290
+	H:	889
+)
+
+(CSMgr.8
+	Client:	9
+)
+
+(CSClient.9
+	Client:	10
+	ReqName:	"ClientNfy"
+)
+
+(PanMgr.10
+	Doc:	6
+)
+
+(DocAct.11
+	Doc:	6
+)
+
+(GList.12
+	Dpy:	13
+	FormatNumb:	18
+)
+
+(MapDpy.13
+	Left:	573101.14249590063000
+	Bottom:	161855.97610164870000
+	Top:	163483.51756391639000
+	Right:	575263.62101508351000
+	ReportUnits:	7
+	Units:	7
+	Scale:	14
+	FrameTop:	8.86458333333333
+	FrameRight:	11.71875000000000
+	PageDpy:	15
+	FitToPage:	1
+	MouseLoc:	17
+)
+
+(Numb.14
+	N:	0.00541912897448
+)
+
+(PageDpy.15
+	Top:	8.86458333333333
+	Right:	11.71875000000000
+	ReportUnits:	1
+	Units:	1
+	Scale:	16
+	ZoomRight:	11.71875000000000
+	ZoomTop:	8.86458333333333
+	GridSpacingX:	0.25000000000000
+	GridSpacingY:	0.25000000000000
+)
+
+(Numb.16
+	N:	96.00000000000000
+)
+
+(PointD.17
+	x:	573226.08569923125000
+	y:	163170.48074766889000
+)
+
+(Numb.18
+)
+
+(ITheme.19
+	Name:	"Brochigh.jpg"
+	Source:	20
+	Flags:	0x06
+	Legend:	27
+	Threshold:	31
+	View:	6
+	GSet:	32
+	LegEditScript:	"View.EditLegend"
+)
+
+(ISrc.20
+	Name:	21
+	MapBox:	23
+	BandStats:	24
+	BandStats:	25
+	BandStats:	26
+)
+
+(SrcName.21
+	FileName:	22
+	Name:	"brochigh.jpg"
+	OwnerClass:	"ISrc"
+)
+
+(FN.22
+	Path:	"t:/bouzelboudjen/broc/brochigh.jpg"
+)
+
+(RectD.23
+	Left:	573199.43697404535000
+	Top:	163407.11876980486000
+	Right:	575165.32653693878000
+	Bottom:	161932.93671507918000
+)
+
+(BStat.24
+	Max:	255.00000000000000
+	Mean:	127.50000000000000
+	StDv:	63.75000000000000
+)
+
+(BStat.25
+	Max:	255.00000000000000
+	Mean:	127.50000000000000
+	StDv:	63.75000000000000
+)
+
+(BStat.26
+	Max:	255.00000000000000
+	Mean:	127.50000000000000
+	StDv:	63.75000000000000
+)
+
+(MBILeg.27
+	GreenBand:	1
+	BlueBand:	2
+	RedLUT:	28
+	GreenLUT:	29
+	BlueLUT:	30
+)
+
+(ILUTIdn.28
+)
+
+(ILUTIdn.29
+)
+
+(ILUTIdn.30
+)
+
+(Thresh.31
+)
+
+(GSet.32
+)
+
+(ITheme.33
+	Name:	"Broc.jpg"
+	Source:	34
+	Flags:	0x05
+	Legend:	41
+	Threshold:	45
+	View:	6
+	GSet:	46
+	LegEditScript:	"View.EditLegend"
+)
+
+(ISrc.34
+	Name:	35
+	MapBox:	37
+	BandStats:	38
+	BandStats:	39
+	BandStats:	40
+)
+
+(SrcName.35
+	FileName:	36
+	Name:	"broc.jpg"
+	OwnerClass:	"ISrc"
+)
+
+(FN.36
+	Path:	"t:/bouzelboudjen/broc/broc.jpg"
+)
+
+(RectD.37
+	Left:	573199.77541752672000
+	Top:	163409.53840654058000
+	Right:	575165.18118431023000
+	Bottom:	161929.95525902451000
+)
+
+(BStat.38
+	Max:	255.00000000000000
+	Mean:	127.50000000000000
+	StDv:	63.75000000000000
+)
+
+(BStat.39
+	Max:	255.00000000000000
+	Mean:	127.50000000000000
+	StDv:	63.75000000000000
+)
+
+(BStat.40
+	Max:	255.00000000000000
+	Mean:	127.50000000000000
+	StDv:	63.75000000000000
+)
+
+(MBILeg.41
+	GreenBand:	1
+	BlueBand:	2
+	RedLUT:	42
+	GreenLUT:	43
+	BlueLUT:	44
+)
+
+(ILUTIdn.42
+)
+
+(ILUTIdn.43
+)
+
+(ILUTIdn.44
+)
+
+(Thresh.45
+)
+
+(GSet.46
+)
+
+(LButn.47
+	HelpTopic:	"New_button"
+	Update:	"Doc.NewUpdate"
+	Label:	"&New"
+	Click:	"View.New"
+)
+
+(LButn.48
+	Disabled:	1
+	HelpTopic:	"Open_button"
+	Update:	"Doc.OpenUpdate"
+	Label:	"&Open"
+	Click:	"Doc.Open"
+)
+
+(LButn.49
+	Disabled:	1
+	HelpTopic:	"Print_button"
+	Update:	"Doc.ActionUpdate"
+	Label:	"P&rint"
+	Click:	"Doc.Action"
+)
+
+(FN.50
+	Path:	"$AVEXT/jfif.avx"
+)
+
+(NameDict.51
+)
+
+(NameDict.52
+	Obj:	53
+	Obj:	54
+)
+
+(AVDict.53
+	InternalName:	"Table of Contents Defaults Dialog"
+)
+
+(AVDict.54
+	InternalName:	"_Thor_"
+)
+
+(FN.878
+	Path:	"$HOME"
+)
+
+(TClr.879
+	Red:	0xffff
+	Green:	0xffff
+)
+
+(AVStr.880
+	S:	"View"
+)
+
+(AVStr.881
+	S:	"Table"
+)
+
+(AVStr.882
+	S:	"Chart"
+)
+
+(AVStr.883
+	S:	"Layout"
+)
+
+(AVStr.884
+	S:	"Script"
+)
+
+(AVStr.885
+	S:	"Project"
+)
+
+(AVStr.886
+	S:	"Appl"
+)
+

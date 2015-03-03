@@ -1,0 +1,12 @@
+200403191513   0     1     0etjgremaud       SHAPEARC m:\diplome\sig\vegetation\shapefile_data\veg m:\diplome\sig\vegetation\temp\vegai
+200403191516   0     1     0etjgremaud clean vegai
+200403191621   0     0     0etjgremaud ARCEDIT M:\DIPLOME\SIG\VEGETATION\TEMP\VEGLINE
+200403191639   0     2     0etjgremaud build vegline poly
+200403191640   0     1     0etjgremaud clean vegline
+200403191642   0     0     0etjgremaud createlabels vegline
+200403191642   0     1     0etjgremaud export cover vegline vegline.e00
+200403191747   0     0     0etjgremaud ARCEDIT M:\DIPLOME\SIG\VEGETATION\TEMP\VEGLINE
+200403191756   0     0     0etjgremaud ARCEDIT M:\DIPLOME\SIG\VEGETATION\TEMP\VEGLINE
+200403191800   0     0     0etjgremaud ARCEDIT M:\DIPLOME\SIG\VEGETATION\TEMP\VEGLINE
+20040322 935   0     0     0etjgremaud ARCEDIT M:\DIPLOME\SIG\VEGETATION\TEMP\VEGLINE
+20040322 941   0     0     0etjgremaud ARCEDIT M:\DIPLOME\SIG\VEGETATION\TEMP\VEGLINE

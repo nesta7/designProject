@@ -1,0 +1,22 @@
+<VRTDataset rasterXSize="1517" rasterYSize="1223">
+  <SRS>PROJCS["CH1903 / LV03",GEOGCS["CH1903",DATUM["CH1903",SPHEROID["Bessel 1841",6377397.155,299.1528128000009,AUTHORITY["EPSG","7004"]],TOWGS84[674.4,15.1,405.3,0,0,0,0],AUTHORITY["EPSG","6149"]],PRIMEM["Greenwich",0],UNIT["degree",0.0174532925199433],AUTHORITY["EPSG","4149"]],PROJECTION["Hotine_Oblique_Mercator"],PARAMETER["latitude_of_center",46.95240555555556],PARAMETER["longitude_of_center",7.439583333333333],PARAMETER["azimuth",90],PARAMETER["rectified_grid_angle",90],PARAMETER["scale_factor",1],PARAMETER["false_easting",600000],PARAMETER["false_northing",200000],UNIT["metre",1,AUTHORITY["EPSG","9001"]],AUTHORITY["EPSG","21781"]]</SRS>
+  <GeoTransform> 5.7285406428499997e+005, 2.0000000000000000e+000, 0.0000000000000000e+000, 1.6384143843600000e+005, 0.0000000000000000e+000,-2.0000000000000000e+000</GeoTransform>
+  <VRTRasterBand dataType="Float32" band="1">
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">681.98999023438</MDI>
+      <MDI key="STATISTICS_MEAN">675.95431400096</MDI>
+      <MDI key="STATISTICS_MINIMUM">671.75</MDI>
+      <MDI key="STATISTICS_STDDEV">3.3639194062433</MDI>
+    </Metadata>
+    <NoDataValue>-3.40282346638529E+038</NoDataValue>
+    <ColorInterp>Gray</ColorInterp>
+    <ComplexSource>
+      <SourceFilename relativeToVRT="0">C:/Users/Florian/Dropbox/Design2014/donnees/SIG Broc/MNT/MNT_broc.tif</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SourceProperties RasterXSize="1517" RasterYSize="1223" DataType="Float32" BlockXSize="1517" BlockYSize="1" />
+      <SrcRect xOff="0" yOff="0" xSize="1517" ySize="1223" />
+      <DstRect xOff="0" yOff="0" xSize="1517" ySize="1223" />
+      <NODATA>-3.40282e+038</NODATA>
+    </ComplexSource>
+  </VRTRasterBand>
+</VRTDataset>
