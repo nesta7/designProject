@@ -185,7 +185,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
     #MAX: dans 'rb', 'r' signifie "reading", ce qui veut dire que l'utilisateur peut lire le fichier, et 'b' signifie qu'on ouvre un fichier binaire.
     #MAX: Il permet que le fichier soit lu en tant que tel.
 
-    #MAX: liaison entre le contenu du fichier et la variable csvContent (je crois qu'il s'agit d'un pointeur
+    #MAX: liaison entre le contenu du fichier et la variable csvContent (je crois qu'il s'agit d'un pointeur)
     csvContent = csv.reader(open(csvPath, 'rb'))
     a=False
     b=True
@@ -212,7 +212,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
     # Creation des images      MAX: ah oui?
     #MAX: initialisation de la variable niveau_hier pour la première itération de la boucle principale
     niveau_hier = 0
-    #MAX: et ca? Pourquoi aller dans le dossier du projet???
+    #MAX: Pourquoi aller dans le dossier du projet???
     os.chdir(pathProject)
 
     '''
@@ -290,7 +290,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
     '''
     #MAX: La boucle suivante parcourt la periode selectionnee par l'utilisateur, avec un pas de temps de timestep (jours)
     for i in range(0, len(listDate), timestep):
-        #MAX: Aucune idee de ce a quoi ca sert!
+        #MAX: booleen servant a determiner si au moins un stade larvaire a lieu durant le jour considere
         flagDraw = False
         #Condition debut avril a fin septembre
         #MO : cette condition ne devrait pas se trouver la a mon avis mais on devrait pretraiter la liste des dates
@@ -389,7 +389,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
             newRasterfn4_mid = os.path.join(dir_name3,tail1)
             newRasterfn4=os.path.abspath(newRasterfn4_mid)
             #print newRasterfn4
-            #ecriture raster
+            #ecriture raster (seulement si un des stades larvaires a lieu le jour considere)
             if flagDraw:
                 array2raster(newRasterfn4,fileMNT,array4)
             flagDraw = False
