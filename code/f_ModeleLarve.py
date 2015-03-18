@@ -9,7 +9,7 @@ Created on Sun May 11 15:35:02 2014
 import numpy as np
 
 def fModeleLarve(deg_cumul, moy_temp,model=1): # VALID FOR TEMPERATURE BETWEEN 15 and 35 deg !
-    if model == 1:     
+    if model == 1:
 ######### ALBOPICTUS - Model = 1 #########
         temp = [15,20,25,30,35]
         L1 = [84,60,52.5,42,59.5]
@@ -19,37 +19,45 @@ def fModeleLarve(deg_cumul, moy_temp,model=1): # VALID FOR TEMPERATURE BETWEEN 1
         stades = np.array([L1,L2,L3,L4])
         coef = []
         n = np.array([1, 5, 5, 5, 1])
-        
+
         for i in range(4): # 4 stades: L1 L2 L3 L4
 #            coef = np.append(coef,np.polyfit(temp,stades[i],2,w=np.sqrt(n)))
+            #MAX: coef sera en fait divise par blocs de 3 valeurs qui seront les parametres
+            #d'une régression parabolique du nombre de degres jours en fonction de la
+            #temperature, pour l'un des stades de developpement.
             coef = np.append(coef,np.polyfit(temp,stades[i],2))
-    
+
 ######### AEGYPTI - model = 2 #########
     if model == 2:
         temp = [15,20,25,27,30,34]
-        L1 = [86.85,37,34.75,26.19,29.7,28.56] 
+        L1 = [86.85,37,34.75,26.19,29.7,28.56]
         L2 = [68.4,32.8,36,19.17,26.7,26.86]
         L3 = [97.95,39.6,41.25,27.81,37.2,37.4]
-        L4 = [128.55,81.2,86.75,72.09,68.7,83.3]		
+        L4 = [128.55,81.2,86.75,72.09,68.7,83.3]
         stades = np.array([L1,L2,L3,L4])
         coef = []
         n = np.array([1, 5, 5, 5, 5, 1])
-    
+
         for i in range(4):
 #            coef = np.append(coef,np.polyfit(temp,stades[i],2,w=np.sqrt(n)))
             coef = np.append(coef,np.polyfit(temp,stades[i],2))
-    
+
 ######### RESULTS #########
+    #MAX: mise en equation de la relation temperature - degres jours, pour chaque stade
     yL11 = lambda x: coef[0]*x**2+coef[1]*x+coef[2]
     yL21 = lambda x: coef[3]*x**2+coef[4]*x+coef[5]
     yL31 = lambda x: coef[6]*x**2+coef[7]*x+coef[8]
     yL41 = lambda x: coef[9]*x**2+coef[10]*x+coef[11]
-    
+
+    #MAX: Meme chose qu'avant, avec en plus un aspect cumulatif
     yL1= lambda x: yL11(x)
     yL2= lambda x: yL11(x)+yL21(x)
     yL3= lambda x: yL11(x)+yL21(x)+yL31(x)
-    yL4= lambda x: yL11(x)+yL21(x)+yL31(x)+yL41(x)    
-    
+    yL4= lambda x: yL11(x)+yL21(x)+yL31(x)+yL41(x)
+
+
+    #MAX: determination du stade larvaire ayant lieu actuellement, en fonction de la
+    #"température accumulée" et de la temperature moyenne des derniers jours
     if deg_cumul >= yL4(moy_temp):
         return 5
     elif deg_cumul >= yL3(moy_temp):

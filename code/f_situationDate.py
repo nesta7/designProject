@@ -323,7 +323,7 @@ def situationDate(startDate, endDate = fetchDate(),timestep = 1, nvCritique=674.
             if niveau_hier < nvCritique :
                 niveau_hier = nvCritique
             #verification nouvelles zones inondees
-            #MAX: la deuxième partie de la condition permet probablement de déterminer si le niveau d'aujourdhui est plus élevé que le niveau des 15 jours précédents
+            #MAX: cette condition verifie si le niveau a monté entre hier et aujourdhui et si le niveau d'aujourdhui est plus haut que celui des 15 derniers jours
             if (niveau_hier < niveau_aujourdhui) & (niveau_aujourdhui == max(arrayAltitude[-15:])):
                 #MAX: definition de la zone nouvellement inondee (entre hier et ajourd'hui)
                 array = 1*((array1 > niveau_hier) & (array1 != nodata) &  (array1 < niveau_aujourdhui) & (array1_vege != nodataVegetation))
