@@ -20,19 +20,20 @@ def MettreAjour():
     f_Database()
 
 def LancerSeqAnimation():
+    #MAX: permet de quitter le dernier programme tkinter qui a été lancé
     root.destroy()
     execfile('SequenceAnimation.py') # fonction pour choisir le répertoire
-    
+
 def ExporterResultats():
     root.destroy()
     execfile('GenererResultats.py')
 
-# Création de l'interface graphique avec la librairie Tkinter    
+# Création de l'interface graphique avec la librairie Tkinter
 root = Tkinter.Tk()
 root.title('Outil d''aide à la décision')
 root.geometry('350x350+400+150') # Taile + position x + position y
 
-root.configure(bg='#255') 
+root.configure(bg='#255')
 MiseAjour = Tkinter.Button(root, text = "Mettre à jour la base de données",command=MettreAjour).place(relx=0.5,rely=0.2,anchor=CENTER)
 LancerSeq = Tkinter.Button(root, text = "Créer la séquence d'animation",command=LancerSeqAnimation).place(relx=0.5,rely=0.35,anchor=CENTER)
 GenResultats = Tkinter.Button(root, text = "Exporter les résultats en format csv",command=ExporterResultats).place(relx=0.5,rely=0.5,anchor=CENTER)
