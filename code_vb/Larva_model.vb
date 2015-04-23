@@ -32,12 +32,12 @@
         Dim Prop As Double = 0.0
         Dim i As Integer
         Dim j As Integer
-        Dim noCol As Integer = 4
+        Dim noCol As Integer = 5
         Dim Model(4,noCol) As Double
         
         'Reference at the bottom
-        Dim temp() As Double = {15,20,25,30,35}
-        Dim L1() As Double = {7.67, 2.67, 2,74, 0.96, 1.18, 1.42}
+        Dim temp() As Double = {15,20,25,27,30,34}
+        Dim L1() As Double = {7.67, 2.67, 2.74, 0.96, 1.18, 1.42}
         Dim L2() As Double = {8.88, 1.43, 1.35, 0.77, 0.89, 1.31}
         Dim L3() As Double = {14.97, 1.62, 1.37, 0.96, 0.98, 0.84}
         Dim L4() As Double = {15.31, 3.59, 3.15, 1,78, 1.94, 1.49}
