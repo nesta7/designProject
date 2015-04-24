@@ -1,49 +1,43 @@
-﻿'MAX: Module qui sert à faire fonctionner la fonction messagebox.
-Imports System.Windows.Forms
+﻿Imports System.Windows.Forms 'MAX: Module qui sert à faire fonctionner la fonction messagebox.
 Module Module1
-    'Main fait par MAX MENTHA BITCHES
+    'Main fait par MAX MENTHA
     Sub Main()
 
-        '--------------------------------------------------------------------------------------------------------------
+        '**************************************************************************************************************
         'Import des zones inondables (identifiant du polygone, altitude de la zone concernée, et infos de connectivité 
         'si on tient compte de la théorie des débordements).
-        '--------------------------------------------------------------------------------------------------------------
+        '**************************************************************************************************************
         Dim path_polygon = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\polygones.csv"
         Dim lines_polygon = IO.File.ReadAllLines(path_polygon)
         Dim tbl = New DataTable
         Dim colCount = lines_polygon.First.Split(","c).Length
-        'MAX: les trois lignes commentées suivantes sont les lignes d'origine du code trouvé sur internet, texte moi 
-        'si tu veux que je te donne la source ^^
-        'For i As Int32 = 1 To colCount
-        'tbl.Columns.Add(New DataColumn("Column_" & i, GetType(Int32)))
-        'Next
         tbl.Columns.Add(New DataColumn("Polygone_id", GetType(Int32)))
         tbl.Columns.Add(New DataColumn("Altitude", GetType(Double)))
         For Each line In lines_polygon
             Dim objFields = From field In line.Split(","c)
                          Select CType(field, Object)
-            'Select CType(Int32.Parse(field), Object)
             Dim newRow = tbl.Rows.Add()
             newRow.ItemArray = objFields.ToArray()
         Next
 
-        '--------------------------------------------------------------------------------------------------------------
-        'import des infos de hauteur d'eau et de température du passé et de prévision.  attention! il faut modifier le 
+        '**************************************************************************************************************
+        'Import des infos de hauteur d'eau et de température du passé et de prévision.  attention! il faut modifier le 
         'code de telle sorte qu'il y ait une mesure par heure pour le passé, et 2 par jour pour les prévisions!!
-        '--------------------------------------------------------------------------------------------------------------
+        '**************************************************************************************************************
 
-        '*****************************
+        '-----------------------------
         'Initialisation des variables
-        '*****************************
+        '-----------------------------
         Dim jma_s As String()
         Dim jour_split As String()
 
         Dim i
         Dim j
 
-        '*****************************
+        '-----------------------------
         'passé
-        '*****************************
+        '-----------------------------
+        'Lecture du csv
         Dim path_past = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\Hauteur_Temp_passe.csv"
         Dim lines_past = IO.File.ReadAllLines(path_past)
         Dim tbl2 = New DataTable
@@ -51,45 +45,48 @@ Module Module1
         tbl2.Columns.Add(New DataColumn("Niveau", GetType(Double)))
         tbl2.Columns.Add(New DataColumn("Temperature", GetType(Double)))
 
-        Dim date_vector_past(lines_past.Length) As String
-        Dim niveau_vector_past(lines_past.Length) As Double
-        Dim temp_vector_past(lines_past.Length) As Double
+        'declaration des variables de date, de niveau de l'eau et de temperature de l'eau
+        Dim date_vector_past(lines_past.Length - 2) As String
+        Dim niveau_vector_past(lines_past.Length - 2) As Double
+        Dim temp_vector_past(lines_past.Length - 2) As Double
 
         'Fractionnement des éléments de date_vector en differentes variables
-        Dim jour_past(lines_past.Length) As Integer
-        Dim mois_past(lines_past.Length) As Integer
-        Dim annee_past(lines_past.Length) As Integer
+        Dim jour_past(lines_past.Length - 2) As Integer
+        Dim mois_past(lines_past.Length - 2) As Integer
+        Dim annee_past(lines_past.Length - 2) As Integer
 
         i = 0 'MAX: variable servant à ignorer la première ligne
         j = 0
 
+        'importation des infos du csv dans les variables définies ci-dessus
         For Each line In lines_past
             If i <> 0 Then
                 Dim objFields2 = From field In line.Split(";"c)
                              Select CType(field, Object)
                 Dim newRow = tbl2.Rows.Add()
                 newRow.ItemArray = objFields2.ToArray()
-                date_vector_past(j) = tbl2.Rows(j)(0)
-                'date_vector_past.Add(tbl2.Rows(j)(0))
-                jma_s = date_vector_past(j).Split(New Char() {"-"c})
-                jour_split = jma_s(2).Split(New Char() {" "c}) ' ca sert à enlever les elements inutiles
 
                 'moment des mesures
+                date_vector_past(j) = tbl2.Rows(j)(0)
+                jma_s = date_vector_past(j).Split(New Char() {"-"c})
+                jour_split = jma_s(2).Split(New Char() {" "c}) ' ca sert à enlever les elements inutiles
                 annee_past(j) = Integer.Parse(jma_s(0))
-                'annee_past.Add(Integer.Parse(jma_s(0)))
                 mois_past(j) = Integer.Parse(jma_s(1))
                 jour_past(j) = Integer.Parse(jour_split(0))
+
                 'mesures
                 niveau_vector_past(j) = tbl2.Rows(j)(1)
                 temp_vector_past(j) = tbl2.Rows(j)(2)
+
                 j = j + 1
             End If
             i = 1
         Next
 
-        '*****************************
+        '-----------------------------
         'prévisions
-        '*****************************
+        '-----------------------------
+        'Lecture du csv
         Dim path_previ = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\Hauteur_Temp_previ.csv"
         Dim lines_previ = IO.File.ReadAllLines(path_previ)
         Dim tbl3 = New DataTable
@@ -97,69 +94,94 @@ Module Module1
         tbl3.Columns.Add(New DataColumn("Niveau", GetType(Double)))
         tbl3.Columns.Add(New DataColumn("Temperature", GetType(Double)))
 
-        Dim date_vector_previ(lines_previ.Length) As String
-        Dim niveau_vector_previ(lines_previ.Length) As Double
-        Dim temp_vector_previ(lines_previ.Length) As Double
+        'Declaration des variables de date, de niveau de l'eau et de temperature de l'eau
+        Dim date_vector_previ(lines_previ.Length - 2) As String
+        Dim niveau_vector_previ(lines_previ.Length - 2) As Double
+        Dim temp_vector_previ(lines_previ.Length - 2) As Double
 
         'Fractionnement des éléments de date_vector en differentes variables
-        Dim jour_previ(lines_previ.Length) As Integer
-        Dim mois_previ(lines_previ.Length) As Integer
-        Dim annee_previ(lines_previ.Length) As Integer
+        Dim jour_previ(lines_previ.Length - 2) As Integer
+        Dim mois_previ(lines_previ.Length - 2) As Integer
+        Dim annee_previ(lines_previ.Length - 2) As Integer
 
         i = 0 'MAX: variable servant à ignorer la première ligne
         j = 0
+
+        'importation des infos du csv dans les variables définies ci-dessus
         For Each line In lines_previ
             If i <> 0 Then
                 Dim objFields3 = From field In line.Split(";"c)
                              Select CType(field, Object)
                 Dim newRow = tbl3.Rows.Add()
                 newRow.ItemArray = objFields3.ToArray()
-                date_vector_previ(j) = tbl3.Rows(j)(0)
-                jma_s = date_vector_previ(j).Split(New Char() {"-"c})
-                jour_split = jma_s(2).Split(New Char() {" "c}) ' ca sert à enlever les elements inutiles
 
                 'moment des mesures
+                date_vector_previ(j) = tbl3.Rows(j)(0)
+                jma_s = date_vector_previ(j).Split(New Char() {"-"c})
+                jour_split = jma_s(2).Split(New Char() {" "c}) 'MAX: ca sert à enlever les elements inutiles
                 annee_previ(j) = Integer.Parse(jma_s(0))
                 mois_previ(j) = Integer.Parse(jma_s(1))
                 jour_previ(j) = Integer.Parse(jour_split(0))
+
                 'mesures
-                niveau_vector_previ(j) = tbl2.Rows(j)(1)
-                temp_vector_previ(j) = tbl2.Rows(j)(2)
+                niveau_vector_previ(j) = tbl3.Rows(j)(1)
+                temp_vector_previ(j) = tbl3.Rows(j)(2)
+
                 j = j + 1
             End If
             i = 1
         Next
-        '--------------------------------------------------------------------------------------------------------------
-        'boucle principale de simulation
-        '--------------------------------------------------------------------------------------------------------------
 
-        '*****************************
+        '**************************************************************************************************************
+        'simulation
+        '**************************************************************************************************************
+
+        '-----------------------------
         'simulation du niveau de l'eau
-        '*****************************
-        Dim inonde_past(lines_past.Length, lines_polygon.Length) As Integer
-        Dim inonde_previ(lines_previ.Length, lines_polygon.Length) As Integer
-        Dim niveau_t
+        '-----------------------------
+        '..........
+        'passé
+        '..........
+        Dim inonde_past(lines_past.Length, lines_polygon.Length) As Integer 'MAX: plus tard on aura pas besoin de garder cette information. Juste les quelques dernières lignes. Celles d'avant auront déjà été prises en compte.
+        Dim inonde_hier(lines_polygon.Length) As Integer 'MAX: on aura plutot un truc comme ca
 
-        For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
-            niveau_t = niveau_vector_past(t)
-            For i = 0 To lines_polygon.Length - 1
-                If niveau_t >= tbl.Rows(i)(1) Then
-                    inonde_past(t, i) = 1
-                End If
-            Next
+        'MAX: pour les 2 prochaines variables: 1ere ligne=stade actuel de chaque polygone. 2eme ligne= pourcentage de stage accompli pour chaque polygone
+        Dim state_yesterday(2, lines_polygon.Length) As Integer 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
+        'state_yesterday=... (import de la variable sauvegardée la veille)
+        Dim current_state(2, lines_polygon.Length) As Integer 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
+
+        'For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
+        '    For i = 0 To lines_polygon.Length - 1
+        '        If niveau_vector_past(t) >= tbl.Rows(i)(1) Then
+        '            inonde_past(t, i) = 1
+        '        End If
+        '    Next
+        'Next
+        For i = 0 To lines_polygon.Length - 1
+            If niveau_vector_past(lines_past.Length - 2) >= tbl.Rows(i)(1) Then
+                inonde_hier(i) = 1
+            End If
+            If inonde_hier(i) = 1 Then
+                'MAX:appliquer la fonction de developpement larvaire 
+            End If
         Next
 
-        For t = 0 To lines_previ.Length - 2
-            niveau_t = niveau_vector_previ(t)
+        '..........
+        'prévisions
+        '..........
+        Dim inonde_previ(lines_previ.Length, lines_polygon.Length) As Integer 'MAX: chaque ligne indique les polygones inondés pour un jour donné
 
+        For t = 0 To lines_previ.Length - 2
             For i = 0 To lines_polygon.Length - 1
-                If niveau_t >= tbl.Rows(i)(1) Then
+                If niveau_vector_previ(t) >= tbl.Rows(i)(1) Then
                     inonde_previ(t, i) = 1
                 End If
             Next
         Next
-        Console.WriteLine(inonde_past)
-        Console.WriteLine(mois_past(3))
+
+
+        Dim blabla(3) As Integer
+        Console.WriteLine(blabla.Length)
         Console.Read()
     End Sub
 
