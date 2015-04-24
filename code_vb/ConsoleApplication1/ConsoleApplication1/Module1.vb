@@ -142,29 +142,58 @@ Module Module1
         '..........
         'passé
         '..........
-        Dim inonde_past(lines_past.Length, lines_polygon.Length) As Integer 'MAX: plus tard on aura pas besoin de garder cette information. Juste les quelques dernières lignes. Celles d'avant auront déjà été prises en compte.
-        Dim inonde_hier(lines_polygon.Length) As Integer 'MAX: on aura plutot un truc comme ca
+        'MAX: deux facons d'approcher le probleme sont présentées. La première est une approche preliminaire fidèle au code d'origine de florian et akkio
+        'la deuxième est l'approche que l'on devrait utiliser une fois le modèle intégré dans le système d'e-dric.
 
-        'MAX: pour les 2 prochaines variables: 1ere ligne=stade actuel de chaque polygone. 2eme ligne= pourcentage de stage accompli pour chaque polygone
-        Dim state_yesterday(2, lines_polygon.Length) As Integer 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
-        'state_yesterday=... (import de la variable sauvegardée la veille)
-        Dim current_state(2, lines_polygon.Length) As Integer 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
+        'MAX: approche 1) toutes les mesures a disposition sont calculées à chaque run du programme
+        Dim inonde_past(lines_past.Length - 2, lines_polygon.Length - 1) As Integer 'MAX: plus tard on aura pas besoin de garder cette information. Juste les quelques dernières lignes. Celles d'avant auront déjà été prises en compte.
+        'MAX: pour la prochaine variable: 1ere dimension = temps. 2eme dimension = polygone, 3eme dimension = stade en cours et pourcentage d'avancement du stade
+        Dim state_time(lines_past.Length - 2, lines_polygon.Length - 1, 2) As Integer
 
-        'For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
-        '    For i = 0 To lines_polygon.Length - 1
-        '        If niveau_vector_past(t) >= tbl.Rows(i)(1) Then
-        '            inonde_past(t, i) = 1
-        '        End If
-        '    Next
-        'Next
-        For i = 0 To lines_polygon.Length - 1
-            If niveau_vector_past(lines_past.Length - 2) >= tbl.Rows(i)(1) Then
-                inonde_hier(i) = 1
-            End If
-            If inonde_hier(i) = 1 Then
-                'MAX:appliquer la fonction de developpement larvaire 
-            End If
+        For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
+            For i = 0 To lines_polygon.Length - 1
+                If niveau_vector_past(t) >= tbl.Rows(i)(1) Then
+                    inonde_past(t, i) = 1
+                End If
+                If inonde_past(t, i) = 1 Then
+                    If t <> 0 Then
+                        'MAX:appliquer la fonction de developpement larvaire 
+                        'state_output=function_state(state_time(t-1,i,0), state_time(t-1,i,1), temp_vector_past(t-1))
+                        'state_time(t,i,0)=state_output(0)
+                        'state_time(t,i,1)=state_output(1)
+                    Else
+                        'state_time(t,i,0)=valeur_arbitraire ??
+                        'state_time(t,i,0)=valeur_arbitraire ??
+                    End If
+                Else
+                    'state_time(t,i,0)=0
+                    'state_time(t,i,1)=0
+                End If
+            Next
         Next
+
+        ''MAX: approche 2) Seules les mesures de la veille sont calculées, les mesures précédentes étant prises en compte par le fichier sauvegardé (voir les lignes suivantes)
+        'Dim inonde_hier(lines_polygon.Length - 1) As Integer
+        ''MAX: pour les 2 prochaines variables: 1ere dimension = polygone, 2eme dimension = stade en cours et pourcentage d'avancement du stade
+        'Dim state_yesterday(lines_polygon.Length - 1, 2) As Integer 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
+        ''state_yesterday=... (import de la variable sauvegardée la veille)
+        'Dim current_state(lines_polygon.Length - 1, 2) As Integer 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
+        'Dim current_state_output(2) As Integer
+
+        'For i = 0 To lines_polygon.Length - 1
+        '    If niveau_vector_past(lines_past.Length - 2) >= tbl.Rows(i)(1) Then
+        '        inonde_hier(i) = 1
+        '    End If
+        '    If inonde_hier(i) = 1 Then
+        '        'MAX:appliquer la fonction de developpement larvaire 
+        '        'current_state_output=function_state(state_yesterday(i,0), state_yesterday(i,1), temp_vector_past(lines_past.Length - 2))
+        '        'current_state(i,0)=current_state_output(0)
+        '        'current_state(i,1)=current_state_output(1)
+        '    Else
+        '        'current_state(i, 0) = 0
+        '        'current_state(i, 0) = 0
+        '    End If
+        'Next
 
         '..........
         'prévisions
@@ -180,8 +209,8 @@ Module Module1
         Next
 
 
-        Dim blabla(3) As Integer
-        Console.WriteLine(blabla.Length)
+
+        Console.WriteLine()
         Console.Read()
     End Sub
 
