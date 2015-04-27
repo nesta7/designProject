@@ -1,6 +1,5 @@
 ﻿Imports System.Windows.Forms 'MAX: Module qui sert à faire fonctionner la fonction messagebox.
 Module Module1
-    'Main fait par MAX MENTHA
     Sub Main()
 
         '**************************************************************************************************************
@@ -28,7 +27,9 @@ Module Module1
         '-----------------------------
         'Initialisation des variables
         '-----------------------------
-        Dim jma_s As String()
+        'MAX: jma pour jour mois annee
+        Dim jma As String()
+        'MAX: jour_split permet de dissocier le jour et l'heure de la mesure
         Dim jour_split As String()
 
         Dim i
@@ -68,10 +69,10 @@ Module Module1
 
                 'moment des mesures
                 date_vector_past(j) = tbl2.Rows(j)(0)
-                jma_s = date_vector_past(j).Split(New Char() {"-"c})
-                jour_split = jma_s(2).Split(New Char() {" "c}) ' ca sert à enlever les elements inutiles
-                annee_past(j) = Integer.Parse(jma_s(0))
-                mois_past(j) = Integer.Parse(jma_s(1))
+                jma = date_vector_past(j).Split(New Char() {"-"c})
+                jour_split = jma(2).Split(New Char() {" "c}) 'MAX: cette opération permet de dissocier l'heure et le jour
+                annee_past(j) = Integer.Parse(jma(0))
+                mois_past(j) = Integer.Parse(jma(1))
                 jour_past(j) = Integer.Parse(jour_split(0))
 
                 'mesures
@@ -117,10 +118,10 @@ Module Module1
 
                 'moment des mesures
                 date_vector_previ(j) = tbl3.Rows(j)(0)
-                jma_s = date_vector_previ(j).Split(New Char() {"-"c})
-                jour_split = jma_s(2).Split(New Char() {" "c}) 'MAX: ca sert à enlever les elements inutiles
-                annee_previ(j) = Integer.Parse(jma_s(0))
-                mois_previ(j) = Integer.Parse(jma_s(1))
+                jma = date_vector_previ(j).Split(New Char() {"-"c})
+                jour_split = jma(2).Split(New Char() {" "c}) 'MAX: cette opération permet de dissocier l'heure et le jour
+                annee_previ(j) = Integer.Parse(jma(0))
+                mois_previ(j) = Integer.Parse(jma(1))
                 jour_previ(j) = Integer.Parse(jour_split(0))
 
                 'mesures
@@ -142,14 +143,17 @@ Module Module1
         '..........
         'passé
         '..........
-        'MAX: deux facons d'approcher le probleme sont présentées. La première est une approche preliminaire fidèle au code d'origine de florian et akkio
-        'la deuxième est l'approche que l'on devrait utiliser une fois le modèle intégré dans le système d'e-dric.
+        'MAX: deux facons d'approcher le probleme sont présentées. La première est une approche preliminaire fidèle au code d'origine de florian et akkio.
+        'La deuxième est l'approche que l'on devrait utiliser une fois le modèle intégré dans le système d'e-dric.
 
         'MAX: approche 1) toutes les mesures a disposition sont calculées à chaque run du programme
         Dim inonde_past(lines_past.Length - 2, lines_polygon.Length - 1) As Integer 'MAX: plus tard on aura pas besoin de garder cette information. Juste les quelques dernières lignes. Celles d'avant auront déjà été prises en compte.
         'MAX: pour la prochaine variable: 1ere dimension = temps. 2eme dimension = polygone, 3eme dimension = stade en cours et pourcentage d'avancement du stade
-        Dim state_time(lines_past.Length - 2, lines_polygon.Length - 1, 2) As Integer
+        Dim state_time(lines_past.Length - 2, lines_polygon.Length - 1, 2) As Double
         'Dim state_output(2) As integer
+
+        'initialiser l'etat du premier jour à 0
+        'pas besoin, c'est fait automatiquement.
 
         For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
             For i = 0 To lines_polygon.Length - 1
@@ -174,6 +178,7 @@ Module Module1
         Next
 
         ''MAX: approche 2) Seules les mesures de la veille sont calculées, les mesures précédentes étant prises en compte par le fichier sauvegardé (voir les lignes suivantes)
+
         'Dim inonde_hier(lines_polygon.Length - 1) As Integer
         ''MAX: pour les 2 prochaines variables: 1ere dimension = polygone, 2eme dimension = stade en cours et pourcentage d'avancement du stade
         'Dim state_yesterday(lines_polygon.Length - 1, 2) As Integer 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
@@ -208,13 +213,86 @@ Module Module1
                 End If
             Next
         Next
-
-
-        Dim youhou(4, 4) As Double
-
-        Console.WriteLine(youhou.Length)
+        Dim temp() As Double = {15, 20, 25, 30, 35}
+        Console.WriteLine(temp.Length)
         Console.Read()
     End Sub
+
+    'MAX: T représente la température de la veille
+    Function function_state(ByVal state_yesterday As Double, ByVal perc_yesterday As Double, ByVal T As Double) As Double()
+
+        'Declaration des variables de sortie
+        Dim state_perc_today As Double()
+        Dim state_today As Double
+        Dim perc_today As Double
+
+        'categories de temperature
+        Dim temp() As Double = {15, 20, 25, 30, 35}
+
+        'Durée stades vexans (établi à l'aide du code matlab "adaptation_albopictus_vexans.m")
+        Dim L1() As Double = {3.4, 2.4, 1.5, 0.9, 0.7}
+        Dim L2() As Double = {2, 1.1, 0.9, 0.9, 0.5}
+        Dim L3() As Double = {2.8, 1.7, 0.9, 0.9, 1}
+        Dim L4() As Double = {8.1, 3.3, 2.4, 2, 3}
+
+        'Durée stades albopictus
+        'Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
+        'Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
+        'Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
+        'Dim L4() As Double = {13.4, 4.1, 3.3, 3.0, 6.8}
+
+
+        Dim i As Integer
+        Dim noCol As Integer = temp.Length - 1
+        Dim Model(4, noCol) As Double
+        Dim perc_incr As Double 'MAX: cette variable montre l'augmentation du pourcentage de la maturation de l'état qui avait lieu entre hier et aujourd'hui
+        Dim time_new_state As Double 'MAX: dans le cas où un changement d'état a lieu entre hier et aujourd'hui, cette variable indique le temps qui s'est écoulé depuis que ce nouvel état a lieu.
+
+        For i = 0 To noCol
+            Model(0, i) = temp(i)
+            Model(1, i) = L1(i)
+            Model(2, i) = L2(i)
+            Model(3, i) = L3(i)
+            Model(4, i) = L4(i)
+        Next
+        If T < Model(0, 0) Or T > Model(0, noCol) Then
+            Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
+        Else
+            For i = 0 To noCol - 1
+                If T >= temp(i) And T < temp(i + 1) Then
+                    'Compute a linear estimation of the require number of days to grow up
+                    'then compute the actual proportion of growth since the simulation is at a daily scale
+                    perc_incr = 1 / (Model(state_yesterday, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_yesterday, i + 1) - Model(state_yesterday, i)))
+                    If perc_incr + perc_yesterday >= 1 Then
+                        time_new_state = (perc_incr + perc_yesterday - 1) * (1 / perc_incr)
+                        state_today = state_yesterday + 1
+                        perc_today = time_new_state / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
+                        If perc_today >= 1 Then
+                            Dim break As Integer = 0
+                            While break = 0
+                                state_today = state_today + 1
+                                time_new_state = (perc_today - 1) * (1 / perc_today)
+                                perc_today = time_new_state / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
+                                If perc_today < 1 Then
+                                    break = 1
+                                End If
+                            End While
+                        End If
+                    Else
+                        time_new_state = 0
+                        state_today = state_yesterday
+                        perc_today = perc_incr + perc_yesterday
+                    End If
+                End If
+            Next
+        End If
+
+
+        state_perc_today(0) = state_today
+        state_perc_today(1) = perc_today
+        Return state_perc_today
+    End Function
+    '---------------------------------------------------------
 
     Function LarvaModel(ByVal cs As Integer, ByVal T As Double) As Double
 
@@ -226,12 +304,20 @@ Module Module1
 
         'Reference at the bottom
         Dim temp() As Double = {15, 20, 25, 30, 35}
-        Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
-        Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
-        Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
-        Dim L4() As Double = {13.4, 4.1, 3.3, 3.0, 6.8}
 
-        'Could probably be inproved
+        'Durée stades vexans (voir code matlab "adaptation_albopictus_vexans.m")
+        Dim L1() As Double = {3.4, 2.4, 1.5, 0.9, 0.7}
+        Dim L2() As Double = {2, 1.1, 0.9, 0.9, 0.5}
+        Dim L3() As Double = {2.8, 1.7, 0.9, 0.9, 1}
+        Dim L4() As Double = {8.1, 3.3, 2.4, 2, 3}
+
+        'Durée stades albopictus
+        'Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
+        'Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
+        'Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
+        'Dim L4() As Double = {13.4, 4.1, 3.3, 3.0, 6.8}
+
+        'Could probably be improved
         For i = 0 To noCol
             Model(0, i) = temp(i)
             Model(1, i) = L1(i)
@@ -260,7 +346,6 @@ Module Module1
         Return Prop
     End Function
 
-    'Should be a method but I'mnot good at it
     'Function that modify the Percentage in the LarvaStates and return the new one after applying the LarvalModel to each require state
     'By Morgan Bruhin
     Function ChangeState(ByVal PercLarvaState() As Double, ByVal T As Double) As Double()
