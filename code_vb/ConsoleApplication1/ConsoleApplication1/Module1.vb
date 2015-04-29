@@ -1,10 +1,14 @@
 ﻿Imports System.Windows.Forms 'MAX: Module qui sert à faire fonctionner la fonction messagebox.
+'les 2 prochains modules servent à écrire des résultats dans un csv...
+Imports System.IO
+'Imports System.Text
+
 Module Module1
     Sub Main()
 
         '**************************************************************************************************************
-        'Import des zones inondables (identifiant du polygone, altitude de la zone concernée, et infos de connectivité 
-        'si on tient compte de la théorie des débordements).
+        'Import des zones inondables (identifiant du polygone, altitude de la zone concernée, evt. connectivité si
+        'on tient compte de la migration des larves vers zones plus basses
         '**************************************************************************************************************
         Dim path_polygon = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\polygones.csv"
         Dim lines_polygon = IO.File.ReadAllLines(path_polygon)
@@ -21,16 +25,14 @@ Module Module1
 
         '**************************************************************************************************************
         'Import des infos de hauteur d'eau et de température du passé et de prévision.  attention! il faut modifier le 
-        'code de telle sorte qu'il y ait une mesure par heure pour le passé, et 2 par jour pour les prévisions!!
+        'code de telle sorte qu'il y ait une mesure par heure pour le passé, et 2 par jour pour les prévisions!! Ensuite,
+        'agréger le tout pour avoir des moyennes journalières
         '**************************************************************************************************************
-
         '-----------------------------
         'Initialisation des variables
         '-----------------------------
-        'MAX: jma pour jour mois annee
-        Dim jma As String()
-        'MAX: jour_split permet de dissocier le jour et l'heure de la mesure
-        Dim jour_split As String()
+        Dim jma As String() 'MAX: jma pour jour mois annee
+        Dim jour_split As String() 'MAX: jour_split permet de dissocier le jour et l'heure de la mesure
 
         Dim i
         Dim j
@@ -57,7 +59,7 @@ Module Module1
         Dim annee_past(lines_past.Length - 2) As Integer
 
         i = 0 'MAX: variable servant à ignorer la première ligne
-        j = 0
+        j = 0 'MAX: variable permettant de passer à travers chaque ligne
 
         'importation des infos du csv dans les variables définies ci-dessus
         For Each line In lines_past
@@ -106,7 +108,7 @@ Module Module1
         Dim annee_previ(lines_previ.Length - 2) As Integer
 
         i = 0 'MAX: variable servant à ignorer la première ligne
-        j = 0
+        j = 0 'MAX: variable permettant de passer à travers chaque ligne
 
         'importation des infos du csv dans les variables définies ci-dessus
         For Each line In lines_previ
@@ -136,7 +138,6 @@ Module Module1
         '**************************************************************************************************************
         'simulation
         '**************************************************************************************************************
-
         '-----------------------------
         'simulation du niveau de l'eau
         '-----------------------------
@@ -146,61 +147,97 @@ Module Module1
         'MAX: deux facons d'approcher le probleme sont présentées. La première est une approche preliminaire fidèle au code d'origine de florian et akkio.
         'La deuxième est l'approche que l'on devrait utiliser une fois le modèle intégré dans le système d'e-dric.
 
-        'MAX: approche 1) toutes les mesures a disposition sont calculées à chaque run du programme
-        Dim inonde_past(lines_past.Length - 2, lines_polygon.Length - 1) As Integer 'MAX: plus tard on aura pas besoin de garder cette information. Juste les quelques dernières lignes. Celles d'avant auront déjà été prises en compte.
-        'MAX: pour la prochaine variable: 1ere dimension = temps. 2eme dimension = polygone, 3eme dimension = stade en cours et pourcentage d'avancement du stade
-        Dim state_time(lines_past.Length - 2, lines_polygon.Length - 1, 2) As Double
-        'Dim state_output(2) As integer
+        ''MAX: approche 1) toutes les mesures a disposition sont calculées à chaque run du programme
+        'Dim inonde_past(lines_past.Length - 2, lines_polygon.Length - 1) As Integer 'MAX: plus tard on aura pas besoin de garder cette information. Juste les quelques dernières lignes. Celles d'avant auront déjà été prises en compte.
+        ''MAX: pour la prochaine variable: 1ere dimension = temps. 2eme dimension = polygone, 3eme dimension = stade en cours et pourcentage d'avancement du stade
+        'Dim state_time(lines_past.Length - 2, lines_polygon.Length - 1, 2) As Double
+        'Dim state_output(2) As Double
 
-        'initialiser l'etat du premier jour à 0
-        'pas besoin, c'est fait automatiquement.
+        ''initialiser l'etat du premier jour à 0
+        ''pas besoin, c'est fait automatiquement.
 
-        For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
-            For i = 0 To lines_polygon.Length - 1
-                If niveau_vector_past(t) >= tbl.Rows(i)(1) Then
-                    inonde_past(t, i) = 1
-                End If
-                If inonde_past(t, i) = 1 Then
-                    If t <> 0 Then
-                        'MAX:appliquer la fonction de developpement larvaire 
-                        'state_output=function_state(state_time(t-1,i,0), state_time(t-1,i,1), temp_vector_past(t-1))
-                        'state_time(t,i,0)=state_output(0)
-                        'state_time(t,i,1)=state_output(1)
-                    Else
-                        'state_time(t,i,0)=valeur_arbitraire ??
-                        'state_time(t,i,0)=valeur_arbitraire ??
-                    End If
-                Else
-                    'state_time(t,i,0)=0
-                    'state_time(t,i,1)=0
-                End If
-            Next
-        Next
-
-        ''MAX: approche 2) Seules les mesures de la veille sont calculées, les mesures précédentes étant prises en compte par le fichier sauvegardé (voir les lignes suivantes)
-
-        'Dim inonde_hier(lines_polygon.Length - 1) As Integer
-        ''MAX: pour les 2 prochaines variables: 1ere dimension = polygone, 2eme dimension = stade en cours et pourcentage d'avancement du stade
-        'Dim state_yesterday(lines_polygon.Length - 1, 2) As Integer 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
-        ''state_yesterday=... (import de la variable sauvegardée la veille)
-        'Dim current_state(lines_polygon.Length - 1, 2) As Integer 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
-        'Dim current_state_output(2) As Integer
-
-        'For i = 0 To lines_polygon.Length - 1
-        '    If niveau_vector_past(lines_past.Length - 2) >= tbl.Rows(i)(1) Then
-        '        inonde_hier(i) = 1
-        '    End If
-        '    If inonde_hier(i) = 1 Then
-        '        'MAX:appliquer la fonction de developpement larvaire 
-        '        'current_state_output=function_state(state_yesterday(i,0), state_yesterday(i,1), temp_vector_past(lines_past.Length - 2))
-        '        'current_state(i,0)=current_state_output(0)
-        '        'current_state(i,1)=current_state_output(1)
-        '    Else
-        '        'current_state(i, 0) = 0
-        '        'current_state(i, 0) = 0
-        '    End If
+        'For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
+        '    For i = 0 To lines_polygon.Length - 1
+        '        If niveau_vector_past(t) >= tbl.Rows(i)(1) Then
+        '            inonde_past(t, i) = 1
+        '        End If
+        '        If inonde_past(t, i) = 1 Then
+        '            If t <> 0 Then
+        '                'MAX:appliquer la fonction de developpement larvaire 
+        '                state_output = function_state(state_time(t - 1, i, 0), state_time(t - 1, i, 1), temp_vector_past(t - 1))
+        '                state_time(t, i, 0) = state_output(0)
+        '                state_time(t, i, 1) = state_output(1)
+        '            Else
+        '                'state_time(t,i,0)=valeur_arbitraire ??
+        '                'state_time(t,i,0)=valeur_arbitraire ??
+        '            End If
+        '        Else
+        '            'state_time(t,i,0)=0
+        '            'state_time(t,i,1)=0
+        '        End If
+        '    Next
         'Next
 
+        'MAX: approche 2) Seules les mesures de la veille sont calculées, les mesures précédentes étant prises en compte par le fichier sauvegardé (voir les lignes suivantes)
+        Dim inonde_hier(lines_polygon.Length - 1) As Integer
+        'MAX: pour les 2 prochaines variables: 1ere dimension = polygone, 2eme dimension = stade en cours et pourcentage d'avancement du stade
+        Dim state_yesterday(lines_polygon.Length - 1, 2) As Double 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
+
+        Dim path_state = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\etat_veille.csv"
+        Dim lines_state = IO.File.ReadAllLines(path_state)
+        Dim tbl4 = New DataTable
+        colCount = lines_state.First.Split(","c).Length
+        tbl4.Columns.Add(New DataColumn("Polygone_id", GetType(Int32)))
+        tbl4.Columns.Add(New DataColumn("Etat", GetType(Double)))
+        tbl4.Columns.Add(New DataColumn("Evolution_etat", GetType(Double)))
+        For Each line In lines_state
+            Dim objFields = From field In line.Split(","c)
+                         Select CType(field, Object)
+            Dim newRow = tbl4.Rows.Add()
+            newRow.ItemArray = objFields.ToArray()
+        Next
+
+        j = 0 'MAX: variable permettant de passer à travers chaque ligne
+        'importation des infos de l'etat de développement de la veille
+        For Each line In lines_state
+            'polygon_id(j) = tbl4.Rows(j)(0)
+            state_yesterday(j, 0) = tbl4.Rows(j)(1)
+            state_yesterday(j, 1) = tbl4.Rows(j)(2)
+            j = j + 1
+        Next
+
+        Dim current_state(lines_polygon.Length - 1, 2) As Integer 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
+        Dim current_state_output(2) As Double
+
+        For i = 0 To lines_polygon.Length - 1
+            If niveau_vector_past(lines_past.Length - 2) >= tbl.Rows(i)(1) Then
+                inonde_hier(i) = 1
+            End If
+            If inonde_hier(i) = 1 Then
+                'MAX:appliquer la fonction de developpement larvaire 
+                current_state_output = function_state(state_yesterday(i, 0), state_yesterday(i, 1), temp_vector_past(lines_past.Length - 2))
+                current_state(i, 0) = current_state_output(0)
+                current_state(i, 1) = current_state_output(1)
+            Else
+                current_state(i, 0) = 0
+                current_state(i, 1) = 0
+            End If
+        Next
+
+        'écriture de la table enregistrant le stade actuel
+        Dim objwri As New StreamWriter("C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\etat_veille.csv", True)
+        Dim current_state_string_1 As String
+        Dim current_state_string_2 As String
+        Dim polygon_id As String
+
+        For i = 0 To lines_polygon.Length - 1
+            current_state_string_1 = System.Convert.ToString(current_state(i, 0))
+            current_state_string_2 = System.Convert.ToString(current_state(i, 1))
+            polygon_id = System.Convert.ToString(i + 1)
+            objwri.WriteLine(polygon_id + ", " + current_state_string_1 + ", " + current_state_string_2)
+        Next
+        objwri.Close()
+        Console.WriteLine(current_state(1, 0))
         '..........
         'prévisions
         '..........
@@ -213,8 +250,6 @@ Module Module1
                 End If
             Next
         Next
-        Dim temp() As Double = {15, 20, 25, 30, 35}
-        Console.WriteLine(temp.Length)
         Console.Read()
     End Sub
 
@@ -222,7 +257,7 @@ Module Module1
     Function function_state(ByVal state_yesterday As Double, ByVal perc_yesterday As Double, ByVal T As Double) As Double()
 
         'Declaration des variables de sortie
-        Dim state_perc_today As Double()
+        Dim state_perc_today(2) As Double
         Dim state_today As Double
         Dim perc_today As Double
 
@@ -264,19 +299,23 @@ Module Module1
                     'then compute the actual proportion of growth since the simulation is at a daily scale
                     perc_incr = 1 / (Model(state_yesterday, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_yesterday, i + 1) - Model(state_yesterday, i)))
                     If perc_incr + perc_yesterday >= 1 Then
-                        time_new_state = (perc_incr + perc_yesterday - 1) * (1 / perc_incr)
-                        state_today = state_yesterday + 1
-                        perc_today = time_new_state / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
-                        If perc_today >= 1 Then
-                            Dim break As Integer = 0
-                            While break = 0
-                                state_today = state_today + 1
-                                time_new_state = (perc_today - 1) * (1 / perc_today)
-                                perc_today = time_new_state / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
-                                If perc_today < 1 Then
-                                    break = 1
-                                End If
-                            End While
+                        If state_yesterday = 4 Then
+                            'disable_polygon = 1
+                        Else
+                            time_new_state = (perc_incr + perc_yesterday - 1) * (1 / perc_incr)
+                            state_today = state_yesterday + 1 ' this one gets out of range
+                            perc_today = time_new_state / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
+                            If perc_today >= 1 Then
+                                Dim break As Integer = 0
+                                While break = 0
+                                    state_today = state_today + 1
+                                    time_new_state = (perc_today - 1) * (1 / perc_today)
+                                    perc_today = time_new_state / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
+                                    If perc_today < 1 Then
+                                        break = 1
+                                    End If
+                                End While
+                            End If
                         End If
                     Else
                         time_new_state = 0
@@ -286,190 +325,10 @@ Module Module1
                 End If
             Next
         End If
-
-
         state_perc_today(0) = state_today
         state_perc_today(1) = perc_today
         Return state_perc_today
     End Function
-    '---------------------------------------------------------
-
-    Function LarvaModel(ByVal cs As Integer, ByVal T As Double) As Double
-
-        Dim Prop As Double = 0.0
-        Dim i As Integer
-        Dim j As Integer
-        Dim noCol As Integer = 4
-        Dim Model(4, noCol) As Double
-
-        'Reference at the bottom
-        Dim temp() As Double = {15, 20, 25, 30, 35}
-
-        'Durée stades vexans (voir code matlab "adaptation_albopictus_vexans.m")
-        Dim L1() As Double = {3.4, 2.4, 1.5, 0.9, 0.7}
-        Dim L2() As Double = {2, 1.1, 0.9, 0.9, 0.5}
-        Dim L3() As Double = {2.8, 1.7, 0.9, 0.9, 1}
-        Dim L4() As Double = {8.1, 3.3, 2.4, 2, 3}
-
-        'Durée stades albopictus
-        'Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
-        'Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
-        'Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
-        'Dim L4() As Double = {13.4, 4.1, 3.3, 3.0, 6.8}
-
-        'Could probably be improved
-        For i = 0 To noCol
-            Model(0, i) = temp(i)
-            Model(1, i) = L1(i)
-            Model(2, i) = L2(i)
-            Model(3, i) = L3(i)
-            Model(4, i) = L4(i)
-        Next
-        If T < Model(0, 0) Or T > Model(0, noCol) Then
-            Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
-        Else
-            For i = 0 To noCol - 1
-                If T >= temp(i) And T < temp(i + 1) Then
-                    'Compute a linear estimation of the require number of days to grow up
-                    'then compute the actual proportion of growing since the simulation is at a daily scale
-                    Prop = 1 / (Model(cs, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(cs, i + 1) - Model(cs, i)))
-                End If
-            Next
-        End If
-        'Display test
-        'For i = 0 To 4
-        '   For j= 0 To noCol
-        '      Console.WriteLine("Model "& Model(i,j))
-        ' Next
-        'Next
-
-        Return Prop
-    End Function
-
-    'Function that modify the Percentage in the LarvaStates and return the new one after applying the LarvalModel to each require state
-    'By Morgan Bruhin
-    Function ChangeState(ByVal PercLarvaState() As Double, ByVal T As Double) As Double()
-        Dim i As Integer
-        Dim index As Integer = -1
-        For i = 0 To 3
-            'if the larva aren't present at the current state i then the percentage is -1
-            If PercLarvaState(i) <> -1 Then
-                'Increase the Larva growth percentage
-                PercLarvaState(i) = PercLarvaState(i) + LarvaModel(i, T)
-                'if the percentage is up to 1 the state is complete
-                If PercLarvaState(i) >= 1.0 Then
-                    'if the state isn't the last one activate the next
-                    If i < 3 Then
-                        If PercLarvaState(i + 1) = -1 Then
-                            index = (i + 1)
-                        Else
-                            'TODO : Decide what to do if a younger population arrive befor the previous fully grows
-                        End If
-                    Else
-                        'TODO : decide what to do exactly for T4 fully grow
-                    End If
-                    'At the end : desactivate the current state
-                    PercLarvaState(i) = -1
-                End If
-                'Activate the next state without computing a new day
-            ElseIf i = index Then
-                PercLarvaState(i) = 0 ' TODO : Compute the difference with the previous state and compute a proportional increase
-            End If
-        Next
-
-        Return PercLarvaState
-    End Function
-
-    ''VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN
-    ''Function updating the lavaire state
-    ''By Morgan Bruhin
-    ''PS didn't use "degre-jour" didn't understand well enought it
-    ''Using percentage of grow per state
-
-    ''Advantage : would allow to have more than one state per polygone (more than only one larval type)
-
-    ''Function that compute the Increase percentage for state cs at temperature T for 1 day
-    'Function LarvaModel(ByVal cs As Integer, ByVal T As Double) As Double
-
-    '    Dim Prop As Double = 0.0
-    '    Dim i As Integer
-    '    Dim j As Integer
-    '    Dim noCol As Integer = 4
-    '    Dim Model(4, noCol) As Double
-
-    '    'Reference at the bottom
-    '    Dim temp() As Double = {15, 20, 25, 30, 35}
-    '    Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
-    '    Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
-    '    Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
-    '    Dim L4() As Double = {13.4, 4.1, 3.3, 3.0, 6.8}
-
-    '    'Could probably be inproved
-    '    For i = 0 To noCol
-    '        Model(0, i) = temp(i)
-    '        Model(1, i) = L1(i)
-    '        Model(2, i) = L2(i)
-    '        Model(3, i) = L3(i)
-    '        Model(4, i) = L4(i)
-    '    Next
-    '    If T < Model(0, 0) Or T > Model(0, noCol) Then
-    '        Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
-    '    Else
-    '        For i = 0 To noCol - 1
-    '            If T >= temp(i) And T < temp(i + 1) Then
-    '                'Compute a linear estimation of the require number of days to grow up
-    '                'then compute the actual proportion of growing since the simulation is at a daily scale
-    '                Prop = 1 / (Model(cs, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(cs, i + 1) - Model(cs, i)))
-    '            End If
-    '        Next
-    '    End If
-    '    'Display test
-    '    'For i = 0 To 4
-    '    '   For j= 0 To noCol
-    '    '      Console.WriteLine("Model "& Model(i,j))
-    '    ' Next
-    '    'Next
-
-    '    Return Prop
-    'End Function
-
-    ''Should be a method but I'mnot good at it
-    ''Function that modify the Percentage in the LarvaStates and return the new one after applying the LarvalModel to each require state
-    ''By Morgan Bruhin
-    'Function ChangeState(ByVal PercLarvaState() As Double, ByVal T As Double) As Double()
-    '    Dim i As Integer
-    '    Dim index As Integer = -1
-    '    For i = 0 To 3
-    '        'if the larva aren't present at the current state i then the percentage is -1
-    '        If PercLarvaState(i) <> -1 Then
-    '            'Increase the Larva growth percentage
-    '            PercLarvaState(i) = PercLarvaState(i) + LarvaModel(i, T)
-    '            'if the percentage is up to 1 the state is complete
-    '            If PercLarvaState(i) >= 1.0 Then
-    '                'if the state isn't the last one activate the next
-    '                If i < 3 Then
-    '                    If PercLarvaState(i + 1) = -1 Then
-    '                        index = (i + 1)
-    '                    Else
-    '                        'TODO : Decide what to do if a younger population arrive befor the previous fully grows
-    '                    End If
-    '                Else
-    '                    'TODO : decide what to do exactly for T4 fully grow
-    '                End If
-    '                'At the end : desactivate the current state
-    '                PercLarvaState(i) = -1
-    '            End If
-    '            'Activate the next state without computing a new day
-    '        ElseIf i = index Then
-    '            PercLarvaState(i) = 0 ' TODO : Compute the difference with the previous state and compute a proportional increase
-    '        End If
-    '    Next
-
-    '    Return PercLarvaState
-    'End Function
-    ''VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN-VERSION-DE-BASE-DE-MORGAN
-
-
 End Module
 
 
