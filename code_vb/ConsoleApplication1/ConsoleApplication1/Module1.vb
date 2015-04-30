@@ -5,12 +5,13 @@ Imports System.IO
 
 Module Module1
     Sub Main()
-
+        'Dim path_init = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\" 'Max
+        Dim path_init = "E:\code_vb\" 'Mo
         '**************************************************************************************************************
         'Import des zones inondables (identifiant du polygone, altitude de la zone concernée, evt. connectivité si
         'on tient compte de la migration des larves vers zones plus basses
         '**************************************************************************************************************
-        Dim path_polygon = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\polygones.csv"
+        Dim path_polygon = String.Concat(path_init, "polygones.csv")
         Dim lines_polygon = IO.File.ReadAllLines(path_polygon)
         Dim tbl = New DataTable
         Dim colCount = lines_polygon.First.Split(","c).Length
@@ -41,7 +42,8 @@ Module Module1
         'passé
         '-----------------------------
         'Lecture du csv
-        Dim path_past = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\Hauteur_Temp_passe.csv"
+        Dim path_past = String.Concat(path_init, "Hauteur_Temp_passe.csv")
+
         Dim lines_past = IO.File.ReadAllLines(path_past)
         Dim tbl2 = New DataTable
         tbl2.Columns.Add(New DataColumn("Date", GetType(String)))
@@ -90,7 +92,7 @@ Module Module1
         'prévisions
         '-----------------------------
         'Lecture du csv
-        Dim path_previ = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\Hauteur_Temp_previ.csv"
+        Dim path_previ = String.Concat(path_init, "Hauteur_Temp_previ.csv")
         Dim lines_previ = IO.File.ReadAllLines(path_previ)
         Dim tbl3 = New DataTable
         tbl3.Columns.Add(New DataColumn("Date", GetType(String)))
@@ -183,7 +185,7 @@ Module Module1
         'MAX: pour les 2 prochaines variables: 1ere dimension = polygone, 2eme dimension = stade en cours et pourcentage d'avancement du stade
         Dim state_yesterday(lines_polygon.Length - 1, 2) As Double 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
 
-        Dim path_state = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\etat_veille.csv"
+        Dim path_state = String.Concat(path_init, "etat_veille.csv")
         Dim lines_state = IO.File.ReadAllLines(path_state)
         Dim tbl4 = New DataTable
         colCount = lines_state.First.Split(","c).Length
@@ -225,7 +227,7 @@ Module Module1
         Next
 
         'écriture de la table enregistrant le stade actuel
-        Dim objwri As New StreamWriter("C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\etat_veille.csv", True)
+        Dim objwri As New StreamWriter(path_state, True) '"C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\etat_veille.csv", True)
         Dim current_state_string_1 As String
         Dim current_state_string_2 As String
         Dim polygon_id As String
