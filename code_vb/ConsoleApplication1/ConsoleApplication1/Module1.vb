@@ -5,8 +5,8 @@ Imports System.IO
 
 Module Module1
     Sub Main()
-        'Dim path_init = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\" 'Max
-        Dim path_init = "E:\code_vb\" 'Mo
+        Dim path_init = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\" 'Max
+        'Dim path_init = "E:\code_vb\" 'Mo
         '**************************************************************************************************************
         'Import des zones inondables (identifiant du polygone, altitude de la zone concernée, evt. connectivité si
         'on tient compte de la migration des larves vers zones plus basses
@@ -183,15 +183,21 @@ Module Module1
         'MAX: approche 2) Seules les mesures de la veille sont calculées, les mesures précédentes étant prises en compte par le fichier sauvegardé (voir les lignes suivantes)
         Dim inonde_hier(lines_polygon.Length - 1) As Integer
         'MAX: pour les 2 prochaines variables: 1ere dimension = polygone, 2eme dimension = stade en cours et pourcentage d'avancement du stade
-        Dim state_yesterday(lines_polygon.Length - 1, 2) As Double 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
+        Dim state_yesterday(lines_polygon.Length - 1) As Double 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
+        Dim perc_yesterday(lines_polygon.Length - 1) As Double
+        Dim time_since_last_eclosion(lines_polygon.Length - 1) As Integer
 
+        'Lecture du fichier etat_veille.csv
         Dim path_state = String.Concat(path_init, "etat_veille.csv")
         Dim lines_state = IO.File.ReadAllLines(path_state)
         Dim tbl4 = New DataTable
         colCount = lines_state.First.Split(","c).Length
+        tbl4.Columns.Add(New DataColumn("Date", GetType(String)))
         tbl4.Columns.Add(New DataColumn("Polygone_id", GetType(Int32)))
         tbl4.Columns.Add(New DataColumn("Etat", GetType(Double)))
         tbl4.Columns.Add(New DataColumn("Evolution_etat", GetType(Double)))
+        tbl4.Columns.Add(New DataColumn("Inondé", GetType(Int32)))
+        tbl4.Columns.Add(New DataColumn("Temps_depuis_debut_inondation", GetType(Int32)))
         For Each line In lines_state
             Dim objFields = From field In line.Split(","c)
                          Select CType(field, Object)
@@ -203,26 +209,46 @@ Module Module1
         'importation des infos de l'etat de développement de la veille
         For Each line In lines_state
             'polygon_id(j) = tbl4.Rows(j)(0)
-            state_yesterday(j, 0) = tbl4.Rows(j)(1)
-            state_yesterday(j, 1) = tbl4.Rows(j)(2)
+            state_yesterday(j) = tbl4.Rows(j)(2)
+            perc_yesterday(j) = tbl4.Rows(j)(3)
+            time_since_last_eclosion(j) = tbl4.Rows(j)(5)
             j = j + 1
         Next
 
-        Dim current_state(lines_polygon.Length - 1, 2) As Integer 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
+        'Suppression de la sauvegarde de la veille
+        If System.IO.File.Exists(String.Concat(path_init, "etat_veille.csv")) = True Then
+            System.IO.File.Delete(String.Concat(path_init, "etat_veille.csv"))
+        End If
+
+        'Création de la nouvelle sauvegarde
+        Dim current_state(lines_polygon.Length - 1) As Double 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
+        Dim current_perc(lines_polygon.Length - 1) As Double
         Dim current_state_output(2) As Double
 
         For i = 0 To lines_polygon.Length - 1
+            time_since_last_eclosion(i) = time_since_last_eclosion(i) + 1
             If niveau_vector_past(lines_past.Length - 2) >= tbl.Rows(i)(1) Then
                 inonde_hier(i) = 1
             End If
             If inonde_hier(i) = 1 Then
-                'MAX:appliquer la fonction de developpement larvaire 
-                current_state_output = function_state(state_yesterday(i, 0), state_yesterday(i, 1), temp_vector_past(lines_past.Length - 2))
-                current_state(i, 0) = current_state_output(0)
-                current_state(i, 1) = current_state_output(1)
+                'MAX:appliquer la fonction de développement larvaire
+                If state_yesterday(i) <> 5.0 Then
+                    current_state_output = function_state(state_yesterday(i), perc_yesterday(i), temp_vector_past(lines_past.Length - 2), time_since_last_eclosion(i))
+                    current_state(i) = current_state_output(0)
+                    current_perc(i) = current_state_output(1)
+                Else
+                    If time_since_last_eclosion(i) < 15 Then 'MAX: faut-il mettre 14 ou 15 ici????
+                        current_state(i) = 5
+                        current_perc(i) = 0
+                    Else
+                        current_state(i) = 1
+                        current_perc(i) = 0
+                        time_since_last_eclosion(i) = 1 'MAX: faut-il mettre 1 ou 0 ici?
+                    End If
+                End If
             Else
-                current_state(i, 0) = 0
-                current_state(i, 1) = 0
+                current_state(i) = 0
+                current_perc(i) = 0
             End If
         Next
 
@@ -231,15 +257,18 @@ Module Module1
         Dim current_state_string_1 As String
         Dim current_state_string_2 As String
         Dim polygon_id As String
-
+        Dim tsle_string As String
+        Dim inonde_string As String
         For i = 0 To lines_polygon.Length - 1
-            current_state_string_1 = System.Convert.ToString(current_state(i, 0))
-            current_state_string_2 = System.Convert.ToString(current_state(i, 1))
+            current_state_string_1 = System.Convert.ToString(current_state(i))
+            current_state_string_2 = System.Convert.ToString(current_perc(i))
             polygon_id = System.Convert.ToString(i + 1)
-            objwri.WriteLine(polygon_id + ", " + current_state_string_1 + ", " + current_state_string_2)
+            tsle_string = System.Convert.ToString(time_since_last_eclosion(i))
+            inonde_string = System.Convert.ToString(inonde_hier(i))
+            objwri.WriteLine(Now.ToShortDateString + ", " + polygon_id + ", " + current_state_string_1 + ", " + current_state_string_2 + ", " + inonde_string + ", " + tsle_string)
+            'MAX: CHANGER LA LIGNE D'EN DESSUS: il faut qu'il y ait inonde_aujourdhui au lieu de inonde_hier
         Next
         objwri.Close()
-        Console.WriteLine(current_state(1, 0))
         '..........
         'prévisions
         '..........
@@ -252,11 +281,13 @@ Module Module1
                 End If
             Next
         Next
+
+        Console.WriteLine(Now.ToShortDateString)
         Console.Read()
     End Sub
 
     'MAX: T représente la température de la veille
-    Function function_state(ByVal state_yesterday As Double, ByVal perc_yesterday As Double, ByVal T As Double) As Double()
+    Function function_state(ByVal state_yesterday As Double, ByVal perc_yesterday As Double, ByVal T As Double, ByVal time_since_last_eclosion As Integer) As Double()
 
         'Declaration des variables de sortie
         Dim state_perc_today(2) As Double
@@ -295,6 +326,7 @@ Module Module1
         If T < Model(0, 0) Or T > Model(0, noCol) Then
             Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
         Else
+
             For i = 0 To noCol - 1
                 If T >= temp(i) And T < temp(i + 1) Then
                     'Compute a linear estimation of the require number of days to grow up
@@ -302,7 +334,9 @@ Module Module1
                     perc_incr = 1 / (Model(state_yesterday, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_yesterday, i + 1) - Model(state_yesterday, i)))
                     If perc_incr + perc_yesterday >= 1 Then
                         If state_yesterday = 4 Then
-                            'disable_polygon = 1
+                            time_new_state = 0
+                            state_today = 5
+                            perc_today = 0
                         Else
                             time_new_state = (perc_incr + perc_yesterday - 1) * (1 / perc_incr)
                             state_today = state_yesterday + 1 ' this one gets out of range
