@@ -1,15 +1,13 @@
 ﻿Imports System.Windows.Forms 'MAX: Module qui sert à faire fonctionner la fonction messagebox.
-'les 2 prochains modules servent à écrire des résultats dans un csv...
-Imports System.IO
-'Imports System.Text
+Imports System.IO 'MAX: module servant à écrire des résultats dans un csv...
 
 Module Module1
     Sub Main()
         Dim path_init = "C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\" 'Max
         'Dim path_init = "E:\code_vb\" 'Mo
+
         '**************************************************************************************************************
-        'Import des zones inondables (identifiant du polygone, altitude de la zone concernée, evt. connectivité si
-        'on tient compte de la migration des larves vers zones plus basses
+        'Import des zones inondables (identifiant du polygone et altitude de la zone concernée)
         '**************************************************************************************************************
         Dim path_polygon = String.Concat(path_init, "polygones.csv")
         Dim lines_polygon = IO.File.ReadAllLines(path_polygon)
@@ -25,24 +23,22 @@ Module Module1
         Next
 
         '**************************************************************************************************************
-        'Import des infos de hauteur d'eau et de température du passé et de prévision.  attention! il faut modifier le 
-        'code de telle sorte qu'il y ait une mesure par heure pour le passé, et 2 par jour pour les prévisions!! Ensuite,
-        'agréger le tout pour avoir des moyennes journalières
+        'Import des infos de hauteur d'eau et de température du passé et de prévision. (1 mesure par jour)
         '**************************************************************************************************************
-        '-----------------------------
+        '----------------------------
         'Initialisation des variables
-        '-----------------------------
-        Dim jma As String() 'MAX: jma pour jour mois annee
-        Dim jour_split As String() 'MAX: jour_split permet de dissocier le jour et l'heure de la mesure
+        '----------------------------
+        Dim jma As String() 'MAX: jma pour jours mois annee
+        Dim jour_split As String() 'MAX: jour_split permet de dissocier le jour et l'heure de la mesure (de les stocker dans 2 différentes variables)
 
         Dim i
         Dim j
 
         '-----------------------------
-        'passé
+        'mesures de la veille
         '-----------------------------
         'Lecture du csv
-        Dim path_past = String.Concat(path_init, "Hauteur_Temp_passe.csv")
+        Dim path_past = String.Concat(path_init, "Hauteur_Temp_veille.csv")
 
         Dim lines_past = IO.File.ReadAllLines(path_past)
         Dim tbl2 = New DataTable
@@ -51,17 +47,10 @@ Module Module1
         tbl2.Columns.Add(New DataColumn("Temperature", GetType(Double)))
 
         'declaration des variables de date, de niveau de l'eau et de temperature de l'eau
-        Dim date_vector_past(lines_past.Length - 2) As String
-        Dim niveau_vector_past(lines_past.Length - 2) As Double
-        Dim temp_vector_past(lines_past.Length - 2) As Double
-
-        'Fractionnement des éléments de date_vector en differentes variables
-        Dim jour_past(lines_past.Length - 2) As Integer
-        Dim mois_past(lines_past.Length - 2) As Integer
-        Dim annee_past(lines_past.Length - 2) As Integer
+        Dim niveau_vector_past As Double
+        Dim temp_vector_past As Double
 
         i = 0 'MAX: variable servant à ignorer la première ligne
-        j = 0 'MAX: variable permettant de passer à travers chaque ligne
 
         'importation des infos du csv dans les variables définies ci-dessus
         For Each line In lines_past
@@ -71,19 +60,9 @@ Module Module1
                 Dim newRow = tbl2.Rows.Add()
                 newRow.ItemArray = objFields2.ToArray()
 
-                'moment des mesures
-                date_vector_past(j) = tbl2.Rows(j)(0)
-                jma = date_vector_past(j).Split(New Char() {"-"c})
-                jour_split = jma(2).Split(New Char() {" "c}) 'MAX: cette opération permet de dissocier l'heure et le jour
-                annee_past(j) = Integer.Parse(jma(0))
-                mois_past(j) = Integer.Parse(jma(1))
-                jour_past(j) = Integer.Parse(jour_split(0))
-
                 'mesures
-                niveau_vector_past(j) = tbl2.Rows(j)(1)
-                temp_vector_past(j) = tbl2.Rows(j)(2)
-
-                j = j + 1
+                niveau_vector_past = tbl2.Rows(0)(1)
+                temp_vector_past = tbl2.Rows(0)(2)
             End If
             i = 1
         Next
@@ -146,44 +125,8 @@ Module Module1
         '..........
         'passé
         '..........
-        'MAX: deux facons d'approcher le probleme sont présentées. La première est une approche preliminaire fidèle au code d'origine de florian et akkio.
-        'La deuxième est l'approche que l'on devrait utiliser une fois le modèle intégré dans le système d'e-dric.
-
-        ''MAX: approche 1) toutes les mesures a disposition sont calculées à chaque run du programme
-        'Dim inonde_past(lines_past.Length - 2, lines_polygon.Length - 1) As Integer 'MAX: plus tard on aura pas besoin de garder cette information. Juste les quelques dernières lignes. Celles d'avant auront déjà été prises en compte.
-        ''MAX: pour la prochaine variable: 1ere dimension = temps. 2eme dimension = polygone, 3eme dimension = stade en cours et pourcentage d'avancement du stade
-        'Dim state_time(lines_past.Length - 2, lines_polygon.Length - 1, 2) As Double
-        'Dim state_output(2) As Double
-
-        ''initialiser l'etat du premier jour à 0
-        ''pas besoin, c'est fait automatiquement.
-
-        'For t = 0 To lines_past.Length - 2 'MAX: on fait -2 car la première ligne ne doit pas etre considérée puisque c'est les titres de colonnes et parce que l'on part de 0
-        '    For i = 0 To lines_polygon.Length - 1
-        '        If niveau_vector_past(t) >= tbl.Rows(i)(1) Then
-        '            inonde_past(t, i) = 1
-        '        End If
-        '        If inonde_past(t, i) = 1 Then
-        '            If t <> 0 Then
-        '                'MAX:appliquer la fonction de developpement larvaire 
-        '                state_output = function_state(state_time(t - 1, i, 0), state_time(t - 1, i, 1), temp_vector_past(t - 1))
-        '                state_time(t, i, 0) = state_output(0)
-        '                state_time(t, i, 1) = state_output(1)
-        '            Else
-        '                'state_time(t,i,0)=valeur_arbitraire ??
-        '                'state_time(t,i,0)=valeur_arbitraire ??
-        '            End If
-        '        Else
-        '            'state_time(t,i,0)=0
-        '            'state_time(t,i,1)=0
-        '        End If
-        '    Next
-        'Next
-
-        'MAX: approche 2) Seules les mesures de la veille sont calculées, les mesures précédentes étant prises en compte par le fichier sauvegardé (voir les lignes suivantes)
         Dim inonde_hier(lines_polygon.Length - 1) As Integer
-        'MAX: pour les 2 prochaines variables: 1ere dimension = polygone, 2eme dimension = stade en cours et pourcentage d'avancement du stade
-        Dim state_yesterday(lines_polygon.Length - 1) As Double 'MAX: variable a importer d'un fichier qui aura ete sauvegardé la veille
+        Dim state_yesterday(lines_polygon.Length - 1) As Double
         Dim perc_yesterday(lines_polygon.Length - 1) As Double
         Dim time_since_last_eclosion(lines_polygon.Length - 1) As Integer
 
@@ -196,7 +139,6 @@ Module Module1
         tbl4.Columns.Add(New DataColumn("Polygone_id", GetType(Int32)))
         tbl4.Columns.Add(New DataColumn("Etat", GetType(Double)))
         tbl4.Columns.Add(New DataColumn("Evolution_etat", GetType(Double)))
-        tbl4.Columns.Add(New DataColumn("Inondé", GetType(Int32)))
         tbl4.Columns.Add(New DataColumn("Temps_depuis_debut_inondation", GetType(Int32)))
         For Each line In lines_state
             Dim objFields = From field In line.Split(","c)
@@ -206,12 +148,12 @@ Module Module1
         Next
 
         j = 0 'MAX: variable permettant de passer à travers chaque ligne
+
         'importation des infos de l'etat de développement de la veille
         For Each line In lines_state
-            'polygon_id(j) = tbl4.Rows(j)(0)
             state_yesterday(j) = tbl4.Rows(j)(2)
             perc_yesterday(j) = tbl4.Rows(j)(3)
-            time_since_last_eclosion(j) = tbl4.Rows(j)(5)
+            time_since_last_eclosion(j) = tbl4.Rows(j)(4)
             j = j + 1
         Next
 
@@ -227,23 +169,23 @@ Module Module1
 
         For i = 0 To lines_polygon.Length - 1
             time_since_last_eclosion(i) = time_since_last_eclosion(i) + 1
-            If niveau_vector_past(lines_past.Length - 2) >= tbl.Rows(i)(1) Then
+            If niveau_vector_past >= tbl.Rows(i)(1) Then
                 inonde_hier(i) = 1
             End If
             If inonde_hier(i) = 1 Then
                 'MAX:appliquer la fonction de développement larvaire
-                If state_yesterday(i) <> 5.0 Then
-                    current_state_output = function_state(state_yesterday(i), perc_yesterday(i), temp_vector_past(lines_past.Length - 2), time_since_last_eclosion(i))
+                If state_yesterday(i) <> 5 Then
+                    current_state_output = function_state(state_yesterday(i), perc_yesterday(i), temp_vector_past, time_since_last_eclosion(i))
                     current_state(i) = current_state_output(0)
                     current_perc(i) = current_state_output(1)
                 Else
-                    If time_since_last_eclosion(i) < 15 Then 'MAX: faut-il mettre 14 ou 15 ici????
+                    If time_since_last_eclosion(i) < 15 Then '14 ou 15 ici????
                         current_state(i) = 5
                         current_perc(i) = 0
                     Else
                         current_state(i) = 1
                         current_perc(i) = 0
-                        time_since_last_eclosion(i) = 1 'MAX: faut-il mettre 1 ou 0 ici?
+                        time_since_last_eclosion(i) = 1 '1 ou 0 ici?
                     End If
                 End If
             Else
@@ -253,37 +195,19 @@ Module Module1
         Next
 
         'écriture de la table enregistrant le stade actuel
-        Dim objwri As New StreamWriter(path_state, True) '"C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\etat_veille.csv", True)
+        Dim objwri As New StreamWriter(path_state, True)
         Dim current_state_string_1 As String
         Dim current_state_string_2 As String
         Dim polygon_id As String
         Dim tsle_string As String
-        Dim inonde_string As String
         For i = 0 To lines_polygon.Length - 1
             current_state_string_1 = System.Convert.ToString(current_state(i))
             current_state_string_2 = System.Convert.ToString(current_perc(i))
             polygon_id = System.Convert.ToString(i + 1)
             tsle_string = System.Convert.ToString(time_since_last_eclosion(i))
-            inonde_string = System.Convert.ToString(inonde_hier(i))
-            objwri.WriteLine(Now.ToShortDateString + ", " + polygon_id + ", " + current_state_string_1 + ", " + current_state_string_2 + ", " + inonde_string + ", " + tsle_string)
-            'MAX: CHANGER LA LIGNE D'EN DESSUS: il faut qu'il y ait inonde_aujourdhui au lieu de inonde_hier
+            objwri.WriteLine(Now.ToShortDateString + ", " + polygon_id + ", " + current_state_string_1 + ", " + current_state_string_2 + ", " + tsle_string)
         Next
         objwri.Close()
-        '..........
-        'prévisions
-        '..........
-        Dim inonde_previ(lines_previ.Length, lines_polygon.Length) As Integer 'MAX: chaque ligne indique les polygones inondés pour un jour donné
-
-        For t = 0 To lines_previ.Length - 2
-            For i = 0 To lines_polygon.Length - 1
-                If niveau_vector_previ(t) >= tbl.Rows(i)(1) Then
-                    inonde_previ(t, i) = 1
-                End If
-            Next
-        Next
-
-        Console.WriteLine(Now.ToShortDateString)
-        Console.Read()
     End Sub
 
     'MAX: T représente la température de la veille
@@ -294,7 +218,7 @@ Module Module1
         Dim state_today As Double
         Dim perc_today As Double
 
-        'categories de temperature
+        'catégories de temperature
         Dim temp() As Double = {15, 20, 25, 30, 35}
 
         'Durée stades vexans (établi à l'aide du code matlab "adaptation_albopictus_vexans.m")
