@@ -28,6 +28,9 @@ TACHES :
 			fréquence de retrait des données/moyen de communication
 			batterie et durée de vie
 
+- Vectorisation du MNT : 
+	- nécessite une discussion sur les améliorations qu'on va vraiment faire, mais : possibilité de traiter le MNT en trois zones différences (Nors Sarine, entre Sarine et Joren et Est Joren)
+
 ________________________________________________________
 PARAMETRE :
 
@@ -40,7 +43,7 @@ PARAMETRE :
 -T de l'air et de l'eau :
 	Trouver un moyen d'améliorer la température de l'eau (en effet mesure au barrage de Rossens!). Sonde, estimation par radiation et exposition, etc
 
-=> Estimation densité des larves de moustique dans l'eau pour les 4 stades (L1-L4)
+=> Estimation stade de croissances des larves de moustique dans l'eau pour les 4 stades (L1-L4)
 ___________________________________________________________
 CALIBRATION : rapport annuel entre 1995-2012, adéquation du modèle
 
