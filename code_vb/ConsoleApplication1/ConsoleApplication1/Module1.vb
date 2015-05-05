@@ -208,6 +208,65 @@ Module Module1
             objwri.WriteLine(Now.ToShortDateString + ", " + polygon_id + ", " + current_state_string_1 + ", " + current_state_string_2 + ", " + tsle_string)
         Next
         objwri.Close()
+
+        ''..........
+        ''prévision
+        ''..........
+        'Dim inonde_prev As Integer
+        'Dim new_state(lines_polygon.Length - 1) As Double 'MAX: etat d'aujourdhui, défini a l'aide des nouvelles mesures effectuées entre hier et aujourdhui
+        'Dim new_perc(lines_polygon.Length - 1) As Double
+        'Dim new_state_output(2) As Double
+
+        'Dim path_state_previ = String.Concat(path_init, "etat_previ.csv")
+        'Dim objwri2 As New StreamWriter(path_state_previ, True)
+
+        'Dim t As Integer
+        'Dim numdayprev = lines_previ.Length - 1 'moins 2?
+        'For t = 0 To numdayprev
+        '    For i = 0 To lines_polygon.Length - 1
+        '        time_since_last_eclosion(i) = time_since_last_eclosion(i) + 1
+        '        If niveau_vector_previ(t) >= tbl.Rows(i)(1) Then
+        '            inonde_prev = 1
+        '        Else
+        '            inonde_prev = 0
+        '        End If
+        '        If inonde_prev = 1 Then
+        '            'MAX:appliquer la fonction de développement larvaire
+        '            If current_state(i) <> 5 Then
+        '                new_state_output = function_state(current_state(i), current_perc(i), temp_vector_previ(t), time_since_last_eclosion(i))
+        '                new_state(i) = new_state_output(0)
+        '                new_perc(i) = new_state_output(1)
+        '            Else
+        '                If time_since_last_eclosion(i) < 15 Then '14 ou 15 ici????
+        '                    new_state(i) = 5
+        '                    new_perc(i) = 0
+        '                Else
+        '                    new_state(i) = 1
+        '                    new_perc(i) = 0
+        '                    time_since_last_eclosion(i) = 1 '1 ou 0 ici?
+        '                End If
+        '            End If
+        '        Else
+        '            new_state(i) = 0
+        '            new_perc(i) = 0
+        '        End If
+        '    Next
+        '    Dim new_state_string_1 As String
+        '    Dim new_state_string_2 As String
+        '    'Dim polygon_id As String
+        '    'Dim tsle_string As String
+        '    For i = 0 To lines_polygon.Length - 1
+        '        new_state_string_1 = System.Convert.ToString(new_state(i))
+        '        new_state_string_2 = System.Convert.ToString(new_perc(i))
+        '        polygon_id = System.Convert.ToString(i + 1)
+        '        tsle_string = System.Convert.ToString(time_since_last_eclosion(i))
+        '        objwri2.WriteLine(Now.ToShortDateString + ", " + polygon_id + ", " + new_state_string_1 + ", " + new_state_string_2 + ", " + tsle_string)
+        '    Next
+        '    current_state = new_state
+        '    current_perc = new_perc
+        'Next
+        'objwri2.Close()
+
     End Sub
 
     'MAX: T représente la température de la veille
