@@ -7,7 +7,7 @@ Public Class Mousticator
     Inherits HydroObject
 
     'Private mz As Single = 677.0F
-    Private mStadeLarvaireIni As Single = 1.0F, mStadeLarvaire As Single = 1.0F
+    Private mLarvalState_Ini As Single = 1.0F, mLarvalState As Single = 1.0F
     Private mDaysFromLastEclosionIni As Integer = 0, mDaysFromLastEclosion As Integer = 0
 
 
@@ -15,18 +15,18 @@ Public Class Mousticator
     Private __z As String = "z"
     Private __TUp As String = "TUp"
     Private __Level As String = "Level"
-    Private __StadeLarvaire As String = "StadeLarvaire"
+    Private __LarvalState As String = "LarvalState"
     Private __DaysFromLastEclosion As String = "DaysFromLastEclosion"
 
     'PARAMETERS
     Private __z_parameter As Integer = 0
-    Private __stadelarvaire_parameter As Integer = 1
+    Private __LarvalState_parameter As Integer = 1
     Private __DaysFromLastEclosion_parameter As Integer = 2
 
     'INPUT/OUTPUT/RESULT
     Private __TUp_input As Integer = 0
     Private __Level_input As Integer = 1
-    Private __StadeLarvaire_result As Integer = 0
+    Private __LarvalState_result As Integer = 0
     Private __DaysFromLastEclosion_result As Integer = 1
 
     Public Sub New()
@@ -42,7 +42,7 @@ Public Class Mousticator
         MyBase.Parameters.Add(P)
         P = Nothing
         '1
-        P = New Parameter(ParameterTypeEnum.NotDefined, __StadeLarvaire, "(-)")
+        P = New Parameter(ParameterTypeEnum.NotDefined, __LarvalState, "(-)")
         P.ParamValue = 1.0F
         MyBase.Parameters.Add(P)
         P = Nothing
@@ -70,9 +70,10 @@ Public Class Mousticator
 
         'mes résultats
         '0
-        MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __StadeLarvaire, "(-)")))
+        MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __LarvalState, "(-)")))
+        '1
         MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __DaysFromLastEclosion, "(-)")))
-        
+
         MyBase.InitIntegralOutputs()
     End Sub
 
@@ -80,17 +81,17 @@ Public Class Mousticator
         Get
             Return CSng(MyBase.Parameters(__z_parameter).ParamValue)
         End Get
-        Set(value As Single)
+        Set(ByVal value As Single)
             MyBase.Parameters(__z_parameter).ParamValue = value
         End Set
     End Property
 
     Public Property StadeLarvaire As Single
         Get
-            Return CSng(MyBase.Parameters(__stadelarvaire_parameter).ParamValue)
+            Return CSng(MyBase.Parameters(__LarvalState_parameter).ParamValue)
         End Get
-        Set(value As Single)
-            MyBase.Parameters(__stadelarvaire_parameter).ParamValue = value
+        Set(ByVal value As Single)
+            MyBase.Parameters(__LarvalState_parameter).ParamValue = value
         End Set
     End Property
 
@@ -98,14 +99,14 @@ Public Class Mousticator
         Get
             Return CInt(MyBase.Parameters(__DaysFromLastEclosion_parameter).ParamValue)
         End Get
-        Set(value As Integer)
+        Set(ByVal value As Integer)
             MyBase.Parameters(__DaysFromLastEclosion_parameter).ParamValue = value
         End Set
     End Property
 
     Public Overrides Sub PrepareComputation()
 
-        mStadeLarvaire = mStadeLarvaireIni
+        mLarvalState = mLarvalState_Ini
         mDaysFromLastEclosion = mDaysFromLastEclosionIni
 
     End Sub
@@ -117,14 +118,12 @@ Public Class Mousticator
         Dim _Level As Single = CSng(MyBase.Inputs(__Level_input).Value)
         Dim _T As Single = CSng(MyBase.Inputs(__TUp_input).Value)
 
-
-
         If _Level >= Me.z Then
 
 
-            If mStadeLarvaire < 5.0F Then
+            If mLarvalState < 5.0F Then
 
-                mStadeLarvaire = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mDaysFromLastEclosion)
+                mLarvalState = Me.CalculateStadeLarvaire(mLarvalState, _T, mDaysFromLastEclosion)
 
             Else
 
@@ -133,21 +132,22 @@ Public Class Mousticator
 
                 If mDaysFromLastEclosion >= 15.0F Then
                     mDaysFromLastEclosion = 0
-                    mStadeLarvaire = 1.0F
+                    mLarvalState = 1.0F
                 End If
 
             End If
 
         Else
-            'Do nothing
+            'A IMPLEMENTER
+
+            'check how much time the zone has been without water. If it is less than 3 days, the development goes on. Otherwise, we consider the larvae dead.
         End If
 
-        MyBase.IntegralOutputs(__StadeLarvaire_result) += mStadeLarvaire '* MyBase.IntegralCount
+        MyBase.IntegralOutputs(__LarvalState_result) += mLarvalState '* MyBase.IntegralCount
         MyBase.IntegralOutputs(__DaysFromLastEclosion_result) = mDaysFromLastEclosion
 
     End Sub
 
-    'MAX: T représente la température de la veille
     Function CalculateStadeLarvaire(ByVal stadeLarvaire As Single, ByVal T As Single, ByVal daysFromLastEclosions As Integer) As Single
 
         'Declaration des variables de sortie
@@ -239,7 +239,7 @@ Public Class Mousticator
 
     Public Overrides Sub SaveFirstStep()
 
-        MyBase.Results(__StadeLarvaire_result).Add(mStadeLarvaireIni)
+        MyBase.Results(__LarvalState_result).Add(mLarvalState_Ini)
         MyBase.Results(__DaysFromLastEclosion_result).Add(mDaysFromLastEclosionIni)
 
         MyBase.IntegralCount = 0
@@ -248,31 +248,27 @@ Public Class Mousticator
     Public Overrides ReadOnly Property GetInitialConditions() As System.Collections.Generic.List(Of Single)
         Get
             Dim L As New List(Of Single)
-            L.Add(CSng(Me.Parameters(__stadelarvaire_parameter).ParamValue))
+            L.Add(CSng(Me.Parameters(__LarvalState_parameter).ParamValue))
             L.Add(CSng(Me.Parameters(__DaysFromLastEclosion_parameter).ParamValue))
             Return L
         End Get
     End Property
 
     Public Overrides Sub DefaultStart(ByVal Coeff As Single)
-        mStadeLarvaireIni = CSng(Me.Parameters(__stadelarvaire_parameter).ParamValue)
+        mLarvalState_Ini = CSng(Me.Parameters(__LarvalState_parameter).ParamValue)
         mDaysFromLastEclosionIni = CInt(Me.Parameters(__DaysFromLastEclosion_parameter).ParamValue)
     End Sub
 
     Public Overrides Sub SetStateParameters()
-        Me.Parameters(__stadelarvaire_parameter).ParamValue = mStadeLarvaireIni
+        Me.Parameters(__LarvalState_parameter).ParamValue = mLarvalState_Ini
         Me.Parameters(__DaysFromLastEclosion_parameter).ParamValue = mDaysFromLastEclosionIni
     End Sub
 
     Public Overrides Sub Hotstart(ByVal index As Integer, ByVal Coeff As Single, Optional ByVal UpdateRange As Single = 1000)
         'Débit initial constant dans le tronçon
-        If Results(__StadeLarvaire_result).X.Length >= index + 1 Then mStadeLarvaireIni = Results(__StadeLarvaire_result).X(index)
+        If Results(__LarvalState_result).X.Length >= index + 1 Then mLarvalState_Ini = Results(__LarvalState_result).X(index)
         If Results(__DaysFromLastEclosion_result).X.Length >= index + 1 Then mDaysFromLastEclosionIni = CInt(Results(__DaysFromLastEclosion_result).X(index))
     End Sub
-
-
-
-
 
     Public Overrides Sub Write(ByVal SW As System.IO.StreamWriter)
         SW.WriteLine("Mousticator")
