@@ -2,7 +2,9 @@ Option Strict On
 Option Explicit On
 
 Public Class Mousticator
+
     'classe de séparation des débits
+
 
     Inherits HydroObject
 
@@ -32,11 +34,13 @@ Public Class Mousticator
 
     Public Sub New()
 
+
         'Fabrication de mes paramètres
         Dim P As Parameter
         MyBase.Type = ObjectsType.Mousticator
 
         'Mes paramètres
+
         '0
         P = New Parameter(ParameterTypeEnum.H, __z, "(m a.s.l.)")
         P.ParamValue = 677.0F
@@ -57,7 +61,9 @@ Public Class Mousticator
 
         'mes Inputs
         '0
+
         P = New Parameter(ParameterTypeEnum.Temperature, __TUp, "(°C)")
+
         P.Position = ParameterPosition.Upstream
         MyBase.Inputs.Add(P)
         P = Nothing
@@ -69,7 +75,9 @@ Public Class Mousticator
 
         'mes Outputs
 
+
         'mes résultats
+
         '0
         MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __StadeLarvaire, "(-)")))
         MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __DaysFromLastEclosion, "(-)")))
@@ -90,7 +98,10 @@ Public Class Mousticator
         Get
             Return CSng(MyBase.Parameters(__stadelarvaire_parameter).ParamValue)
         End Get
+
         Set(value As Single)
+        '?Set(ByVal value As Single)
+
             MyBase.Parameters(__stadelarvaire_parameter).ParamValue = value
         End Set
     End Property
@@ -155,7 +166,9 @@ Public Class Mousticator
 
     End Sub
 
+
     'MAX: T représente la température de la veille
+
     Function CalculateStadeLarvaire(ByVal stadeLarvaire As Single, ByVal T As Single, ByVal daysFromLastEclosions As Integer) As Single
 
         'Declaration des variables de sortie
@@ -165,6 +178,7 @@ Public Class Mousticator
 	'Matrice du modèle de dévellopement larvaire selon la température
 	'Regroupé dans PrepareComputation()
 
+<<<<<<< HEAD
         'catégories de temperature
         'Dim temp() As Single = {15.0F, 20.0F, 25.0F, 30.0F, 35.0F}
 
@@ -175,6 +189,7 @@ Public Class Mousticator
         'Dim L4() As Single = {8.1F, 3.3F, 2.4F, 2.0F, 3.0F}
 
         'Durée stades albopictus
+
         'Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
         'Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
         'Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
@@ -193,6 +208,7 @@ Public Class Mousticator
         'Next
 
         Dim i As Integer
+
         
         
         Dim percentage_incr As Single 'MAX: cette variable montre l'augmentation du pourcentage de la maturation de l'état qui avait lieu entre hier et aujourd'hui
@@ -202,6 +218,7 @@ Public Class Mousticator
 
         If T < Model(0, 0) Or T > Model(0, noCol) Then
             'Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
+
 
 
         Else
@@ -281,7 +298,9 @@ Public Class Mousticator
     End Sub
 
     Public Overrides Sub Hotstart(ByVal index As Integer, ByVal Coeff As Single, Optional ByVal UpdateRange As Single = 1000)
+
         'Débit initial constant dans le tronçon
+
         If Results(__StadeLarvaire_result).X.Length >= index + 1 Then mStadeLarvaireIni = Results(__StadeLarvaire_result).X(index)
         If Results(__DaysFromLastEclosion_result).X.Length >= index + 1 Then mDaysFromLastEclosionIni = CInt(Results(__DaysFromLastEclosion_result).X(index))
     End Sub
