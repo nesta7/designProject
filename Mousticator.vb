@@ -176,7 +176,8 @@ Public Class Mousticator
             End If
         End If
 
-        MyBase.IntegralOutputs(__StadeLarvaire_result) = mStadeLarvaire '* MyBase.IntegralCountMyBase.IntegralOutputs(__StadeLarvaire_result) += mStadeLarvaire '* MyBase.IntegralCount
+        MyBase.IntegralOutputs(__StadeLarvaire_result) = mStadeLarvaire '* MyBase.IntegralCount 
+        'MyBase.IntegralOutputs(__StadeLarvaire_result) += mStadeLarvaire '* MyBase.IntegralCount
         MyBase.IntegralOutputs(__DaysFromLastEclosion_result) = mDaysFromLastEclosion
         MyBase.IntegralOutputs(__DaysWithoutWater) = mDaysWithoutWater
 
