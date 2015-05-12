@@ -10,7 +10,6 @@ Public Class Mousticator
     Private mStadeLarvaireIni As Single = 1.0F, mStadeLarvaire As Single = 1.0F
     Private mDaysFromLastEclosionIni As Integer = 0, mDaysFromLastEclosion As Integer = 0
 
-
     'VARIABLES PARAMETERS INPUTS/OUTPUTS/RESULTS
     Private __z As String = "z"
     Private __TUp As String = "TUp"
@@ -121,7 +120,6 @@ Public Class Mousticator
 
         If _Level >= Me.z Then
 
-
             If mStadeLarvaire < 5.0F Then
 
                 mStadeLarvaire = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mDaysFromLastEclosion)
@@ -139,10 +137,10 @@ Public Class Mousticator
             End If
 
         Else
-            'Do nothing
+            'IMPLEMENT SOMETHING HERE. Si les larves sont privées d'eau, elles survivent quand meme quelques jours (par exemple 5, pour etre du coté de la sécurité...) mais après, elles meurent.
         End If
 
-        MyBase.IntegralOutputs(__StadeLarvaire_result) += mStadeLarvaire '* MyBase.IntegralCount
+        MyBase.IntegralOutputs(__StadeLarvaire_result) = mStadeLarvaire '* MyBase.IntegralCountMyBase.IntegralOutputs(__StadeLarvaire_result) += mStadeLarvaire '* MyBase.IntegralCount
         MyBase.IntegralOutputs(__DaysFromLastEclosion_result) = mDaysFromLastEclosion
 
     End Sub
@@ -169,7 +167,6 @@ Public Class Mousticator
         'Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
         'Dim L4() As Double = {13.4, 4.1, 3.3, 3.0, 6.8}
 
-
         Dim i As Integer
         Dim noCol As Integer = temp.Length - 1
         Dim Model(4, noCol) As Single
@@ -186,8 +183,6 @@ Public Class Mousticator
 
         If T < Model(0, 0) Or T > Model(0, noCol) Then
             'Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
-
-
         Else
 
             For i = 0 To noCol - 1
