@@ -2,7 +2,7 @@ Option Strict On
 Option Explicit On
 
 Public Class Mousticator
-    'classe de séparation des débits
+    'classe de sï¿½paration des dï¿½bits
 
     Inherits HydroObject
 
@@ -31,11 +31,11 @@ Public Class Mousticator
 
     Public Sub New()
 
-        'Fabrication de mes paramètres
+        'Fabrication de mes paramï¿½tres
         Dim P As Parameter
         MyBase.Type = ObjectsType.Mousticator
 
-        'Mes paramètres
+        'Mes paramï¿½tres
         '0
         P = New Parameter(ParameterTypeEnum.H, __z, "(m a.s.l.)")
         P.ParamValue = 677.0F
@@ -56,7 +56,7 @@ Public Class Mousticator
 
         'mes Inputs
         '0
-        P = New Parameter(ParameterTypeEnum.Temperature, __TUp, "(°C)")
+        P = New Parameter(ParameterTypeEnum.Temperature, __TUp, "(ï¿½C)")
         P.Position = ParameterPosition.Upstream
         MyBase.Inputs.Add(P)
         P = Nothing
@@ -68,11 +68,11 @@ Public Class Mousticator
 
         'mes Outputs
 
-        'mes résultats
+        'mes rï¿½sultats
         '0
         MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __StadeLarvaire, "(-)")))
         MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __DaysFromLastEclosion, "(-)")))
-        
+
         MyBase.InitIntegralOutputs()
     End Sub
 
@@ -147,23 +147,23 @@ Public Class Mousticator
 
     End Sub
 
-    'MAX: T représente la température de la veille
+    'MAX: T reprï¿½sente la tempï¿½rature de la veille
     Function CalculateStadeLarvaire(ByVal stadeLarvaire As Single, ByVal T As Single, ByVal daysFromLastEclosions As Integer) As Single
 
         'Declaration des variables de sortie
         Dim state_today As Integer = CInt(Math.Ceiling(stadeLarvaire) - 1)
         Dim percentage_today As Single = stadeLarvaire - state_today
 
-        'catégories de temperature
+        'catï¿½gories de temperature
         Dim temp() As Single = {15.0F, 20.0F, 25.0F, 30.0F, 35.0F}
 
-        'Durée stades vexans (établi à l'aide du code matlab "adaptation_albopictus_vexans.m")
+        'Durï¿½e stades vexans (ï¿½tabli ï¿½ l'aide du code matlab "adaptation_albopictus_vexans.m")
         Dim L1() As Single = {3.4F, 2.4F, 1.5F, 0.9F, 0.7F}
         Dim L2() As Single = {2.0F, 1.1F, 0.9F, 0.9F, 0.5F}
         Dim L3() As Single = {2.8F, 1.7F, 0.9F, 0.9F, 1.0F}
         Dim L4() As Single = {8.1F, 3.3F, 2.4F, 2.0F, 3.0F}
 
-        'Durée stades albopictus
+        'Durï¿½e stades albopictus
         'Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
         'Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
         'Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
@@ -173,8 +173,8 @@ Public Class Mousticator
         Dim i As Integer
         Dim noCol As Integer = temp.Length - 1
         Dim Model(4, noCol) As Single
-        Dim percentage_incr As Single 'MAX: cette variable montre l'augmentation du pourcentage de la maturation de l'état qui avait lieu entre hier et aujourd'hui
-        Dim time_new_state As Single 'MAX: dans le cas où un changement d'état a lieu entre hier et aujourd'hui, cette variable indique le temps qui s'est écoulé depuis que ce nouvel état a lieu.
+        Dim percentage_incr As Single 'MAX: cette variable montre l'augmentation du pourcentage de la maturation de l'ï¿½tat qui avait lieu entre hier et aujourd'hui
+        Dim time_new_state As Single 'MAX: dans le cas oï¿½ un changement d'ï¿½tat a lieu entre hier et aujourd'hui, cette variable indique le temps qui s'est ï¿½coulï¿½ depuis que ce nouvel ï¿½tat a lieu.
 
         For i = 0 To noCol
             Model(0, i) = temp(i)
@@ -185,7 +185,7 @@ Public Class Mousticator
         Next
 
         If T < Model(0, 0) Or T > Model(0, noCol) Then
-            'Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
+            'Console.WriteLine("Temperature " & T & "ï¿½C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
 
 
         Else
@@ -265,7 +265,7 @@ Public Class Mousticator
     End Sub
 
     Public Overrides Sub Hotstart(ByVal index As Integer, ByVal Coeff As Single, Optional ByVal UpdateRange As Single = 1000)
-        'Débit initial constant dans le tronçon
+        'Dï¿½bit initial constant dans le tronï¿½on
         If Results(__StadeLarvaire_result).X.Length >= index + 1 Then mStadeLarvaireIni = Results(__StadeLarvaire_result).X(index)
         If Results(__DaysFromLastEclosion_result).X.Length >= index + 1 Then mDaysFromLastEclosionIni = CInt(Results(__DaysFromLastEclosion_result).X(index))
     End Sub
@@ -285,4 +285,5 @@ Public Class Mousticator
         V = CSng(SR.ReadLine)
         MyBase.Read(SR)
     End Sub
+    
 End Class
