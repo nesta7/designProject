@@ -8,7 +8,7 @@ Public Class Mousticator
     'Private mz As Single = 677.0F
     Private mStadeLarvaireIni As Single = 1.0F, mStadeLarvaire As Single = 1.0F
     Private mDaysFromLastEclosionIni As Integer = 0, mDaysFromLastEclosion As Integer = 0
-    Private mDaysWithoutWaterIni As Integer = 0, mDaysWithoutWater As Integer = 0
+    Private mDaysWithoutWaterIni As Integer = -1, mDaysWithoutWater As Integer = -1
     Private mFunctionResults(2) As Single
     'Ajouté pour la matrice du modèle ?
     Private Model(4,4) As Single
@@ -153,20 +153,31 @@ Public Class Mousticator
             mDaysFromLastEclosion = mFunctionResult(1)
             mDaysWithoutWater = 0
         Else
-            'IMPLEMENT SOMETHING HERE. Si les larves sont privées d'eau, elles survivent quand meme quelques jours (on choisit 5 jours, pour etre du coté de la sécurité...) mais après, elles meurent.
-            mDaysWithoutWater += 1
-            If mDaysWithoutWater < 5 Then
-                mFunctionResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mDaysFromLastEclosion)
-                mStadeLarvaire = mFunctionResult(0)
-                mDaysFromLastEclosion = mFunctionResult(1)
+            'Si les larves sont privées d'eau, elles survivent quand meme quelques jours (on choisit 5 jours, pour etre du coté de la sécurité...) mais après, elles meurent.
+
+            'Au début de l'utilisation du programme, certaines zones ne seront pas inondées. 
+            'Ce n'est pas pour autant qu'il faut autoriser un développement pendant les 5 
+            'premiers jours. => IDEE)donner a mDaysWithoutWater la valeur -1 comme valeur par 
+            'defaut. Cette(valeur)n'aura plus jamais lieu une fois que le polygone évalué aura 
+            'été inondé au moins une fois.
+            If mDaysWithoutWater <> -1 Then
+                mDaysWithoutWater += 1
+                If mDaysWithoutWater < 5 Then
+                    mFunctionResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mDaysFromLastEclosion)
+                    mStadeLarvaire = mFunctionResult(0)
+                    mDaysFromLastEclosion = mFunctionResult(1)
+                Else
+                    mStadeLarvaire = 5
+                    mDaysFromLastEclosion += 1
+                End If
             Else
                 mStadeLarvaire = 5
                 mDaysFromLastEclosion += 1
             End If
-
         End If
 
-        MyBase.IntegralOutputs(__StadeLarvaire_result) = mStadeLarvaire '* MyBase.IntegralCountMyBase.IntegralOutputs(__StadeLarvaire_result) += mStadeLarvaire '* MyBase.IntegralCount
+        MyBase.IntegralOutputs(__StadeLarvaire_result) = mStadeLarvaire '* MyBase.IntegralCount 
+        'MyBase.IntegralOutputs(__StadeLarvaire_result) += mStadeLarvaire '* MyBase.IntegralCount
         MyBase.IntegralOutputs(__DaysFromLastEclosion_result) = mDaysFromLastEclosion
         MyBase.IntegralOutputs(__DaysWithoutWater) = mDaysWithoutWater
 
