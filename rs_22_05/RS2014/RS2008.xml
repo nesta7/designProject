@@ -1,0 +1,42 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RS2008
+</name>
+</assembly>
+<members>
+<member name="P:RS2008.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:RS2008.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:RS2008.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:RS2008.RemoteSimulation.Execute(RS3Tools.Simulation.simulationConfig@,RS2008.RsCommandLineVars,System.String,System.String)">
+	<summary>
+ Overwrite de certains paramètres de configuration du pilote par la ligne de commande rsCommandLineVars
+ Modification éventuelle du fichier .sim et du groupe des prévisions (source) si on peut utiliser un fichier "remote"
+ </summary>
+</member><member name="M:RS2008.RemoteSimulationConfigModifier.ChangeCoefficientsInConfig(RS3Tools.Simulation.simulationConfig@,RS2008.RsCommandLineVars)">
+	<summary>
+ adapting simulationConfig with arguments
+ </summary>
+</member><member name="M:RS2008.RS2008_Console.ForceReferences">
+	<summary>
+ If this function is not present, reflection will consider Exporters and Aquisitor as an unused reference and will not be shown, so the pilots will not be created.
+ http://stackoverflow.com/questions/3433973/getreferencedassemblies-doesnt-return-all-assemblies
+ </summary>
+</member><member name="M:RS2008.RS2008_Console.BuildPilot(System.String,System.String)">
+	<summary>
+ Ici il faut trouver le bon type de pilote ! Pour l'instant, choix par Nom, et éventuellement par App
+ </summary>
+</member>
+</members>
+</doc>

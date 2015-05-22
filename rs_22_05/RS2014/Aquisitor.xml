@@ -1,0 +1,277 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Aquisitor
+</name>
+</assembly>
+<members>
+<member name="M:Aquisitor.FtpFunctions.GetFtpFile(System.String,System.String,System.String,System.String)">
+	<summary>
+ Download single ftp file.
+ </summary>
+</member><member name="M:Aquisitor.FtpFunctions.DeleteFtpFilesOlderThanNDays(System.Int32,System.String,System.String,System.String,System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Delete files on ftp based on their "LastModified" date.
+ </summary>
+	<returns>The number of deleted files.</returns>
+</member><member name="T:Aquisitor.FtpFunctions">
+	<summary>
+ Library: http://enterprisedt.com/products/edtftpnet/
+ </summary>
+</member><member name="M:Aquisitor.Downloader.deleteLocalFilesOlderThanNDays(System.String,System.Int32)">
+	<summary>
+ Deletes all files older than maxNumberOfDays. Returns the number of deleted files.
+ </summary>
+</member><member name="M:Aquisitor.Downloader.getFileNamesFromLocalFolder(System.String)">
+	<summary>
+ Gets a list of files contained by a local folder.
+ </summary>
+</member><member name="M:Aquisitor.Downloader.copyNewFilesFromFolderToFolder(System.String,System.String)">
+	<summary>
+ Copies the new files from a source folder into a destination folder.
+ New = not already contained by the destination folder.
+ </summary>
+</member><member name="M:Aquisitor.Downloader.downloadAllFilesFromFolderFTP(System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean,System.String,System.Nullable{System.Int32})">
+	<summary>
+ Downloads all files from FTP directory
+ </summary>
+	<param name="ftpServerAddress">...in the form: "ftp://xxx.xxx.xxx.xxx/yyy/"</param>
+</member><member name="M:Aquisitor.Downloader.downloadSFTPFile(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+	<summary>
+ Gets a file using the sFTP protocol.
+ </summary>
+</member><member name="M:Aquisitor.Parser.GetValueFromXmlNode(System.Xml.XmlNode,System.String,System.String,System.String,System.Double)">
+	<summary>
+ For ERM Meteo.
+ </summary>
+</member><member name="M:Aquisitor.Parser.cropDatesForKhrFromExcel(System.Data.DataTable,System.Int32,System.Int32)">
+	<summary>
+ The first column of the excel file contains the dates.
+ This function crops all of them.
+ </summary>
+</member><member name="M:Aquisitor.Parser.cropFactorsForKhrFromExcel(System.Data.DataTable,System.Int32,System.Int32,System.Int32)">
+	<summary>
+ In the 5th column of the excel file there are factors which affect the whole value column for a given internal index.
+ This function crops all of those which are not Null, and removes the "/" (divided by) string for each one of them.
+ </summary>
+</member><member name="M:Aquisitor.Parser.parseBVE(System.String,System.String)">
+	<summary>
+ Analysis tool
+ </summary>
+	<param name="allText"></param>
+	<param name="schemaFile"></param>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.Parser.ParseMETEOSUISSE_SDM_AND_PLUVIO(System.String,System.Collections.Generic.List{System.String},DJDBEngine.DataSet@,Aquisitor.dateType,System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Either PLUVIO or SDM, it makes no difference.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.Parser.createStationCodeDictionaryFromSchema(System.String)">
+	<summary>
+ Creates a dictionary with codeString as key and nameString as result.
+ This will be used to find the correspondence between an acquisition coded station name, and the name used in the DJDB dataset.
+ It is written in the DJDB dataset schema file.
+ </summary>
+</member><member name="M:Aquisitor.Parser.createSensorCodeDictionaryFromSchema(System.String)">
+	<summary>
+ Creates a dictionary with codeString as key and nameString as result.
+ This will be used to find the correspondence between an acquisition coded station name, and the name used in the DJDB dataset.
+ It is written in the DJDB dataset schema file.
+ </summary>
+</member><member name="M:Aquisitor.Parser.createUnitfactorDictionaryFromSchema(System.String)">
+	<summary>
+ Creates a dictionary with codeString as key and unitFactor as result.
+ This will be used to find the multiplying factor of a certain sensor to be acquired with the proper units.
+ </summary>
+</member><member name="M:Aquisitor.Parser.RoundedHour(System.DateTime)">
+	<summary>
+ Returns the closest "full hour" for a given date.
+ Example: 23:59 =&gt; 00:00 of the next day.
+ </summary>
+</member><member name="M:Aquisitor.Parser.parseBafu(System.String,System.String)">
+	<summary>
+ Analysis tool only. 
+ Creates the maximum likelihood list between the xml shcema and the stations from Bafu,
+ other analysis files are created (all of them in the same path of the xml schemaFile).
+ </summary>
+	<param name="URL"></param>
+	<param name="schemaFile"></param>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.Parser.getAllIndexFromSchema(DJDBEngine.DataSet)">
+	<summary>
+ "ds.Stations(i).Name" must be a number only, which represent the index at the raw meteosuisse file (not "COSMO2_1034")
+ </summary>
+	<param name="ds"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.AuxiliaryFunctions.KmlVsSchema(System.String,System.String,System.String)">
+	<summary>
+ Takes the info from the MeteoSuisse kml file (http://www.meteosuisse.admin.ch/web/fr/climat/reseaux_de_mesures/surface/google_earth.html), 
+ then compares it with the current DJDB xml schema, and writes the result in Excel format.
+ </summary>
+	<param name="kmlFile"></param>
+	<param name="schemaXmlFile"></param>
+	<param name="resultTxtFile"></param>
+	<remarks></remarks>
+</member><member name="P:Aquisitor.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Aquisitor.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:Aquisitor.My.Resources.Resources.Open">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:Aquisitor.My.Resources.Resources.Save">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:Aquisitor.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="T:Aquisitor.SoapDownloader">
+	<summary>
+ http://stackoverflow.com/questions/4791794/client-to-send-soap-request-and-received-response
+ </summary>
+</member><member name="M:Aquisitor.ParserAlpiqJournalier.TransformValueWithUnits(System.Double,System.String)">
+	<summary>
+ IF STRING= 103m3: multiplicate Valeur with 1000/86400
+ IF STRING= MWH multiplicate Valeur with 1/24
+ </summary>
+</member><member name="M:Aquisitor.Parsers.ParserAromeArpege.Parse(System.String,System.DateTime,System.String,DJDBEngine.DataSet@,Aquisitor.dateType,Aquisitor.ParserType)">
+	<summary>
+ Arpege: une valeur à chaque heure
+ Arome: une valeur chaque 3h
+ </summary>
+</member><member name="M:Aquisitor.Parsers.ParserAromeArpege.GetAromeOrArpegeRawData(System.String,Aquisitor.ParserType)">
+	<summary>
+ The key of the dictionary is represented by:
+ "stationName;sensorIndex"
+ </summary>
+</member><member name="M:Aquisitor.ParserSalzburg.SumTwoTimeValueSeries(System.Collections.Generic.Dictionary{System.DateTime,System.Single},System.Collections.Generic.Dictionary{System.DateTime,System.Single})">
+	<summary>
+ The resulting sensor is the SUM of both timeseries.
+ The one with the largest Count (A) will dominate over the other.
+ The one with the lowest Count (B) is considered as having zero value whenever the time is present in A but not in B.
+ </summary>
+</member><member name="M:Aquisitor.ExcelReaderHelper.ReadExcelCellAsValueOrZero(System.Data.DataTable,System.Int32,System.Int32,System.Boolean)">
+	<summary>
+ For the new excel reader library (IExcelDataReader).
+ Old library: Microsoft.Office.Interop.Excel.Application
+ </summary>
+	<param name="table">equivalent to excel's "work sheet"</param>
+	<param name="line">excel line</param>
+	<param name="column">excel column</param>
+	<param name="indexIsAlredyZeroBased">Excel lines and columns are not zero based. This library IS zero based. Be careful when choosing this parameter.</param>
+</member><member name="M:Aquisitor.ExcelReaderHelper.ReadExcelCellAsString(System.Data.DataTable,System.Int32,System.Int32,System.Boolean)">
+	<summary>
+ For the new excel reader library (IExcelDataReader).
+ Old library: Microsoft.Office.Interop.Excel.Application
+ </summary>
+	<param name="table">equivalent to excel's "work sheet"</param>
+	<param name="line">excel line</param>
+	<param name="column">excel column</param>
+	<param name="indexIsAlredyZeroBased">Excel lines and columns are not zero based. This library IS zero based. Be careful when choosing this parameter.</param>
+</member><member name="M:Aquisitor.UniversalImporter.METEOSUISSE_SDM_AND_PLUVIO(System.Collections.Generic.List{System.String}@,System.String)">
+	<summary>
+ The same acquisitor for PLUVIO and SDM.
+ </summary>
+	<param name="filePrefix">It defines the acquisition type (either PLUVIO or SDM)</param>
+</member><member name="M:Aquisitor.UniversalImporter.RADAR_v01">
+	<summary>
+ Obsolete.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.UniversalImporter.getFormattedUrl(System.DateTime,System.String)">
+	<summary>
+ Format of the response: {rootDir, formattedFileName}
+ </summary>
+	<param name="dateToImport"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.UniversalImporter.HIDROTURIA(System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Unused in deployment (as for 28/10/2014)
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.FRANCEEST(System.Collections.Generic.List{System.String}@)">
+	<summary>
+ FRANCEEST == VIGICRUES ???... ' NON c'est hydroreel
+ </summary>
+	<param name="warnings"></param>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.UniversalImporter.EPEX(System.DateTime,System.Boolean)">
+	<summary>
+ New version (2/6/2014)
+ They changed the website. Now the acquisition is through a json file.
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.EPEX_Old_Version">
+	<summary>
+ Obsolete since the website change on 2/6/2014
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.MeteoSuisseSelector(System.String,System.String@,System.String@,System.String@,System.Boolean,System.String,System.String@)">
+	<summary>
+ Selects the main features of each type of acquisition, depending on the type.
+ </summary>
+	<param name="groupName"></param>
+	<param name="acquisitionType"></param>
+	<param name="fileName"></param>
+	<param name="headerKeyWorkd"></param>
+	<param name="reconstructionMode">False by default</param>
+	<param name="stringFileDate">Example: 7112100</param>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.UniversalImporter.NEPAL(System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Unused in deployment (as for 28/10/2014)
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.TransformInterpolationModeForMeteoSuissePREV(DJDBEngine.DataSet,DJDBEngine.SensorCategoryEnum,DJDBEngine.SensorInterpolationModeEnum)">
+	<summary>
+ Sets a new interpolationMode for sensors by category
+ </summary>
+	<param name="DS"></param>
+	<param name="category"></param>
+	<param name="interpolation"></param>
+	<remarks></remarks>
+</member><member name="M:Aquisitor.UniversalImporter.BackupDeleteAndSelelectFilesFromFTP(System.String,System.String,System.Int32,System.String)">
+	<summary>
+ 2015-04-13 [XP] Originaly created for OFIMA.
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.ISSKA(System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Acquisition for the client ISSKA
+ TETRAEDRE: name of the data-storing company
+ Acquisition method: SOAP web query, XML response.
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.ALPIQ_SFTP(System.Collections.Generic.List{System.String}@)">
+	<summary>
+ After hey changed their server to SFTP instead of basic FTP (02-04-2014)
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.ALPIQ(System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Unused as for 28/10/2014
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.COLMAR_PREV">
+	<summary>
+ Unused in deployment (as for 28/10/2014)
+ </summary>
+</member><member name="M:Aquisitor.UniversalImporter.pointFilterControl(System.DateTime@,System.Single@,System.Int32,System.Int32,System.Single,System.Single,System.Single[])">
+	<summary>
+ Returns false if a point (time,value) doesn't fit withing the conditions, true otherwise.
+ </summary>
+	<param name="time"></param>
+	<param name="value"></param>
+	<param name="maxPastHourSpan">-9999 for none</param>
+	<param name="maxFutureHourSpan">-9999 for none</param>
+	<param name="maxValueAllowed">-9999 for none</param>
+	<param name="minValueAllowed">-9999 for none</param>
+	<param name="invalidValues">Nothing for none</param>
+	<returns></returns>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

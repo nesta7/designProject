@@ -1,0 +1,288 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RSEngine
+</name>
+</assembly>
+<members>
+<member name="F:RSEngine.JonctionPotable.mCoteFond">
+************
+
+</member><member name="M:RSEngine.ReservoirPollutif.RoundToDigits(System.Single@,System.Int32)">
+	<summary>
+ Function that avoids extremely low values (for example: 7.9050503334599447E-323).
+ Created for chamberonne: the numbers were too low to be accepted by the fonto exporter.
+ </summary>
+</member><member name="M:RSEngine.Comparator.RetrieveSourceForTemperature(RSEngine.Source)">
+	<summary>
+Retrouver l'objet source qui va lui donner la température 
+ SOURCE NAME : idem comparator, sensors'name = temperature
+ </summary>
+	<remarks></remarks>
+</member><member name="M:RSEngine.Comparator.AddParameters">
+	<summary>
+ These parameters are common to all "New()" functions.
+ </summary>
+</member><member name="P:RSEngine.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources._New">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Access">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Back">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Capteur">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Capteur2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Clock">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Clock_1_">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Copy">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Delete">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Deversoir">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Deversoir2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.EditAsObject">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Evaporation">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Fleche">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Glacier">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.GroupInterface">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.GroupInterfaceAval">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Jonction">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Jonction2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.logo">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Modele">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Open">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Open2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Pluie">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Pluie2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.PluieNeige">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Pompe">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Properties">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Reach">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.ReachKinematic">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.ReachMuskin">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Regard">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Regulation">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Reservoir">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Reservoir2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Save">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.solar">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Source">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Split">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Split2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.State">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.SubModel">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Sum">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Swmm">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.TABLE_REGULATION_LUGANO">
+	<summary>
+  Looks up a localized string similar to 	2	3	4	6	8	10	13	16	18	20	25	30	35	40	45	48	50	60	70	80	90	100	110	120	130	140	155	170
+1	269.85	269.90	269.95	270.00	270.06	270.13	270.21	270.30	270.56	270.60	270.68	270.74	270.85	270.90	270.95	271.01	271.04	271.07	271.10	271.13	271.16	271.19	271.22	271.25	271.28	271.31	271.34	271.37
+11	269.85	269.90	269.94	269.98	270.04	270.10	270.17	270.26	270.53	270.55	270.65	270.71	270.83	270.88	270.94	271.04	271.08	271.11	271.14	271.17	271.21	271.24	271.28	271.31	271.34	271.37	271.40	271.43
+21	269.85	269.90	269.93	2 [rest of string was truncated]";.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.TimeSerie">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.TimeSerie2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Transition">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Tuyau">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSEngine.My.Resources.Resources.Up">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:RSEngine.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="F:RSEngine.JunctionPollutif.mCoteFond">
+************
+
+</member><member name="M:RSEngine.JunctionPollutif.CoeffQDownLowFlow(System.Single)">
+	<summary>
+ Computes the low flow outflow coefficient for damping
+ </summary>
+	<param name="h"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:RSEngine.Application.getSimFilePerApp">
+	<summary>
+ Export .sim to SQL project.
+ Take all the correspondences from appName to .sim file path.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:RSEngine.Application.exportSingleProject(System.String,System.String)">
+	<summary>
+ Exports a single project to SQL
+ </summary>
+</member><member name="M:RSEngine.SimSqlManager.getHydroObjectRecord(SqlEngine.Models.Application,RSEngine.TransformXY,RSEngine.HydroObject,System.Object)">
+	<summary>
+ Used mainly for the links. Gets the hydro object record from an rsEngine hydroObject.
+ </summary>
+</member><member name="P:RSEngine.Solver.Index(System.DateTime)">
+	<summary>
+ returns the index of the result for a given time. Rounded
+ </summary>
+	<param name="time"></param>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:RSEngine.DJDBTrader.UpdateNewStations(DJDBEngine.DataSet@,System.Collections.Generic.List{DJDBEngine.Station})">
+	<summary>
+ Update and clear of NewStations (issued from spatial integration GIS/Zone/Comparator)
+ </summary>
+	<param name="DS"></param>
+	<param name="newstations"></param>
+	<remarks></remarks>
+</member><member name="P:RSEngine.GlacierClimat.A0">
+	<summary>
+ Area du glacier
+ </summary>
+</member>
+</members>
+</doc>

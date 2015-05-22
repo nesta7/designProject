@@ -1,3 +1,6 @@
+close all
+clear all
+
 %nombre de jours nécessaires pour l'accomplissement 
 %de chaque stade à différentes températures
 %(développement de L1 à adulte)
@@ -23,4 +26,4 @@ plot(temperatures, days_tot_per_temp_vex);
 
 prop_factor=(days_tot_per_temp_vex./days_tot_per_temp_albo)';
 
-days_per_temp_and_state_vex=days_per_temp_and_state.*prop_factor
+days_per_temp_and_state_vex=days_per_temp_and_state_albo.*prop_factor

@@ -1,0 +1,1671 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MailClient
+</name>
+</assembly>
+<members>
+<member name="P:QMailClient.SMTPClient.RemoteServerAddress">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the reomte mail server address.
+ </summary>
+	<value>IP address or domain name</value>
+	<remarks>
+ It can be a IP address like "10.0.0.1" or a domain name like "mail.yahoo.com"
+ </remarks>
+	<history>
+ 	[Tony]	2005-3-28	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.SMTPClient.RemoteServerPort">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the remote SMTP server's listenning port.
+ </summary>
+	<value>An Int16 value.</value>
+	<remarks>
+ It should be 0 ~ 65535. Default for SMTP server is 25
+ </remarks>
+	<history>
+ 	[Tony]	2005-3-28	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.SMTPClient.UserName">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set SMTP mail server login user name
+ </summary>
+	<value>User name string</value>
+	<remarks>
+ Only needed when the server need authentication
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.SMTPClient.Password">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set SMTP mail server login user password
+ </summary>
+	<value>Password string</value>
+	<remarks>
+ Only needed when the server need authentication
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.SMTPClient.IncreaseNetworkCompatible">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set whether the working socket should wait for some period of time 
+ between sending and receving message.
+ </summary>
+	<value>True or False</value>
+	<remarks>
+ Set this property to TRUE when you are behide a firewall, using an anti-virus 
+ software which scans incoming emails or there is a high network latency. 
+ Otherwise, set this property to FALSE, it will increase performance.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.SMTPClient.Statue">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return the working socket's connection state
+ </summary>
+	<value>ConnectionState enumeration</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.Reset">
+ -----------------------------------------------------------------------------
+ <summary>
+ Reset the connection state.
+ </summary>
+	<remarks>
+ Not recommended to use this method directly.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.SendMail(QMailClient.EMail)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Send the mail
+ </summary>
+	<param name="MailToSend">The instance of the EMail class to be sent</param>
+	<returns>An Int16 value, 0:Failed, 1:Successful</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-3-28	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.Quit">
+ -----------------------------------------------------------------------------
+ <summary>
+ Leave the mail server and close the connection.
+ </summary>
+	<returns>True, success; False, failed.</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.AuthLogin">
+ -----------------------------------------------------------------------------
+ <summary>
+ Login the SMTP server using the given user name and password.
+ </summary>
+	<returns>True, success; False, failed.</returns>
+	<remarks>
+ Only use this method when the SMTP server need authentication.  Please ensure 
+ UserName and Password properties are set before use this method.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.AuthLogin(System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Login the SMTP server using the user name and password given in the parameters.
+ </summary>
+	<param name="UserName">User name</param>
+	<param name="Password">Password belongs to the user name</param>
+	<returns>True, success; False, failed.</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.CloseForcedly">
+ -----------------------------------------------------------------------------
+ <summary>
+ Close the connection forcedly.
+ </summary>
+	<remarks>
+ Not recommended to use this method directly. This may cause data losing or other 
+ problems.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.SendCommand(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Send a SMTP command to the server
+ </summary>
+	<param name="Command">Command name</param>
+	<returns>Server's response text in bytes array</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.CorrectedResponse(System.Byte[],System.String@)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Check the response of the server.
+ </summary>
+	<param name="ReceivedBytes">Server's response, it is in bytes array format.</param>
+	<param name="Message">Optional. The message of the server's response.</param>
+	<returns>True, command execute successful; False, command execute failed.</returns>
+	<remarks>
+		<p>The first digital of the three digitals in response message indicates as follow:</p>
+		<p>1: command accepted, waiting for confirm</p>
+		<p>2: command executed</p>
+		<p>3: command accepted, waiting for more information</p>
+		<p>4: command refused</p>
+		<p>5: command failed</p>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.SMTPClient.Connect">
+ -----------------------------------------------------------------------------
+ <summary>
+ Make the connection to the mail server.
+ </summary>
+	<returns>True, connect successful; False, connect failed.</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:QMailClient.SMTPClient">
+ -----------------------------------------------------------------------------
+ Project	 : QMailClient
+ Class	 : SMTPClient
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Represents the object which communicate with a SMTP mail server. This class can be inherited. 
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailPriority.Low">
+ -----------------------------------------------------------------------------
+ <summary>
+ Low priority
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailPriority.Normal">
+ -----------------------------------------------------------------------------
+ <summary>
+ Normal priority(default)
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailPriority.High">
+ -----------------------------------------------------------------------------
+ <summary>
+ High priority
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:QMailClient.EMail.MailPriority">
+ -----------------------------------------------------------------------------
+ <summary>
+ Mail priority enumeration.
+ </summary>
+	<remarks>
+ It's just a priority flag, can be ignored by other mail client program.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.Empty">
+ -----------------------------------------------------------------------------
+ <summary>
+ Null content
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.UnknownOrDefault">
+ -----------------------------------------------------------------------------
+ <summary>
+ Not supported content type will be set to UnknownOrDefault.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.TextPlain">
+ -----------------------------------------------------------------------------
+ <summary>
+ Plain text mail
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.TextHTML">
+ -----------------------------------------------------------------------------
+ <summary>
+ HTML mail
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.MultipartMixed">
+ -----------------------------------------------------------------------------
+ <summary>
+ Mails with attachments or other contents.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.MultipartAlternative">
+ -----------------------------------------------------------------------------
+ <summary>
+ Mails with two parts which are alternative, generally a text in both plain 
+ text and HTML format can be found in the mail body.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.MultipartRelated">
+ -----------------------------------------------------------------------------
+ <summary>
+ Mails with more than one parts which are related, generally it is a HTML 
+ mail with some pictures in it.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.MultipartReport">
+ -----------------------------------------------------------------------------
+ <summary>
+ Mail status report sent back by mail servers.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.ApplicationOctetStream">
+ -----------------------------------------------------------------------------
+ <summary>
+ Attachment content type, octet stream
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.ApplicationXCompress">
+ -----------------------------------------------------------------------------
+ <summary>
+ Attachment content type, compressed attachments
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.ImageJPEG">
+ -----------------------------------------------------------------------------
+ <summary>
+ JPEG Image
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.ImageGIF">
+ -----------------------------------------------------------------------------
+ <summary>
+ GIF Image
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.ImageOther">
+ -----------------------------------------------------------------------------
+ <summary>
+ Other image(TIFF,BMP and etc.)
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.Audio">
+ -----------------------------------------------------------------------------
+ <summary>
+ Audio file
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.MessageRFC822">
+ -----------------------------------------------------------------------------
+ <summary>
+ Message from mail servers
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="F:QMailClient.EMail.MailContentType.MessageDeliveryStatus">
+ -----------------------------------------------------------------------------
+ <summary>
+ Message from mail servers which reports mail delivery status(Failed delivery)
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:QMailClient.EMail.MailContentType">
+ -----------------------------------------------------------------------------
+ <summary>
+ Mail content type supported by QMailClient library.
+ </summary>
+	<remarks>
+ After initialize a QMail object, this is the default content type.
+ And a Empty content type is not allowed when sending the mail.
+ It should be set before sending mails.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.MailAttachmentCollection.Item(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return Mail attachment items.
+ </summary>
+	<param name="Name">Item name, it should be unique</param>
+	<value>An instance of a MailAttachment object</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.MailAttachmentCollection.Count">
+ -----------------------------------------------------------------------------
+ <summary>
+ Attachments' count in the collection.
+ </summary>
+	<value>A int32 value</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.MailAttachmentCollection.GetEnumerator">
+ -----------------------------------------------------------------------------
+ <summary>
+ Get enumerator function used by "For Each" statement.
+ </summary>
+	<returns>Interface IEnumerator</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.MailAttachmentCollection.Add(QMailClient.MailAttachment)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Add an attachment into the collection.
+ </summary>
+	<param name="Item">Should be a valid instance of a MailAttachment.</param>
+	<remarks>
+ An Argument Exception will be thrown when Item is null or invalid.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.MailAttachmentCollection.Remove(QMailClient.MailAttachment)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Remove an attachment from the collection.
+ </summary>
+	<param name="Item">An instance of MailAttachment.</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.MailAttachmentCollection.Remove(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Remove an attachment from the collection.
+ </summary>
+	<param name="Name">The attachment name used when call Add method.</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.MailAttachmentCollection.Clear">
+ -----------------------------------------------------------------------------
+ <summary>
+ Remove all attachments from the collection.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:QMailClient.EMail.MailAttachmentCollection">
+ -----------------------------------------------------------------------------
+ Project	 : QMailClient
+ Class	 : EMail.MailAttachmentCollection
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Represents a mail attachments' collection, contains the attachements which will be sent with 
+ the mail.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.UniqueID">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return unique ID of a mail.
+ </summary>
+	<value>A long string</value>
+	<remarks>
+ This ID is used to get and delete mails from the mail server, it's unique on a certain server.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Size">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return mail size in bytes.
+ </summary>
+	<value>A int32 value</value>
+	<remarks>
+ This unit is BYTE.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Subject">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set mail subject.
+ </summary>
+	<value>Subject description string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.To">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set MailTo addresses.
+ </summary>
+	<value>Address string</value>
+	<remarks>
+ It can accept multi-address, multi-address should be split with ";".
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.From">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set MailFrom address.
+ </summary>
+	<value>Address string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Date">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set mail send/receive date.
+ </summary>
+	<value>DateTime value</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Header">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set mail header source codes.
+ </summary>
+	<value>Mail header string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Body">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set mail body source codes.
+ </summary>
+	<value>Mail body string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.BodyHTML">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return mail body source codes when mail is HTML formatted.
+ </summary>
+	<value>HTML codes</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.ReturnPath">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set mail address which should be used when replying the mail.
+ </summary>
+	<value>Address string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Bcc">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set Blind Carbon Copy addresses.
+ </summary>
+	<value>Address string</value>
+	<remarks>
+ It can accept multi-address, multi-address should be split with ";".
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Cc">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set Carbon Copy addresses.
+ </summary>
+	<value>Address string</value>
+	<remarks>
+ It can accept multi-address, multi-address should be split with ";".
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Priority">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set mail priority.
+ </summary>
+	<value>MailPriority enumeration</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.ContentType">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return mail content type.
+ </summary>
+	<value>MailContentType enumeration</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.SourceCode">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return all source codes in a mail.
+ </summary>
+	<value>Source code string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.MessageID">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return the MessageID in the mail header section.
+ </summary>
+	<value>Message ID string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.Attachments">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the attachments in the mail.
+ </summary>
+	<value>MailAttachmentCollection</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.ReplyTo">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the reply address of the mail
+ </summary>
+	<value>Mail address string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-22	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.EMail.InReplyTo">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the in-reply-to information of the mail
+ </summary>
+	<value>A unique mail ID</value>
+	<remarks>
+ This field contains a piece of text describing a message you are replying to.  
+ Some mail systems can use this information to correlate related pieces of mail.  
+ It should be a unique mail ID like "BEE5E5C3FA49A445C23F034F75@abc.com"
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-22	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.GetContentTypeFromString(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Convert content type string into MailContentType enumeration.
+ </summary>
+	<param name="TypeString">Content type string in the mail body description.</param>
+	<returns>MailContentType enumeration</returns>
+	<remarks>
+ Used for receiving mails
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ConvertContentTypeToString(QMailClient.EMail.MailContentType)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Convert MailContentType enumeration into content type string.
+ </summary>
+	<param name="Type">MailContentType enumeration</param>
+	<returns>Content type string</returns>
+	<remarks>
+ Used for sending mails
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ConvertContentTypeToString(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Get content type of an attachment according to the given attachment's file name.
+ </summary>
+	<param name="FileName">The file name of an attachment</param>
+	<returns>Content type string</returns>
+	<remarks>
+ Used when sending mails
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.EncodeMail">
+ -----------------------------------------------------------------------------
+ <summary>
+ Generate the mail header, body and sourcecode from mail properties.
+ </summary>
+	<remarks>
+ Used when sending mails
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.DecodeMail(System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Analyze the mail's sourcecode.
+ </summary>
+	<param name="OnlyDecodeMailHeaderInformation"></param>
+	<remarks>
+ Used when receiving mails.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.CombineBody">
+ -----------------------------------------------------------------------------
+ <summary>
+ Create codes in mail body section.
+ </summary>
+	<remarks>
+ Used when sending mails.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.SplitBody(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Analyze mail body.
+ </summary>
+	<param name="MailHeader">Optional. If MailHeader is not given, it will analyze mail header in the body instead, otherwise use the given header information.</param>
+	<remarks>
+ Used when receiving mails.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.CombineHeader">
+ -----------------------------------------------------------------------------
+ <summary>
+ Generate mail header section.
+ </summary>
+	<remarks>
+ Used when sending mails.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.SplitHeader">
+ -----------------------------------------------------------------------------
+ <summary>
+ Analyze mail header section.
+ </summary>
+	<remarks>
+ Used when receiving mails.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.GetDateTimeFromString(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Get date time information from date time string in mail header.
+ </summary>
+	<param name="DateTimeString">Date time string with time zone</param>
+	<returns>A DateTime value</returns>
+	<remarks>
+ In this version, time zone is ignored.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.GetValueString(System.String,System.String,System.Boolean,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Generally used to get string according to the key given in body content or 
+ get ascii values in mail header section.
+ </summary>
+	<param name="SourceString">Mail codes</param>
+	<param name="Key">Searching key</param>
+	<param name="ContainsQuotationMarks">Optional. Indicate whether the string is contains a pair of quotation marks, default is False.</param>
+	<param name="ContainsSemicolon">Optional. Indicate whether the string is contains a semicolon, default is False.</param>
+	<returns>The string required according to the Key</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ConvertStringEncodingFromBase64(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Convert Base64 string into text string.
+ </summary>
+	<param name="SourceString">Base64 codes</param>
+	<returns>Text string</returns>
+	<remarks>
+ For string with "=?,?="(Charset information included)
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ConvertStringEncodingFromBase64Ex(System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Convert Base64 string into text string.
+ </summary>
+	<param name="SourceString">Base64 codes</param>
+	<param name="Charset">Charset string</param>
+	<returns></returns>
+	<remarks>
+ For string without "=?,?="(Charset information not included)
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ConvertStringEncodingToBase64Ex(System.String,System.String,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Convert text string into Base64 string.
+ </summary>
+	<param name="SourceString">String to convert</param>
+	<param name="Charset">Charset string</param>
+	<param name="AutoWordWrap">Add a [CRLF] after each 76 chars</param>
+	<returns>Base64 string</returns>
+	<remarks>
+ Do not add "=?,?="(Do not add charset information with the string).
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ConvertStringEncodingToBase64(System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Convert text string into Base64 string.
+ </summary>
+	<param name="SourceString">String to convert</param>
+	<param name="Charset">Charset string</param>
+	<returns>Base64 string</returns>
+	<remarks>
+ Add "=?,?="(Add charset information with the string).
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ConvertStringEncoding(System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Decode string from ascii encoding
+ </summary>
+	<param name="SourceString">String to decode</param>
+	<param name="Charset">Charset string</param>
+	<returns>Decoded string</returns>
+	<remarks>
+ If charset is invalid, the system default charset is used instead
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.DecodeTextContent(System.String,System.String,System.String,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+		<p>Decode the the part of the mail body which is text-based.</p>
+		<p>Support following Content-Transfer-Encoding method: 7bit, binary, base64, quoted-printable</p>
+		<p>Unsupported: 8bit</p>
+	</summary>
+	<param name="Content">Mail body content</param>
+	<param name="ContentTransferEncoding">Content transfer encoding description</param>
+	<param name="Charset">Charset description</param>
+	<param name="ContainsSubHeader">Indicate whether the content contains a sub header which needs to be analyzed, default is False</param>
+	<returns>Decoded mail body text</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.SaveToFile(System.String,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Save the mail to a disk file.
+ </summary>
+	<param name="FilePath">Disk file path</param>
+	<param name="AutoRewrite">Enable auto overwrite when file specified is existed</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ReadFromFile(System.String,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Read a mail from a disk file.
+ </summary>
+	<param name="FilePath">Disk file path</param>
+	<param name="OnlyDecodeMailHeaderInformation">If true, it only analyze mail header section. This is used to increase performance when there only need to view mail properties, not mail content.</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.ReadFromStream(System.IO.Stream@,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Read a mail from a stream, file stream, memory stream or others.
+ </summary>
+	<param name="SourceStream">An instance of a stream.</param>
+	<param name="OnlyDecodeMailHeaderInformation">If true, it only analyze mail header section. This is used to increase performance when there only need to view mail properties, not mail content.</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.SaveToStream(System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Save a mail into a memory stream.
+ </summary>
+	<param name="ForceEncodeMail">Generate the mail codes again before saveing it.</param>
+	<returns>An instance of a MemoryStream</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.AddCustomHeaderField(System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Add custom information in mail header.
+ </summary>
+	<param name="Key">Field key</param>
+	<param name="Value">Field value</param>
+	<remarks>
+ An 'X-' is added automatically to your given Key as the mail header field key.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.EMail.GetCustomHeaderField(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Get the custom information in mail header.
+ </summary>
+	<param name="Key">Field key</param>
+	<returns>Field value</returns>
+	<remarks>
+ Custom information is start with an 'X-' in mail header.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:QMailClient.EMail">
+ -----------------------------------------------------------------------------
+ Project	 : QMailClient
+ Class	 : EMail
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Represents an E-mail object. This class can be inherited.
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.MailAttachment.#ctor(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Initializes a new instance of the MailAttachment class and specify the attachment file path.
+ </summary>
+	<param name="FilePath">Attachment file path on the disk</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.MailAttachment.#ctor(System.String,System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Initializes a new instance of the MailAttachment class and specify the attachment file path and display file name.
+ </summary>
+	<param name="FilePath">Attachment file path on the disk</param>
+	<param name="FileName">The file name displayed in the mail(For display only).</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.MailAttachment.ContentTransferEncoding">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return the content transfer encoding type.
+ </summary>
+	<value>Encoding type string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.MailAttachment.FilePath">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the attachment file path.
+ </summary>
+	<value>File path string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.MailAttachment.FileName">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the attachment display name.
+ </summary>
+	<value>Display file name</value>
+	<remarks>
+ It's optional, for display in mail client program only. 
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.MailAttachment.FileSize">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return the attachment size in bytes.
+ </summary>
+	<value>An Int32 value</value>
+	<remarks>
+ The unit is BYTE.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.MailAttachment.Content">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the attachment encoded content.
+ </summary>
+	<value>Content string</value>
+	<remarks>
+ Not recommended to use this property directly, unless you want to encode/decode the attachment use your own method.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.MailAttachment.ContentID">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return the attachment content unique ID.
+ </summary>
+	<value>ID string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.MailAttachment.GenerateBase64ContentFromFile">
+ -----------------------------------------------------------------------------
+ <summary>
+ Generate Base64 content for the attachment file.
+ </summary>
+	<remarks>
+ This method will be called automatically in EMail class
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.MailAttachment.SaveToFile(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Save the attchment to a disk file
+ </summary>
+	<param name="SaveFilePath">Disk file path</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:QMailClient.MailAttachment">
+ -----------------------------------------------------------------------------
+ Project	 : QMailClient
+ Class	 : MailAttachment
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Represents a mail attachment. This class can not be inherited. 
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.POP3Client.RemoteServerAddress">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the reomte mail server address.
+ </summary>
+	<value>IP address or domain name</value>
+	<remarks>
+ It can be a IP address like "10.0.0.1" or a domain name like "mail.yahoo.com"
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.POP3Client.RemoteServerPort">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set the remote POP3 server's listenning port.
+ </summary>
+	<value>An Int16 value.</value>
+	<remarks>
+ It should be 0 ~ 65535. Default for POP3 server is 110
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.POP3Client.UserName">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set POP3 mail server login user name
+ </summary>
+	<value>User name string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.POP3Client.Password">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set POP3 mail server login user password
+ </summary>
+	<value>Password string</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.POP3Client.IncreaseNetworkCompatible">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return or set whether the working socket should wait for some period of time 
+ between sending and receving message.
+ </summary>
+	<value>True or False</value>
+	<remarks>
+ Set this property to TRUE when you are behide a firewall, using an anti-virus 
+ software which scans incoming emails or there is a high network latency. 
+ Otherwise, set this property to FALSE, it will increase performance.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="P:QMailClient.POP3Client.Statue">
+ -----------------------------------------------------------------------------
+ <summary>
+ Return the working socket's connection state
+ </summary>
+	<value>ConnectionState enumeration</value>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.Login">
+ -----------------------------------------------------------------------------
+ <summary>
+ Try loginning the POP3 mail server using the given user name and password.
+ </summary>
+	<returns>True, login successful; False, login failed.</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.GetMailList(System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Get a mail list on the POP3 mail server.
+ </summary>
+	<param name="GetMailHeader">Optional. Indicate whether to get mail header information.</param>
+	<returns>
+ An ArrayList contains the instances of the EMail class. But these instances have empty mail content. 
+ In order to get a certain mail content, use RetrieveMail() method after calling GetMailList() method.
+ </returns>
+	<remarks>
+ The mail list included old and new mails on the mail server. Set GetMailHeader to True is recommended because 
+ it will return all useful information about a mail to user, otherwise it will only return mail's unique ID and 
+ mail size information.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+ 
+
+</member><member name="M:QMailClient.POP3Client.RetrieveMail(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Retrieve a whole mail from POP3 server.
+ </summary>
+	<param name="UniqueID">The unique ID of the mail required to retrieve</param>
+	<returns>An instance of the EMail class</returns>
+	<remarks>
+ The unique ID could be found in the ArrayList returned by GetMailList() method.
+ The GetMailList() returns an ArrayList contains many instances of EMail class and
+ the properties UniqueID of these instances are already set by that method. 
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.RetrieveMail(System.String,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Retrieve a whole mail from POP3 server.
+ </summary>
+	<param name="UniqueID">The unique ID of the mail required to retrieve</param>
+	<param name="ReturnSourceCode">If True, it will return the whole mail source codes; if False, it will return only the codes of the mail body section.</param>
+	<returns>Mail source codes</returns>
+	<remarks>
+ Use this overload version only when you want to decode the mail using your own method.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.DeleteMail(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Delete a mail from the server permanently.
+ </summary>
+	<param name="UniqueID">The unique ID of the mail required to delete</param>
+	<returns>
+ An Int16 value, 1 - Successful; 2 - Failed; -1 - No such mail on server(the mail may be already deleted)
+</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.RetrieveAndDeleteMail(System.String)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Retrieve the mail the server and then delete it.
+ </summary>
+	<param name="UniqueID">The unique ID of the mail required to retrieve and then delete</param>
+	<returns>An instance of EMail class if success, else it will return Nothing(null in C#)</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.Reset">
+ -----------------------------------------------------------------------------
+ <summary>
+ Reset the connection state.
+ </summary>
+	<remarks>
+ Not recommended to use this method directly.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.Quit">
+ -----------------------------------------------------------------------------
+ <summary>
+ Leave the mail server and close the connection.
+ </summary>
+	<returns>True, success; False, failed.</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.CloseForcedly">
+ -----------------------------------------------------------------------------
+ <summary>
+ Close the connection forcedly.
+ </summary>
+	<remarks>
+ Not recommended to use this method directly. This may cause data losing or other 
+ problems.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.SendCommand(System.String,System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Send a POP3 command to the server
+ </summary>
+	<param name="Command">Command name</param>
+	<param name="ReceiveLongData">Optional. If the command will cause the server to return a large text response, set this to True.</param>
+	<returns>Server's response text in bytes array</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.CorrectedResponse(System.Byte[],System.String@)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Check the response of the server.
+ </summary>
+	<param name="ReceivedBytes">Server's response, it is in bytes array format.</param>
+	<param name="Message">Optional. The message of the server's response.</param>
+	<returns>True, command execute successful; False, command execute failed.</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.Connect">
+ -----------------------------------------------------------------------------
+ <summary>
+ Make the connection to the mail server.
+ </summary>
+	<returns>True, connect successful; False, connect failed.</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="M:QMailClient.POP3Client.GetUIDList(System.Boolean)">
+ -----------------------------------------------------------------------------
+ <summary>
+ Get mail's unique ID list
+ </summary>
+	<param name="UIDAsKey">Indicate whether to use the UID as the key in the return hashtable</param>
+	<returns>A hashtable contains a UID list</returns>
+	<remarks>
+ If UIDAsKey is True, the UID is the key of the hashtable, otherwise the mail index will be the key.
+ </remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member><member name="T:QMailClient.POP3Client">
+ -----------------------------------------------------------------------------
+ Project	 : QMailClient
+ Class	 : POP3Client
+ 
+ -----------------------------------------------------------------------------
+ <summary>
+ Represents the object which communicate with a POP3 mail server. This class can be inherited. 
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Tony]	2005-12-1	Created
+ </history>
+ -----------------------------------------------------------------------------
+
+</member>
+</members>
+</doc>

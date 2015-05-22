@@ -1,0 +1,174 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+DJDBTools
+</name>
+</assembly>
+<members>
+<member name="P:DJDBTools.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:DJDBTools.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:DJDBTools.My.Resources.Resources.Open2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDBTools.My.Resources.Resources.RSII">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:DJDBTools.My.Resources.Resources.Save">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDBTools.My.Resources.Resources.Unknown">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:DJDBTools.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:DJDBTools.ToolsPilot.ReloadRemoteConfig">
+	<summary>
+ Checks if the XML config file has been changed (thus if "forceReload" has been set to True).
+ First it processes the queue of single actions with the function processDoWorkNows().
+ Then reloads the config and starts running.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DJDBTools.ToolsPilot.processDoWorkNows(System.Xml.XmlDocument@,DJDBTools.weblog)">
+	<summary>
+ Processes the queue of single actions for all those Tools in the XML file which doWorkNow is set to True.
+ </summary>
+	<param name="xmlDocument"></param>
+	<param name="weblog"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBTools.DataExporter.WriteStatistics">
+	<summary>
+ Ecriture des résultats des statistiques
+ Si "OPERATION serie" --&gt; écriture des valeurs en 2 colonnes "date _ valeur" par sensor, pas d'alignement des valeurs.
+ </summary>
+</member><member name="M:DJDBTools.DataExporter.WriteExportToColumn">
+	<summary>
+ Ecriture des résultats d'un seul dataset sous forme de colonne
+ 
+  Date                sta1    sta2    sta3  ...
+  01.002.1983 00:00   0.123   0.232   1.023 ...
+  01.002.1983 01:00   0.223   0.342   1.323 ...
+ 
+ </summary>
+</member><member name="M:DJDBTools.DataExporter.WriteRNFTraining">
+	<summary>
+ Export des valeurs sous forme de table. Valeurs alignées
+ Si "FORMAT NOINTERPOLATE" --&gt; pas d'interpolation. Valeurs manquantes "-". Suppression des 3 premières colonnes RNF.
+ </summary>
+	<remarks></remarks>
+</member><member name="T:DJDBTools.RSII.CapteursDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DJDBTools.RSII.DataGroupsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DJDBTools.RSII.StationsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DJDBTools.RSII.ValeursDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:DJDBTools.RSII.CapteursRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DJDBTools.RSII.DataGroupsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DJDBTools.RSII.StationsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DJDBTools.RSII.ValeursRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:DJDBTools.RSII.CapteursRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DJDBTools.RSII.DataGroupsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DJDBTools.RSII.StationsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DJDBTools.RSII.ValeursRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:DJDBTools.RSII">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:DJDBTools.RSIITableAdapters.CapteursTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:DJDBTools.RSIITableAdapters.DataGroupsTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:DJDBTools.RSIITableAdapters.StationsTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="T:DJDBTools.RSIITableAdapters.ValeursTableAdapter">
+	<summary>
+Represents the connection and commands used to retrieve and save data.
+</summary>
+</member><member name="M:DJDBTools.RSIITableAdapters.TableAdapterManager.UpdateUpdatedRows(DJDBTools.RSII,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Update rows in top-down order.
+</summary>
+</member><member name="M:DJDBTools.RSIITableAdapters.TableAdapterManager.UpdateInsertedRows(DJDBTools.RSII,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Insert rows in top-down order.
+</summary>
+</member><member name="M:DJDBTools.RSIITableAdapters.TableAdapterManager.UpdateDeletedRows(DJDBTools.RSII,System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Delete rows in bottom-up order.
+</summary>
+</member><member name="M:DJDBTools.RSIITableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+	<summary>
+Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+</summary>
+</member><member name="M:DJDBTools.RSIITableAdapters.TableAdapterManager.UpdateAll(DJDBTools.RSII)">
+	<summary>
+Update all changes to the dataset.
+</summary>
+</member><member name="T:DJDBTools.RSIITableAdapters.TableAdapterManager.UpdateOrderOption">
+	<summary>
+Update Order Option
+</summary>
+</member><member name="T:DJDBTools.RSIITableAdapters.TableAdapterManager.SelfReferenceComparer">
+	<summary>
+Used to sort self-referenced table's rows
+</summary>
+</member><member name="T:DJDBTools.RSIITableAdapters.TableAdapterManager">
+	<summary>
+TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+</summary>
+</member>
+</members>
+</doc>

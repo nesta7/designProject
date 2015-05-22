@@ -1,0 +1,208 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+DJDBEngine
+</name>
+</assembly>
+<members>
+<member name="M:DJDBEngine.MeasuredSensor.ReadFromSingle(System.IO.BinaryReader@,System.Single,System.Int32)">
+	<summary>
+ Lecture de l'ancien format, structure POINT. Conversion en pas de temps constant à la lecture.
+ </summary>
+	<param name="BR"></param>
+	<param name="Version"></param>
+	<remarks></remarks>
+</member><member name="P:DJDBEngine.Sensor.interpolate(System.DateTime)">
+	<summary>
+ Returns interpolated value within 2 steps. If out of range, return nothing
+ 
+ </summary>
+	<param name="D"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.Sensor.init(System.Int32)">
+	<summary>
+ Initialize the length of the values array for this sensor, assuming that FirstTime reprents the 0 index of this array.
+ </summary>
+	<param name="NumberOfValues">To initialize the length of the values array for this sensor</param>
+</member><member name="M:DJDBEngine.Sensor.init(System.Int32,System.Int32,System.DateTime)">
+	<summary>
+ Initialize the length of the values array for this sensor, assuming that FirstTime reprents the 0 index of this array.
+ </summary>
+	<param name="NumberOfValues">To initialize the length of the values array for this sensor</param>
+	<param name="timestep">In Seconds</param>
+	<param name="FirstTime">The first time of the sensor</param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.Sensor.ConvertSensorBackToPoints">
+	<summary>
+ Converts the sensor into points, for old functions such as computedSensors
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.Sensor.ModifySensorWithOtherConstantTimeStep(System.DateTime,System.Int32)">
+	<summary>
+ Modification du timestep ou du firstDate et recalcul du pas de temps constant
+ </summary>
+	<param name="NewFirstTime"></param>
+	<param name="NewTimeStep"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.Sensor.DefineNewFirstDate(DJDBEngine.Sensor)">
+	<summary>
+ On garde année/mois/jour, mais on récupère heure/minute/seconde à partir d'un sensor de référence
+ </summary>
+	<param name="othersensor"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.Sensor.AddOrReplace(System.DateTime,System.Single)">
+	<summary>
+ Replaces the previous function coded in "POINTS". Adapt the size of the array, garantee the constant time step.
+ RULE : the existing sensors determines the firstdate and timestep. THE IMPORTED VALUE MIGHT BE ADAPTED IF NECESSARY, IN TIME
+ </summary>
+	<param name="Time"></param>
+	<param name="Value"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataAnalyzer.CreateQuantilesFromLEPS">
+	<summary>
+ Creates quantiles 25%, 33%, 50%, 66%, 75% from 16 continuous LEPS members
+ Creates a new dataset with these quantiles
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.Groupe.findClosestDate(System.String,System.DateTime,System.Boolean)">
+	<summary>    
+ Scans all dataSets names in group and finds the closest dataset given a certain date and a dataSet prefix.
+ </summary>
+	<param name="dataSetPrefix">Example: dataSetPrefix="Prévision COSMO2 du "</param>
+</member><member name="M:DJDBEngine.DataBase.writeToSQL(System.String)">
+	<summary>
+ Write the whole DJDB file into SQL.
+ This function is mainly use to crop all the already existing data in the XMLs.
+ It will become obsolete, since from now on every new write should be made separatelly, not all the datasets at the same time.
+ </summary>
+</member><member name="M:DJDBEngine.DataBase.readFromSQL(System.String)">
+	<summary>
+ [ !!! ] UNUSED YET ... comment the Exit Sub if needed.
+ Given an xmlFilePath, reads all the elements of this DJDB in SQL.
+ </summary>
+</member><member name="M:DJDBEngine.DataBase.RecoverFromBinaryFiles">
+	<summary>
+ Recover the Database XML file from binary files
+ Writes a text file with BinaryName, Size, First 3 stations
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.StochasticGenerator.Climate_Generetor_Stochastic">
+	<summary>
+ Generates Climate Scenario per sampling in a reference dataset (stochastic)
+ applies daily coefficents for P and T from files (one stationname.txt file per station)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.sql_getOrCreateDatasetElement(System.Boolean)">
+	<summary>
+ Finds or creates the element that corresonds to the SqlDatasetElement for the current Dataset.
+ </summary>
+	<param name="writing">"true" if the binary file is being written in this moment</param>
+</member><member name="M:DJDBEngine.DataSet.sql_insertOrUpdateInfo(System.Boolean)">
+	<summary>
+ Updates all the info into sql.
+ </summary>
+</member><member name="M:DJDBEngine.DataSet.sql_DatasetElementIsOccupied(System.Boolean)">
+	<summary>
+ Checks if the 'writing' flag is active. If it is, it means that the slot is used by some other process.
+ This can be combined in a loop (with a convenient thread.sleep in it).
+ </summary>
+</member><member name="M:DJDBEngine.DataSet.sql_waitUntilDatasetElementIsFree(System.Boolean,System.Int32,System.Int32,System.Boolean)">
+	<summary>
+ Creates a loop waiting for the sqlDatasetElement to be free (meaning: somebody else set the writing flag from True to False)
+ </summary>
+	<param name="occupyElementWhenFree">This variable will set writing=true whenever the element is free</param>
+	<param name="checkIntevalInSeconds">The duration of each iteration of the loop.</param>
+	<param name="timeoutInSeconds">The maximum duration to try the loop.</param>
+	<param name="freeAfterTimeout">Do we gain control of the element after the long timeout?</param>
+</member><member name="M:DJDBEngine.DataSet.sql_deleteDatasetElement">
+	<summary>
+ Deletes the sqlDatasetElement
+ </summary>
+	<returns>True if succeed. False if the element was not found.</returns>
+</member><member name="M:DJDBEngine.DataSet.sql_updateToFakeDataset(System.String,System.String,System.String,System.String)">
+	<summary>
+ Sets all the info to create a fake dataset that will be able to interact with the other sql_[function_name] functions in this class.
+ </summary>
+</member><member name="M:DJDBEngine.DataSet.MergeByPoints(DJDBEngine.DataSet)">
+	<summary>
+ Merge des POINTS. Va disparaître au profit de Merge pour pas de temps constant
+ </summary>
+	<param name="DS"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.Merge(DJDBEngine.DataSet)">
+	<summary>
+ Merge pour pas de temps constant
+ </summary>
+	<param name="DS"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.ConvertToConstantTimeStep">
+	<summary>
+ Converts a dataset created with POINTS (for example : parser) into ConstantTimeStep
+ </summary>
+	<remarks></remarks>
+</member><member name="P:DJDBEngine.DataSet.DateCreated">
+	<summary>
+ Max Time span (in hours) to generate an alarm. If Now - LastDateInDataset &gt; MaxTimeSpan then ALARM.
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.ReadFromBinaryFile(System.String)">
+	<summary>
+ Created by Xavi 08.09.2014
+ </summary>
+</member><member name="M:DJDBEngine.DataSet.ExportDatasetToFonto">
+	<summary>
+ Export to the fonto DB using the FontoManager.exe
+ Calls FontoManager.exe through the command line
+ </summary>
+</member><member name="M:DJDBEngine.DataSet.saveSchemaToXML(System.String)">
+	<summary>
+ Creates an XML schema file from a DataSet
+ </summary>
+	<param name="SchemaFileName"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.updateSensorInfoInXML(System.Xml.XmlDocument@)">
+	<summary>
+ Updates "lastDate" and "lastValue" fields in every sensor of the XML schema file
+ </summary>
+	<param name="xmlDoc"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.updateSensorHeadersInXML(System.Xml.XmlDocument@,System.Xml.XmlNode@)">
+	<summary>
+ Updates the summary of the dataset into the XML schema file ("header" node)
+ </summary>
+	<param name="xmlDoc"></param>
+	<param name="documentNode"></param>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.Save">
+	<summary>
+ ECRITURE DU BINAIRE UNIQUEMENT
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DJDBEngine.DataSet.ReadFromStream(System.IO.Stream@,System.Boolean,System.Boolean)">
+	<summary>
+ Read dataset from stream.
+ It is used to read the .xbin dataset directly from a zipped file.
+ </summary>
+</member><member name="P:DJDBEngine.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:DJDBEngine.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:DJDBEngine.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

@@ -1,0 +1,14 @@
+Acquisition	
+AcquisitionLOCALE	
+HydroSuisse	
+GroupeE	
+Massa	
+SIG	
+Simplon	
+Doubs	
+Colmar	X:\COLMAR\Configuration\COLMAR RESEAU NEW TEST.dja
+GIH	
+LAUSANNE	
+METEO	
+Zinal	
+OFIMA	

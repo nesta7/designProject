@@ -1,0 +1,95 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Exporters
+</name>
+</assembly>
+<members>
+<member name="M:Exporters.SQLAlarmAnalyst.getDataSet(DJDBEngine.DataBase@,Exporters.dataBaseInfo,System.Int32)">
+	<summary>
+ New function (with SQL)
+ </summary>
+</member><member name="M:Exporters.SQLAlarmAnalyst.getSensorName(System.String,System.Int32)">
+	<summary>
+ New function (with SQL)
+ </summary>
+</member><member name="M:Exporters.SQLAlarmAnalyst.exportZonesToTable(MySql.Data.MySqlClient.MySqlConnection@,System.String,DJDBEngine.DataSet,System.String,System.Boolean,System.Boolean,System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Takes all the indicators from each zone and exports them to the SQL "scenario" table.
+ </summary>
+</member><member name="M:Exporters.SQLAlarmAnalyst.cropZonesInDataSet(DJDBEngine.DataSet,System.Int32)">
+	<summary>
+ Counts the number of zones in a dataset (all zones have the form "zone_1|69" etc)
+ </summary>
+</member><member name="M:Exporters.SQLAlarmAnalyst.extractMeanFromSensor(DJDBEngine.Sensor,System.DateTime,System.DateTime,System.Int32,System.Int32)">
+	<summary>
+ Computes the Sum parameter for a single sensor.
+ </summary>
+</member><member name="M:Exporters.openLayersObject.createEmptyConfig(System.String)">
+	<summary>
+ Combine with "saveObjectToXML(emptyConfig, filePath)"
+ </summary>
+	<param name="filePath"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:Exporters.ExportFilesFromDB.prepareDates(System.Collections.Generic.List{System.DateTime}@,System.DateTime,System.DateTime,System.TimeSpan)">
+	<summary>
+ Sorts a list of dates, from firstDate to lastDate with a certain timeStep
+ </summary>
+	<param name="listOfDates"></param>
+	<param name="firstDate"></param>
+	<param name="lastDate"></param>
+	<param name="timeStep">Usually : New TimeSpan(1, 0, 0)</param>
+	<remarks></remarks>
+</member><member name="M:Exporters.ExportFilesFromDB.getDataSet(DJDBEngine.DataBase@,System.String,System.String)">
+	<summary>
+ Finds either the last DataSet of a variable DataSet Type (such as COSMO2, COSMO7 or ECMW), or the Static DataSet (MAJ).
+ </summary>
+	<param name="dataBase"></param>
+	<param name="groupName">Group description</param>
+	<param name="modelMeteoType">A string : "Mise à Jour", "COSMO2", "COSMO7", "ECMWF"</param>
+	<returns>Found Data Set</returns>
+	<remarks></remarks>
+</member><member name="M:Exporters.ExportFilesFromDB.convertGridToString(System.String[0:,0:]@,System.Int32@)">
+	<summary>
+ Transforms a Matrix(,) into a string with rows and columns.
+ </summary>
+	<param name="dataGrid"></param>
+	<param name="filterColumnIndex">The index of the column which row will be skipped if contains "" only. filterColumnIndex = -1 to block this functionality.</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:Exporters.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Exporters.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Exporters.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:Exporters.ExportSimulation.uploadFoldersToLocalServer(System.Collections.Generic.List{System.String},System.String,System.String,CommonTools.frmSuivi@)">
+	<summary>
+ uploadFoldersToLocalServer (W:) For both 1h and 24h data version
+ </summary>
+	<param name="ListOfFolders"></param>
+	<param name="localServerPath"></param>
+	<param name="tempPath"></param>
+	<param name="ProgressBar"></param>
+	<remarks></remarks>
+</member><member name="M:Exporters.ExportSimulation.uploadFoldersToFTP(System.Collections.Generic.List{System.String},System.String,System.String,CommonTools.frmSuivi@)">
+	<summary>
+ uploadFoldersToFTP for both 1h and 24h data version
+ </summary>
+	<param name="ListOfFolders"></param>
+	<param name="ftpPath"></param>
+	<param name="tempPath"></param>
+	<param name="ProgressBar"></param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

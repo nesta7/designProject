@@ -1,0 +1,42 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RSUserTools
+</name>
+</assembly>
+<members>
+<member name="P:RSUserTools.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:RSUserTools.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:RSUserTools.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:RSUserTools.BVImporter.Repair_PressureFlow(RSEngine.Model)">
+	<summary>
+ Vieille fonction de 2010
+ </summary>
+	<param name="mModel"></param>
+	<remarks></remarks>
+</member><member name="M:RSUserTools.BVImporter.Repair_UrbanGroupInterfaces(RSEngine.Model)">
+	<summary>
+ Repair the groupInterface due to a bad Read/write of Hydroobject
+ Frédéric Jordan, 17.1.2015
+ </summary>
+	<param name="mModel"></param>
+	<remarks></remarks>
+</member><member name="M:RSUserTools.BVImporter.ExportAllMetadata(System.String)">
+	<summary>
+ Export metadata of all hydroobjects of the model
+ </summary>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

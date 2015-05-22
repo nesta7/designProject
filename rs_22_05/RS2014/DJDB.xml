@@ -1,0 +1,203 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+DJDB
+</name>
+</assembly>
+<members>
+<member name="M:DJDB.DataManagerUI.repairAllDjdbs">
+	<summary>
+ Repair all datasets performing any operation. Intially made to replace certain sensor names in all databases.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DJDB.DataManagerUI.getAllDjdbPaths">
+	<summary>
+ List with all appNames and their corresponding djdbFilePaths
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:DJDB.xmlVisualizer.fillObjectWithXml(System.Object@,System.Xml.XmlDocument@,System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Property Name
+    Value
+ /Property Name
+ 
+ Property Name
+    sub-property name 1
+       Value 1
+    /sub-property name 1
+    sub-property name 2
+       Value 2
+    /sub-property name 2
+ /Property Name
+ </summary>
+	<param name="mObject"></param>
+	<param name="xmlDoc"></param>
+	<param name="listOfWarnings"></param>
+	<remarks></remarks>
+</member><member name="P:DJDB.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.Access">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.AccessFile">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.CloseDataset">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.ConnectToDataBase">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.Copy">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.cross">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.Delete">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.Disconect">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.ExportSchema">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.NewDataBase">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.Paste">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.QueryDataset">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.Save">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.ToolBox">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:DJDB.My.Resources.Resources.ValidateSchema">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:DJDB.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:DJDB.GeojsonExport.GetStationData(DJDBEngine.DataSet,System.Int32,System.DateTime,System.DateTime)">
+	<summary>
+ Gets the djdb station name, the X and Y coordinates, and initializes the date-value storage.
+ </summary>
+</member><member name="M:DJDB.DJDBTreeView.ListBinariesInFolder(System.String)">
+	<summary>
+ Xavi (08.09.2014)
+ This function lists all the *.xbin files in the same folder as fullFileName.
+ </summary>
+</member><member name="M:DJDB.DJDBTreeView.ListAllBinaryFiles(System.Object,System.EventArgs)">
+	<summary>
+ List directly all the binary files under this folder:
+ </summary>
+</member><member name="M:DJDB.DJDBTreeView.clearSQL_Database(System.Object,System.EventArgs)">
+	<summary>
+ Clear the SQL data, but do not clear the bin files.
+ The system must be in "isSQLDJDBMode"=true
+ Before, the XML file must be checked
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:DJDB.DJDBTreeView.CustomFunction(System.Object,System.EventArgs)">
+	<summary>
+ Flexible custom function in which we add the sub that we want to launch.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:DJDB.DJDBTreeView.shiftAllDatesInDataset">
+	<summary>
+ CUSTOM FUNCTION
+ Created for Colmar: shift from UTC to Localtime in all stored dates in the djdb dataset.
+ </summary>
+</member><member name="M:DJDB.DJDBTreeView.createSqlInsertionQueriesForDateValues(System.Object,System.EventArgs)">
+	<summary>
+ Creates the SQL queries through which all the stations of this dataset will be inserted into SQL.
+ This function has been developed for the Solar project.
+ </summary>
+</member><member name="M:DJDB.DJDBTreeView.createSqlInsertionQueriesForAllStations(System.Object,System.EventArgs)">
+	<summary>
+ Creates the SQL queries through which all the stations of this dataset will be inserted into SQL.
+ This function has been developed for the Solar project.
+ </summary>
+</member><member name="M:DJDB.DJDBTreeView.createMeteosuisseMeasureConversionDictionary">
+	<summary>
+ Station name to station meteosuisse internal code
+ </summary>
+</member><member name="M:DJDB.DJDBTreeView.ImportSolarPowerCSVFiles_RE">
+	<summary>
+ Temporary function in order to import the CSV files containing the 15min solar power data (from 2009 to 2011).
+ Was used replacing the "Integratedataset" function, in order to control it through the right-click.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DJDB.DJDBTreeView.cropAlarmAnalystConfig_Corrector(System.String)">
+	<summary>
+ Correction of the file produced by a bad version of "cropAlarmAnalystConfig"
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DJDB.DJDBTreeView.cropAlarmAnalystConfig(System.String)">
+	<summary>
+ Crops the values for the AlarmAnalyst XML Config file.
+ You need to check Group, DataSet, Station and Sensor that you want to add to the list.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:DJDB.frmExportToStatistics.lblExportStatistics_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)">
+	<summary>
+ Config File Name:
+ 
+ key 'FORMAT':
+ -&gt; SINGLE_DS_EXPORT for simple export of some stations from a single ds to a column organized textfile
+ -&gt; COLUMN export from several datasets and several stations to a column organized textfile
+ -&gt; LINE export from several datasets and several stations to a line organized textfile
+ 
+ example:
+ --
+ FORMAT	SINGLE_DS_EXPORT
+ NUMERICFORMAT	0.000
+ DATASET	RESULTS	lassoula horaire new
+ STATION	Lassoula1_SM|5	Qs	Serie
+ STATION	Lassoula2_SM|5	Qs	Serie
+ --
+ 
+ 
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

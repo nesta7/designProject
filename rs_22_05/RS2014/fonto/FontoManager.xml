@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+FontoManager
+</name>
+</assembly>
+<members>
+<member name="M:FontoManager.Database.Models.rs_ui_db.Site.GetSitesIfAccessible(System.UInt64,System.Nullable{System.UInt64})">
+	<param name="sensor_SID"></param>
+	<param name="user_SID">if user is admin =&gt; user_SID is Nothing</param>
+</member><member name="T:FontoManager.GeoFunctions.Generic.EastingNorthingUtm">
+	<summary>
+ UTM coordinate type.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.WgsToNewCoordinateSystem.TransformCoordinates(ProjNet.CoordinateSystems.ICoordinateSystem,System.Double,System.Double)">
+	<summary>
+ Convert lat-lon WGS84 to UTM coordinates.
+ </summary>
+	<returns> easting=coordPoint(0), northing=coordPoint(1) </returns>
+</member><member name="T:FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsVariableResults">
+	<summary>
+ Sorted dictionary of forecastDate, fileFullPath.
+ For a single gfsVariable, stores the info of each downloaded file.
+ </summary>
+</member><member name="M:FontoManager.Features.SharedResources.#ctor(System.UInt64)">
+	<summary>
+ Gets the data from the DB to spare the execution to constantly ask access to the same information.
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Application.GetAllAppsExceptDemoType">
+	<summary>
+ Get all apps, excluing those with "demo" type.
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Application.GetAllDemoTypeApps">
+	<summary>
+ Get all apps that are classified as "demo".
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:FontoManager.Importers.GlobalModels.Parsers.GribElements.Grib1Parameter">
+	<summary>
+ WMO Code table 2 - Indicator of parameter
+ Parameter Codes (PDS)
+ http://rda.ucar.edu/docs/formats/grib/gribdoc/
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.HirlamData.ConvertMultipleHirlamForecastsToTopkapiGridInput(System.String,FontoManager.Importers.GlobalModels.Exporters.EsriGrid.EsriGridHeader)">
+	<summary>
+ 
+ Conditions:
+ baseDirectory is a folder containing subfolders.
+ Each subfolder is named with the date of the forecast.
+ Each subfolder contains 72 files, one for each hour of the forecast.
+ 
+ Output:
+ a twin folder [baseDirectory]_TOPKAPI is created, with twin subfolders.
+ Each one of these new subfolders contains the transformed .grd which is a valid input file for Topkapi.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.HirlamData.GetRawHirlamForecastFromFolder(System.String)">
+	<summary>
+ Scans a folder containing a single 72h single forecast and charges it into a dictionary.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.HirlamData.GetProductInfoKey(Seaware.GribCS.Grib1.Grib1ProductDefinitionSection,System.Collections.Generic.ICollection{Seaware.GribCS.Grib1.Grib1ProductDefinitionSection})">
+	<summary>
+ Returns the producInfo key already present in the dictionary, or returns Nothing if not present.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.HirlamData.EqualProductInfos(Seaware.GribCS.Grib1.Grib1ProductDefinitionSection,Seaware.GribCS.Grib1.Grib1ProductDefinitionSection)">
+	<summary>
+ Helper function: checks if two producInfo's are equal (defined by equal parameter Number + equal level name)
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.HirlamData.GetBaseDateFromFolderName(System.String)">
+	<summary>
+ The folder name must be named as the base date.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.HirlamData.ArrangeFilesInSubfolders(System.String)">
+	<summary>
+ When all files (of different Hirlam runs) are toghether in the same folder, this function distributes them into each subfolders with the name of the base date.
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.SeriesFiltering.GetThresholdsByMonth">
+	<summary>
+ [ monthNumber, max_mm/day ]
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Measure.GetParsedData(System.String[])">
+	<summary>
+ Data file format after 25.04.2013
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Measure.GetColumnIndexToSensornameDictionary(System.String[])">
+	<summary>
+ Translates the column position in the data file to its corresponding sensor name.
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Measure.TryAddStationAndSensorToDictionary(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.String}}}@)">
+	<summary>
+ Add station and sensor to the dictionary, if needed (this usually happens only in the first iteration, ie: reading the fist data block)
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Measure.GetCodeToSensorDictionary">
+	<summary>
+ Sensor names used in the header of the data file vs sensor names used in our database.
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.Manager.CreateLastestPersistenceCurveForASingleApp(System.String,System.String,System.DateTime)">
+	<summary>
+ Creates and inserts the single curve in fonto for a single app, given a set of configuration parameters (datasets, endHours and transitions of each slice).
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.Manager.CreateLastestSingleCurveForASingleApp(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Creates and inserts the single curve in fonto for a single app, given a set of configuration parameters (datasets, endHours and transitions of each slice).
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.Manager.CreateGenericSingleCurve(System.Collections.Generic.Dictionary{System.DateTime,System.Single}[],System.String[],System.String[])">
+	<summary>
+ Creates a single curve, given a set of timeValue series and a set of endHour rules and transition rules.
+ The hypothesis is that allSeries are aligned starting from the same first_date. The index of each series represents " first_date + hour_shift " (array_index=hour_shift).
+ </summary>
+	<param name="allSeries"></param>
+	<param name="endHours">equivalent to "from where to where" (in hours) for each series.</param>
+	<param name="transitions">the slice of hours in which we will perform a smooth transition between one series and the next.</param>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.EsriGrid.GetOutputTopkapiGridFileName(System.DateTime)">
+	<summary>
+ Topkapi grid file input format: 1 grid per hour, with the format "201104010100.grd".
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.EsriGrid.ParseGfsResultsAsEsriGrid(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults,System.String)">
+	<summary>
+ Converts files to ESRI GRID format. Also: creates openlayers animation.
+ </summary>
+	<param name="gridResultsSubfolder">Example: "grid-results\"</param>
+</member><member name="T:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.EsriGrid">
+	<summary>
+ http://en.wikipedia.org/wiki/Esri_grid
+ </summary>
+</member><member name="M:FontoManager.Win32Processes.killProcessesLockingFile(System.String)">
+	<summary>
+ Checks all processes locking a file and kills them.
+ </summary>
+</member><member name="M:FontoManager.Win32Processes.FileIsLocked(System.String)">
+	<summary>
+ Checks if a file is locked by another process
+ </summary>
+</member><member name="M:FontoManager.Win32Processes.GetProcessesLockingFile(System.String)">
+	<summary>
+ Return a list of processes that hold on the given file.
+ </summary>
+</member><member name="M:FontoManager.Win32Processes.GetFilesLockedBy(System.Diagnostics.Process)">
+	<summary>
+ Return a list of file locks held by the process.
+ </summary>
+</member><member name="T:FontoManager.GeoFunctions.GoogleMapsAltitude.Main">
+	<summary>
+ Documentation:
+ https://developers.google.com/maps/documentation/javascript/elevation
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.GetTableName">
+	<summary>
+ Gets the mysql table name through the npoco metadata set in the base model:
+ NPoco.TableName("my_table_name")
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.FindAllGenericItemsFromTable(System.String,System.String)">
+	<summary>
+ Returns all rows (with all its columns) in this table.
+ This function does not need a generated class model to retrieve the data, as it will be stored in a dictionary.
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.FindAllByAttributes(System.Collections.Generic.Dictionary{System.String,System.String})">
+	<summary>
+ Selects the results given a set of attributes.
+ </summary>
+	<param name="attributes">the keys of the dictionary are the field names, and the values of the dictionary are the field values</param>
+</member><member name="M:FontoManager.Database.DbObject.FindAllByAttributes(System.String[],System.String[])">
+	<summary>
+ Selects the result given a set of attributes.
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.FindByAttributes(System.String[],System.String[])">
+	<summary>
+ Selects the result given a set of attributes.
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.FindAllBySql(System.String)">
+	<summary>
+ Returns all rows (with all its columns) in this table.
+ The object type in this case is dynamic. To cast the particular model class, the custom model will have this function overridden.
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.GetPrimaryKey">
+	<summary>
+ Gets the mysql table name through the npoco metadata set in the base model:
+ NPoco.TableName("my_table_name")
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.CorrectWhereClause(System.String)">
+	<summary>
+ Adds the "where" keyword if the keyword is not already inside the clause.
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.SingleResult(System.Collections.IEnumerable)">
+	<summary>
+ Custom way to return first or Nothing from a IEnumerable
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.AssureOneResultOnly(System.Collections.IEnumerable)">
+	<summary>
+ Checks if there is more than one result in the IEnumerable.
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.FormatAsSQL(System.String)">
+	<summary>
+ Correct the input for SQL so it fits the standards
+ </summary>
+</member><member name="M:FontoManager.Database.DbObject.GetPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+	<summary>
+ Gets the name of the property as a string.
+ It is used to create queries with the fields binded to the actual variable names.
+ </summary>
+</member><member name="T:FontoManager.FileExporter.Clients.Khr.KhrColumnObject">
+	<summary>
+ Used for KHR only.
+ Since we need to crop plenty of info from the original exported files, this structure helps to organize it.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.FileExporter.Clients.Khr.CustomExport(System.String)">
+	<summary>
+ Specific export routing for khr.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Khr.CreateCustomKhrFile(System.String,System.String)">
+	<summary>
+ This function will go find the file exported as a regular export and transform it into the desired sefa format.
+ - Exported file: string.format("\\srv-datacenter\web\members\html\apps\data\sefa\shared\{0:yyyyMMdd}_KHR_Zuflussprognose.csv", Now)
+ - Export single curve + min + max (they all must come from the command line as 1st, 2nd and 3rd).
+ - The exported values start at midnight of the next day.
+ - The exported length is: up to the end.
+ - The time step is 15min. As we work with hourly-spaced values, we interpolate linearly between those values.
+ - Date string format: String.Format("{0:dd.MM.yyyy HH:mm}", baseDate)
+
+ Format example:
+ &gt; Zuflussprognose Laufwasser;;;;;;;;
+ &gt; ;;;;;;;;
+ &gt; Einheit: m3/15min;;;;;;;;
+ &gt; Zeitstempel;Sufers Lauf;Sufers Lauf min;Sufers Lauf max;Ferrera;Bärenburg;VdL;Preda;Hinterrhein (Fluss)
+ &gt; 25.04.2014 00:15;;;;;;;;
+ &gt; 25.04.2014 00:30;;;;;;;;
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Khr.WriteResultFromKhr(System.String,FontoManager.FileExporter.Clients.Khr.KhrColumnObject[],System.Collections.Generic.List{System.DateTime},System.Collections.Generic.Dictionary{System.String,System.String})">
+	<summary>
+ Formats and writes to disk the single result file for KHR.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Khr.GetTimeValuesFromKhrExportedFile(FontoManager.FileExporter.Clients.Khr.KhrColumnObject,System.String,System.DateTime)">
+	<summary>
+ Given a khr exported file, reads all the time-value data into the memory.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Khr.InterpolateEvery15minFromKhrExportedFile(System.Collections.Generic.Dictionary{System.DateTime,System.Single},System.Collections.Generic.List{System.DateTime}@)">
+	<summary>
+ Given the hourly data in 'results', interpolates every 15min in between.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Romande.AlignPrevAndMeasureOrSimulation(System.String[],System.String,System.String)">
+	<summary>
+ Adds the measure to the same column as the forecast, as if the series were continuous.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Romande.AveragePer24h(System.String[],System.String,System.String)">
+	<summary>
+ Specific export routing for Romande.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Romande.GetHeaderArrayFromResults(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.Single}})">
+	<summary>
+ Gets an array with the names of the datasetTypes.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Romande.TransformResultsToCsvDictionary(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.Single}})">
+	<summary>
+ Transform to csv dictionary to keep in the standard format before writing it into a file.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Romande.AveragePer24h(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.Single}},FontoManager.FileExporter.Clients.Romande.AverageType)">
+	<summary>
+ Get the results averaged per 24h (from midnight to midnight)
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Romande.GetTimeValuesFromFile(System.String)">
+	<summary>
+ Given a khr exported file, reads all the time-value data into the memory.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Romande.GetDatasetTypes(System.String)">
+	<summary>
+ Gets the dataset type names from the header (first line) of the file.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.GoogleMapsAltitude.Elements.GeocodeList.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
+	<summary>
+ Build object from google api parsed json response.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.GoogleMapsAltitude.Elements.GeocodeList.GetGoogleApiQueryAsUrl">
+	<summary>
+ Full URL example: "https://maps.googleapis.com/maps/api/elevation/json?locations=40.714728,-73.998672|41.714728,-73.998672"
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.PersiannData.GetData(System.String)">
+	<summary>
+ http://chrs.web.uci.edu/persiann/data.html
+ Historical precipitation fields
+ Format: 4-byte binary float from a SUN system (big-endian)
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.PersiannData.GetDateFromDayNumber(System.String)">
+	<summary>
+ The files will have the following names: m6s4_3hYYDOYHS.bin
+ Where:
+ YY : 2 digit year starting from 00 for 2000
+ DOY: Day of year
+ HS: Starting hour of the 3 hours accumulation period, (0,3,6,9,12,15,18,21)
+ for example, the file m6s4_3h0006100 represents the precipitation accumulated between 00 and 03, on March 1th, 2000.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.PersiannData.DecodeArrayValues(System.Double[])">
+	<summary>
+ The file contains the precipitation in mm/3h
+ 
+ Spatial resolution of 0.25° x 0.25°. The data is stored in C style row centric format.
+ The first value being centered at 59.875, 0.125, the second value at 59.875, 0.375
+ The last 2 values are centered at: -59.875, 359.625 and -59.875, 359.875.
+ It is a matrix of 480 rows x 1440 cols.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.PersiannData.GetValuesAsArray(System.String)">
+	<summary>
+ the file format is 4-byte binary float from a SUN system (big-endian)
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.Main.ImportDateRangeFromWebsiteAsLoopMode(System.DateTime,System.DateTime)">
+	<summary>
+ Getting years of data. We need multiple requests to the webserver in order to avoid saturating the connection.
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.Main.ImportDateRangeFromWebpageFromAllTypes(System.DateTime,System.DateTime)">
+	<summary>
+ Getting data from date to date with a single request.
+ Note: if "highestDate" is today (during the day) the result are the dates up to this hour.
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.Main.ImportDateRangeFromWebpage(System.DateTime,System.String,FontoManager.Importers.IndianData.CommonTools.ImdType)">
+	<summary>
+ Importing data froa single imd type.
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.Main.GetDataFromUrl(System.String,System.Int32,FontoManager.Importers.IndianData.CommonTools.ImdType)">
+	<summary>
+ For a single imd type.
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.Main.ExtractMiddleString(System.String,System.String,System.String)">
+	<summary>
+ Returns the middle part between two string tags.
+ </summary>
+</member><member name="T:FontoManager.Importers.IndianData.Main">
+	<summary>
+ 
+ 2015-02-11
+ IMD (India Meteorological Department) automation station service
+ http://www.imdaws.com/ViewAwsData.aspx
+ 
+ Hourly weather data of all weather stations in India downloaded from www.imdaws.com in 2012:
+ https://archive.org/details/www.imdaws.com-2012
+ 
+ </summary>
+</member><member name="M:FontoManager.MainModule.CommandLineDictionaryToString(System.Collections.Generic.Dictionary{System.String,System.String})">
+	<summary>
+ Converts the dictionary containing the elements of the command line into a string representing the command line.
+ </summary>
+</member><member name="M:FontoManager.MainModule.ReadCommandLineParameters(System.String)">
+	<summary>
+ Transforms command line arguments into a classified dictionary.
+ </summary>
+</member><member name="M:FontoManager.Importers.Airports.Main.Main">
+	<summary>
+ Entry point.
+ </summary>
+</member><member name="M:FontoManager.Importers.Airports.Main.GetParsedResults(System.String)">
+	<summary>
+ Convert metar txt to decoded xml, and read the results.
+ </summary>
+	<remarks>This function uses 'mweather.exe', which must be included in the root of the vbnet project, with the property "Copy: Always"</remarks>
+</member><member name="M:FontoManager.Importers.Airports.Main.GetResultsFromXmlFileAndTxtFile(System.String,System.String)">
+	<summary>
+ Dates are taken from the TXT file.
+ The measure data is taken from the XML file.
+ </summary>
+</member><member name="T:FontoManager.Importers.Airports.Main">
+	<summary>
+ Airport stations details: http://openflights.org/data.html
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Timeseriesmeasure.DeleteAllFromSensor(System.UInt64)">
+	<summary>
+ Deletes Timeseriesmeasure elements only. Not Tsmeasure.
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Timeseriesmeasure.DeleteAllFromSensor_TsmeasureExtension(System.UInt64)">
+	<summary>
+ Includes the deletions of the elemnts in Tsmeasure (appart from Timeseriesmesure).
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Sefa.CustomExport(System.String)">
+	<summary>
+ Specific export routing for sefa.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Sefa.CreateCustomSefaFile(System.String,System.String)">
+	<summary>
+ This function will go find the file exported as a regular export and transform it into the desired sefa format.
+ - Exported file: string.format("\\srv-datacenter\web\members\html\apps\data\sefa\shared\{0:dd.MM.yyyy}_Plan-Dessous.csv", Now)
+ - Exported sensor: "sefa/Plan-Dessous/42/Puissance" =&gt; http://fonto.swissrivers.ch/plotter/plotSensor/sensorSid/23914/datasetTypeSid/-1
+ - Export single curve only.
+ - The exported values start at midnight of the next day.
+ - The exported length is 5 days.
+ - The values are multiplied by a factor 1000.
+ - The time step is 15min. As we work with hourly-spaced values, we interpolate linearly between those values.
+ - Date string format: String.Format("{0:dd.MM.yyyy}", baseDate)
+ - Line format example: 10.05.2014;02:45;5132
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.Ftp.GetFtpFile(System.String,System.String,System.String,System.String)">
+	<summary>
+ Download single ftp file.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.Ftp.DeleteFtpFilesOlderThanNDays(System.Int32,System.String,System.String,System.String,System.Collections.Generic.List{System.String}@)">
+	<summary>
+ Delete files on ftp based on their "LastModified" date.
+ </summary>
+	<returns>The number of deleted files.</returns>
+</member><member name="T:FontoManager.Importers.GlobalModels.Downloaders.Ftp">
+	<summary>
+ Library: http://enterprisedt.com/products/edtftpnet/
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.CustomGridTarget.GenerateCustomTargetCoordinateList">
+	<summary>
+ Given a fix set of rules (defined by 'AlgerianGridHeader As New EsriGridHeader')
+ we create a list of coordinates.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.CustomGridTarget.InterpolateSingleCoordinate(FontoManager.GeoFunctions.Generic.EastingNorthingUtm,System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.EastingNorthingUtm,System.Double})">
+	<summary>
+ Given a single input coordinate:
+ - We go through all the imported coordinates, comparing the distance to those points
+ - We take the 4 closest points
+ - We interpolate the value from the inverse of the distance from those 4 closest points
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.CustomGridTarget.AdjustResultToTargetCoordinates(System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.EastingNorthingUtm,System.Double},System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.EastingNorthingUtm,FontoManager.GeoFunctions.Generic.EastingNorthingUtm})">
+	<summary>
+ Given a set of fix coordinates, we interpolate the values from the whole set of imported data, adjusting them to those fix predefined points.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.CustomGridTarget.WriteSingleResultAsUtmEsriGridFile(System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.EastingNorthingUtm,System.Double},System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.EastingNorthingUtm,FontoManager.GeoFunctions.Generic.EastingNorthingUtm},System.String,System.Collections.Generic.List{FontoManager.GeoFunctions.Generic.EastingNorthingUtm})">
+	<summary>
+ Transforms the parsed results into the ESRI GRID format and then writes them into a text file.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.CustomGridTarget.WriteGrib1ResultsAsUtmEsriGridFile(System.Collections.Generic.List{FontoManager.Importers.GlobalModels.Parsers.GribElements.Grib1Result},System.String)">
+	<summary>
+ Transforms the parsed results into the ESRI GRID format and then writes them into a text file.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.EsriGrid.CustomGridTarget.WriteGrib2ResultsAsUtmEsriGridFile(System.Collections.Generic.List{FontoManager.Importers.GlobalModels.Parsers.GribElements.Grib2Result},System.String)">
+	<summary>
+ Transforms the parsed results into the ESRI GRID format and then writes them into a text file.
+ This specific function interpolates the results specifically to the Algerian region.
+ </summary>
+</member><member name="M:FontoManager.Features.DatasetInsertionParameters.FillDatasetInsertionParametersFromCommandLine">
+	<summary>
+ Crop the data from the command line.
+ </summary>
+</member><member name="T:FontoManager.Features.DatasetInsertionParameters">
+	<summary>
+ Input parameters for the function updateAppDataFromDjdbFile
+ </summary>
+</member><member name="M:FontoManager.Features.AlarmSenderCommonProperties.LoadAlarmColors">
+	<summary>
+ Loads all colors for all alarm levels in the database.
+ </summary>
+</member><member name="M:FontoManager.Features.AlarmSenderCommonProperties.UpdateUserInfos">
+	<summary>
+ Get all the necessary info from all users that will receive an email.
+ </summary>
+</member><member name="M:FontoManager.Features.AlarmSenderCommonProperties.GetAlarmedDatasetsForThisUser(System.Int32)">
+	<summary>
+ Gets the datasets that are configured as "visible" (in Fonto) for this user.
+ For example: if COSMO7 is set as "not visible", it will not be considered when calculating the alarms.
+ </summary>
+</member><member name="T:FontoManager.Features.AlarmSenderCommonProperties">
+	<summary>
+ Properties that are common the the whole flow of the code in this class.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.Helpers.DataNormalization.TransformNegativeValuesToZero(System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.LatLonWgs,System.Double})">
+	<summary>
+ All negative values are set to zero.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.Helpers.DataNormalization.TransformFromKelvinToCentigrads(System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.LatLonWgs,System.Double})">
+	<summary>
+ From °K to °C
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.Helpers.DataNormalization.DivideRainfallResults(System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.LatLonWgs,System.Double},System.Double)">
+	<summary>
+ mm/[N]h =&gt; mm/h
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.DjdbExporter.AdaptDatasetToRsRestrictions(DJDBEngine.DataSet)">
+	<summary>
+ RS restrictions:
+ - Time has to be local time (In this case: local time in India is +5.5h. Constant because there are no daylight savings.)
+ - RS can't deal with NaN. These values will be interpolated as best as we can.
+ - RS can't deal with WGS coordinates. We must transform them to UTM (in this case: UTM45N)
+ </summary>
+</member><member name="M:FontoManager.DatasetInsertionManager.ExportDjdbDataset">
+	<summary>
+ Exports a djdb dataset directly from the path of its binary file.
+ </summary>
+</member><member name="M:FontoManager.DatasetInsertionManager.GetInsertionDataFromSensor(FontoManager.Features.DatasetInsertionParameters,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.Single}},FontoManager.Database.Models.rs_ui_db.Station,FontoManager.Database.Models.rs_ui_db.Dataset,System.Collections.Generic.Dictionary{System.String,FontoManager.Database.Models.rs_ui_db.Timeseriesmeasure})">
+	<summary>
+ inserts sensor data and returns minDate
+ </summary>
+</member><member name="T:FontoManager.Features.UserInfo">
+	<summary>
+ Info necessary to create and send the alarms for each single user.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Deletion.Main.IdDeletion">
+	<summary>
+ Deletes all the ids present in table id_deletion.
+ This table contains the field table_name (to identify "what type" do we delete), and the field id (to indentify "what index" do we delete).
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Deletion.Main.DeleteObjectType(System.String,System.String[])">
+	<summary>
+ Delete by type and idArray
+ </summary>
+</member><member name="M:FontoManager.Deletion.Main.DeleteStationTypes(System.String[])">
+	<summary>
+ Usage:
+ DeleteStationTypes("0", "10", "11")
+ </summary>
+</member><member name="M:FontoManager.Features.DjdbDatasetMetadata.TransformQRefToQSim(System.Collections.Generic.Dictionary{System.String,FontoManager.Features.StationParameters}@)">
+	<summary>
+ Transforms "Q référence" into "Q simulé"
+ (this has been crated in order to reconstruct the measures from the Analyst dataset)
+ </summary>
+</member><member name="M:FontoManager.Features.DjdbDatasetMetadata.GetDatasetPrefix">
+	<summary>
+ Finds the right prefix given a full djdb dataset name.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.MeasuresRomande.Import">
+	<summary>
+ Measures coming from Romande. A single solar.zip file replaced every time in e-dric's FTP.
+ This file contains N files, one per station. Each file is a CSV with date-value pairs of multiple days.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Importers.Solar.MeasuresRomande.ParseSingleRomandeMeasureFile(System.String,System.String@,System.String@)">
+	<summary>
+ Reads a single file path from Solar.zip (romande) corresponding to a single station.
+ Inserts the date-value pairs into SQL.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.MeasuresRomande.InsertRomandeDataIntoSql(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.Single}},System.DateTime,System.DateTime)">
+	<summary>
+ Code to insert the already cropped date-value pairs into SQL.
+ </summary>
+	<param name="results">Dictionary of (station_code, date-value_dictionary)</param>
+</member><member name="M:FontoManager.EmailSender.SendEmail(System.String[],System.String,System.String,System.Collections.Generic.List{System.String})">
+	<summary>
+ Sends the HTML to the given email addresses.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.WgsToCH1904.Converter.CH2WGS(System.Double@,System.Double@)">
+	<summary>
+ USAGE:
+ 
+ Dim lng As Double = sta.X
+ Dim lat As Double = sta.Y
+ CommonTools.GeoFunction.CH2WGS(lng, lat) 
+ 
+ </summary>
+	<param name="_x">sta.X to Longitude</param>
+	<param name="_y">sta.Y to Latitude</param>
+</member><member name="M:FontoManager.GeoFunctions.WgsToCH1904.Converter.WGS2CH(System.Double@,System.Double@)">
+	<param name="_x">Longitude to sta.X</param>
+	<param name="_y">Latitude to sta.Y</param>
+</member><member name="M:FontoManager.Database.Models.execution.IndependentExecution.InsertAutoExecute(System.String,System.String)">
+	<summary>
+ Creates a test mockup db item in the database that will be executed in the next run.
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Sensor.GetSensorSidsFromAppByListOfNames(System.UInt64,System.Collections.Generic.Dictionary{System.String,System.String})">
+	<param name="stationAndSensorCombinations">dictionary of [station_name,sensor_name]. If sensor_name is Nothing, it means "all sensor types from this station name".</param>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Dataset.#ctor(System.String,System.UInt64,FontoManager.Database.Models.rs_ui_db.DatasetType,System.DateTime,System.DateTime,System.DateTime,System.DateTime)">
+	<summary>
+ New with datasetType object in memory.
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Dataset.GetListOfDatasetsToDelete(System.Int32,System.Int32)">
+	<summary>
+  - delete datasets older than one week (except if they are from an app of type "demo", or column family of type "measure")
+  - delete datasets with deleted=True
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Dataset.GetCustomListOfDatasetsToDelete(System.Int32)">
+	<summary>
+ Customizable function
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Dataset.DistributeTimeseriesprevisionsToAnualTables(System.DateTime,System.DateTime)">
+	<summary>
+ Migrate datasets @ 6h and 18h from timeseriesprevisions to timeseriesprevisions_20XX
+ Special cases:
+ - Colmar (some datasets have to be saved at 0h,6h,12h,18h.
+ - Demo apps: any date.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.GribData.ParseGrib1(System.String)">
+	<summary>
+ GRIB1 PARSING
+ Usage example : http://sourceforge.net/p/gribcs/discussion/1311584/thread/3a6efd3b/
+ 
+ HIRLAM DECODING:
+ Rotation grib problem (unkwnown grid type 10): http://sourceforge.net/p/gribcs/discussion/1311584/thread/479eff7e/
+ STEPS:
+ 1. download gribcs code: http://sourceforge.net/p/gribcs/code/HEAD/tree/
+ 2. open it in visual studio 2013 (ignore the errors)
+ 3. Error when building JpcDecoder: Error 2 error RC1015: cannot open include file 'afxres.h'
+ 4. Solution: If your project doesn't use MFC you can safely replace afxres.h with windows.h in your terrain2.rc. (source: http://stackoverflow.com/questions/3566018/cannot-open-include-file-afxres-h-in-vc2010-express )
+ 5. Copy the type 1 case and add a type 10 with the same code.
+ 
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.GribData.ParseGrib2(System.String)">
+	<summary>
+ GRIB2 PARSING
+ Usage example : http://sourceforge.net/p/gribcs/discussion/1311584/thread/3a6efd3b/
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.GribData.WriteGrib2ResultsAsWgsEsriGridFile(FontoManager.Importers.GlobalModels.Parsers.GribElements.Grib2Result,System.String)">
+	<summary>
+ GRIB2 : Write results to ESRI GRID as Wgs coordinates.
+ </summary>
+</member><member name="T:FontoManager.Importers.GlobalModels.Parsers.GribData">
+	<summary>
+ For formats Grib1 and Grib2
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.RsData.FontoDsToDjdbDs.Export(System.UInt64)">
+	<summary>
+ Get data from the fonto database and transform it into a fonto dataset.
+ </summary>
+	<param name="dataset_SID"></param>
+</member><member name="M:FontoManager.Database.Meta_ModelGenerator.GetModelCodeFromDb(System.String,System.String)">
+	<summary>
+ Base model class generation, given the name of an existing table.
+ </summary>
+</member><member name="M:FontoManager.Database.Meta_ModelGenerator.GetDataTableWithQuery(System.String,System.String)">
+	<summary>
+ Gets the exhaustive DataTable object given a specified sql query.
+ </summary>
+</member><member name="M:FontoManager.Database.Meta_ModelGenerator.GetModelName(System.String)">
+	<summary>
+ This function mainly replaces underscore word separation by camelCase
+ </summary>
+</member><member name="M:FontoManager.Database.Meta_ModelGenerator.buildModelCodeFromDataTable(System.Data.DataTable)">
+	<summary>
+ Base model class generation, given the results in a dataTable object.
+ </summary>
+</member><member name="M:FontoManager.Database.Meta_ModelGenerator.GetPropertyStrings(System.Data.DataTable)">
+	<summary>
+ Property text generation for the base class, given the results in a dataTable object.
+ </summary>
+</member><member name="M:FontoManager.Database.Meta_ModelGenerator.GetInitializerString(System.Data.DataTable)">
+	<summary>
+ To build the New 
+ </summary>
+</member><member name="M:FontoManager.Impoters.RuntimeLogImporter.LogfileFinder.SkipDirectory(System.String)">
+	<summary>
+ Manages undesired directories
+ </summary>
+</member><member name="M:FontoManager.Impoters.RuntimeLogImporter.LogfileFinder.IsReplacedFolder(System.String)">
+	<summary>
+ Folders that have been replaced are identified by their name ending:
+ _yyyy.MM.dd_HH\hmm
+ </summary>
+</member><member name="M:FontoManager.SmsSender.SendSmsFromEdricRoutoAccount(System.String,System.String)">
+	<summary>
+ Send single sms from Routo system.
+ 
+ Details:
+ 
+ http://www.telesignmobile.com/
+ 
+ Your RoutoMessaging username is same for all interfaces: 1182222
+ (web) Command Center password: 6nz4x8kdm
+ (.net) password : s7kjt5rwx
+ 
+ </summary>
+</member><member name="T:FontoManager.Importers.Webcam.Main">
+	<summary>
+ Source:
+ 'http://www.codeproject.com/Articles/15537/Camera-Vision-video-surveillance-on-C
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Importers.Airports.Downloader.DownloadAllHours">
+	<summary>
+ Download from 00Z.TXT to 23Z.TXT from the NOAA ftp.
+ </summary>
+</member><member name="M:FontoManager.Importers.Airports.Downloader.GetOrCreateDownloadFolder(System.DateTime)">
+	<summary>
+ Format: basefolder\yyyy\MM\dd
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults.GetGfsVariableResults(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable)">
+	<summary>
+ Returns the stored results corresponding to a given GfsVariable.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults.GetSortedDates">
+	<summary>
+ Sorted list of stored dates.
+ </summary>
+</member><member name="T:FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults">
+	<summary>
+ Class to store and sort the info of the group of GFS downloaded files.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.TrmmData.ParseAllTrmmFilesInDirectory(System.String,FontoManager.Importers.GlobalModels.Exporters.EsriGrid.EsriGridHeader)">
+	<summary>
+ Parse all TRMM files in directory.
+ Directory must exclusivelly contain TRMM-type files.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.TrmmData.ConvertSingleTrmmFileToEsriGrid(System.String,System.String,FontoManager.Importers.GlobalModels.Exporters.EsriGrid.EsriGridHeader)">
+	<summary>
+ http://www.eol.ucar.edu/projects/name/documentation/3B42RT_README
+ </summary>
+</member><member name="P:FontoManager.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:FontoManager.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:FontoManager.My.Resources.Resources.airports">
+	<summary>
+  Looks up a localized string similar to "Airport ID","Name","City","Country","IATA/FAA","ICAO","Latitude","Longitude","Altitude","Timezone","DST","Tz database time zone"
+1,"Goroka","Goroka","Papua New Guinea","GKA","AYGA",-6.081689,145.391881,5282,10,"U","Pacific/Port_Moresby"
+2,"Madang","Madang","Papua New Guinea","MAG","AYMD",-5.207083,145.7887,20,10,"U","Pacific/Port_Moresby"
+3,"Mount Hagen","Mount Hagen","Papua New Guinea","HGU","AYMH",-5.826789,144.295861,5388,10,"U","Pacific/Port_Moresby"
+4,"Nadzab","Nadzab","Papua New Guinea","LAE","AYNZ", [rest of string was truncated]";.
+</summary>
+</member><member name="P:FontoManager.My.Resources.Resources.EmailTemplate">
+	<summary>
+  Looks up a localized string similar to &lt;html&gt;&lt;head&gt;
+	
+	&lt;title&gt;e-dric alerts&lt;/title&gt;
+	
+	&lt;meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type"&gt;
+	
+&lt;/head&gt;
+&lt;body marginheight="0" topmargin="0" marginwidth="0" leftmargin="0"&gt;
+
+&lt;table cellspacing="0" border="0" style="background: #f1f0e8;" cellpadding="0" width="100%"&gt;
+	
+	&lt;tbody&gt;&lt;tr&gt;
+		&lt;td&gt;
+			&lt;table cellspacing="0" bgcolor="#484845" width="100%" cellpadding="0"&gt;
+				&lt;tbody&gt;&lt;tr&gt;
+					&lt;td height="50" valign="top"&gt;
+						&lt;table cellspacing="0" align="center" width="600" [rest of string was truncated]";.
+</summary>
+</member><member name="T:FontoManager.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:FontoManager.UtilConst.FirstOrDefault(System.Collections.IEnumerable)">
+	<summary>
+ Any query that uses this function should contain "LIMIT 1" for time optimization.
+ </summary>
+</member><member name="M:FontoManager.UtilConst.InsertArrayElement``1(``0[]@,System.Int32,``0)">
+	<summary>
+ Insert element in the middle of an Array of any type
+ </summary>
+</member><member name="M:FontoManager.UtilConst.GetGlobalResourceManager">
+	<summary>
+ Gets the ResourceManager assuming that the Solution contains only one project, and GlobalVariables.vb is under this project.
+ </summary>
+</member><member name="M:FontoManager.UtilConst.GetResource(System.String)">
+	<summary>
+ Returns the resource specified by resourceName.
+ In order to add more resources: My Project =&gt; Resources =&gt; Files =&gt; Add Resources (or drag and drop)
+ </summary>
+	<param name="resourceName">This resource name must NOT contain the extention (.jpg, .txt, ...)</param>
+</member><member name="M:FontoManager.Importers.Airports.item.UpdateWindDirectionAndSpeed">
+	<summary>
+ From string of type "S (170 degrees) at 9 km/h" to direction and speed.
+ </summary>
+</member><member name="M:FontoManager.Importers.Airports.item.UpdateLatLon">
+	<summary>
+ From string of type "70-19N 149-35W" to Lat Lon.
+ </summary>
+</member><member name="T:FontoManager.Importers.GlobalModels.Parsers.GribElements.Grib2Parameter">
+	<summary>
+ Parameter Codes (PDS)
+ http://rda.ucar.edu/datasets/ds335.0/metadata/grib2.html
+ The following 156 parameters from NCEP GRIB2 Parameter Code Master Table 2/Local Table 1 are included in this dataset.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Importers.IndianData.CommonTools.ConvertMMMToMM(System.String)">
+	<summary>
+ Converts the 3 letter definition of month into the two number definition of month.
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.CommonTools.GetAllStateCodes">
+	<summary>
+ Returns all the state codes and their names.
+ </summary>
+</member><member name="T:FontoManager.Database.ITimeseries">
+	<summary>
+ Interface for models:
+ - Timeseriesprevision
+ - Timeseriesmeasure
+ </summary>
+</member><member name="T:FontoManager.GeoFunctions.Generic.EastingNorthingCH1904">
+	<summary>
+  Swiss CH1904 Coordinates.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.Djdb.GfsToDjdb.TransformGfsResultsToDjdb(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults,FontoManager.CoordinateTransformationEnum)">
+	<summary>
+ Converts files to DJDB Dataset format.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.Djdb.GfsToDjdb.GetXyzFromResults(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults)">
+	<summary>
+ Gets the XYZ of the GFS forecast.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.Djdb.GfsToDjdb.CreateDatasetWithEmptyStations(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults,FontoManager.CoordinateTransformationEnum)">
+	<summary>
+ Creates the stations of the datasets with their XYZ.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.Djdb.GfsToDjdb.AddSensorsToDataset(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults,DJDBEngine.DataSet)">
+	<summary>
+ Loops throught he results to find the sensors to be added to the empty stations.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Exporters.Djdb.GfsToDjdb.AddValuesToDataset(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsGroupedResults,DJDBEngine.DataSet)">
+	<summary>
+ Fills the sensors with the forecast values.
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Prevision.ParseValuesFromText(System.String[],System.String,System.DateTime)">
+	<summary>
+ Parses MeteoSuisse-type files, then export to SQL.
+ 
+  Data structure: 
+    [ station_index, [sensor_name,[date,value]] ]
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Prevision.TryAddStationAndSensorToDictionary(System.Int32,System.String,System.Collections.Generic.Dictionary{System.Int32,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.Single}}}@)">
+	<summary>
+ Add station and sensor to the dictionary, if needed (this usually happens only in the first iteration, ie: reading the fist data block)
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Prevision.RemoveDoubleSpaces(System.String)">
+	<summary>
+ Leave single spaces only.
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Prevision.GetCleanHeaderText(System.String)">
+	<summary>
+ Remove unwanted characters from the header line of the data block.
+ </summary>
+</member><member name="M:FontoManager.Importers.Meteosuisse.Prevision.GetDataBlockDate(System.String)">
+	<summary>
+ Extract the date from the header of the data block.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.ExportFilesForClient(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Main function of this module.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.DeletePreviousCustomFiles(System.String,System.String)">
+	<summary>
+ Some custom files tend to have a date inside the filename, which means that every day there is a new file.
+ We often want to delete those, so the list of files does not keep growing.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.UploadFileToExternalFTP(System.String,System.String,System.String,System.String,System.Boolean,System.Int32)">
+	<summary>
+ Uploads a single file to the ftp
+ </summary>
+	<param name="filepath">The filename of the source file to be uploaded</param>
+	<param name="ftpAdress">Example : "ftp://ftp.server.ch/destination_file.txt"</param>
+	<param name="user">ftp Username</param>
+	<param name="passwd">ftp Password</param>
+	<param name="keepAlive">if we don't want to close the connection right after the upload</param>
+	<param name="timeOut">Usually 10000</param>
+	<remarks></remarks>
+</member><member name="M:FontoManager.FileExporter.Manager.UploadFilesToExternalFtp(System.String[],System.String,System.String,System.String)">
+	<summary>
+ Once the CSV files have been generated in a local folder, this function crops them all and uploads to an external ftp.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.ExportCsvFilesToFolders(System.String[],System.String,FontoManager.Database.Models.rs_ui_db.Application,System.String[],System.UInt64[])">
+	<summary>
+ Gets the data info from the fonto db, formats it into csv, and writes the file in the e-dric ftp folder corresponding to siteName.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.GenerateDictionaryForCsv(System.Collections.Generic.Dictionary{System.DateTime,System.Single}[])">
+	<summary>
+ Align dates and values
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.TransformDictionaryToCsvText(System.Collections.Generic.Dictionary{System.DateTime,System.String[]},System.String[],System.String,System.String)">
+	<summary>
+ Transform the dictionary to text. Add header.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.GetHeaderFromDatasetTypes(FontoManager.Database.Models.rs_ui_db.DatasetType[])">
+	<summary>
+ Creates a header array from a datasetType array.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.CheckIfFoldersExistOrTryCreate(System.String[])">
+	<summary>
+ Checks the existence of the export folders. Tries to create them if they don't exist.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Manager.WriteExportedCsvAtLocalSharingFolders(System.String,System.String,System.String)">
+	<summary>
+ Write the csv file to e-dric's local folders (ftp and web) speciffic for this app, to be able to share the file with the client.
+ This here works only because srv-edric1 has de good credentials (user:edric) to access to de srv-datacenter shared folders.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.GfsDownloader.GetResultsFromFolder(System.String)">
+	<summary>
+ Given a folder filled with downloaded files, sorts them and puts them in memory.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.GfsDownloader.DownloadGfsRawForecast(System.String,FontoManager.IGfsRegion)">
+	<summary>
+ Gets the binary files of the GFS forecast from the web to a local folder.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.GfsDownloader.GetCurrentForecastDate">
+	<summary>
+ We check time to look wich model run we are interested in:
+ The forecasts are available about 4.5 hours after model run start. as we are UTC + 1 we download at 6, 12, 18, and 00
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.GfsDownloader.CheckIfForecastFileIsAvailable(System.DateTime,FontoManager.IGfsRegion)">
+	<summary>
+ check if the last file of the run is already available on the server (file at forecastHorizon):
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.GfsDownloader.BuildGfsFileName(System.DateTime,System.Int32,FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable)">
+	<summary>
+ Creates the filename of the downloaded GFS file.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.GfsDownloader.DecodeGfsFileName(System.String,System.DateTime@,System.Int32@,FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable@)">
+	<summary>
+ Given a Gfs file name, decodes the info. Needs to be coordinated with the function BuildGfsFileName().
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.GfsDownloader.GetGfsURL(System.DateTime,FontoManager.IGfsRegion,FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable,System.Int32)">
+	<summary>
+ Construct the web address according to the standard format.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Parsers.Helpers.FileSystem.CreateOrRecreateDirectory(System.String)">
+	<summary>
+ If the directory exists, deletes it. In any case: creates a new directory.
+ </summary>
+	<param name="directoryFullPath"></param>
+	<remarks></remarks>
+</member><member name="M:FontoManager.Importers.IndianData.CsvImporter.GetCsvFilePrefixByType(FontoManager.Importers.IndianData.CommonTools.ImdType)">
+	<summary>
+ ARG/AWS/RADIATION
+ (ARG-2012-01-01.csv / AWS-2012-01-01.csv / RADIATION-2012-01-01.csv)
+ </summary>
+</member><member name="M:FontoManager.Importers.IndianData.CsvImporter.GetDataFromCsvFile(System.String,FontoManager.Importers.IndianData.CommonTools.ImdType)">
+	<summary>
+ For a single imd type.
+ </summary>
+</member><member name="T:FontoManager.Importers.IndianData.CsvImporter">
+	<summary>
+ Found data from 2012 in archive.org
+ This parser is dedicated to import the data from this 2012 files.
+ </summary>
+</member><member name="M:FontoManager.Features.FirstAndLastDatasetDates.UpdateFirstAndLastDate(FontoManager.Features.FirstAndLastDatasetDates)">
+	<summary>
+ Updates the existing metaData info with new values.
+ </summary>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable.#ctor(System.String,System.String,System.Boolean)">
+	<param name="varname">variable name (must follow the specific gfs URL format)</param>
+	<param name="level">layer/level (~height). Must follow the specifig gfs URL format.</param>
+</member><member name="M:FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable.EqualTo(FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable)">
+	<summary>
+ Compare to GfsVariable.
+ </summary>
+</member><member name="T:FontoManager.Importers.GlobalModels.Downloaders.Elements.GfsUrlVariable">
+	<summary>
+ URL-specific pair of variable_name + atmospheric_level.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.Generic.CoordTransformation.GetBand(System.Double)">
+	<summary>
+ Get UTM band given an input latitude.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.Generic.CoordTransformation.GetZone(System.Double,System.Double)">
+	<summary>
+ Get the UTM zone given a lat-lon combination.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.Generic.CoordTransformation.WgsToUtm(System.Double,System.Double)">
+	<summary>
+ Convert lat-lon WGS84 to UTM coordinates.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.Generic.CoordTransformation.ConvertWgsDictionaryToUtmDictionary(System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.LatLonWgs,System.Double})">
+	<summary>
+ Convert the key of the dictonary from WGS point to UTM point.
+ </summary>
+</member><member name="M:FontoManager.GeoFunctions.Generic.CoordTransformation.ConvertWgsDictionaryToCh1904Dictionary(System.Collections.Generic.Dictionary{FontoManager.GeoFunctions.Generic.LatLonWgs,System.Double})">
+	<summary>
+ Convert the key of the dictonary from WGS point to CH1904 point.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.PrevCosmo7.Import">
+	<summary>
+ Exports the forecast from MeteoSuisse into the SOLAR database.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.PrevCosmo7.InsertDateValuesToSql(System.Collections.Generic.Dictionary{System.Int32,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.Single}}},System.String)">
+	<summary>
+ Once we have the values stocked and sorted in memory objects, we instert them to SQL as BLOB files.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.GetLastCreatedFileInFolder(System.String)">
+	<summary>
+ Gets the file with the highest modified date in a folder.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.ExtractZIP(System.String,System.String)">
+	<summary>
+ Extract from .zip
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.ExtractTGZ(System.String,System.String)">
+	<summary>
+ Extract from .tgz file.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.CreateTemporaryFolder(System.String)">
+	<summary>
+ Creates a temporary folder.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.DeleteFolder(System.String)">
+	<summary>
+ Tries to delete a folder.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.RenameDirectories(System.String)">
+	<summary>
+ We need to rename all of them for some reason (?)
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.CreateSqlScriptFromSchemaFile(System.String)">
+	<summary>
+ Opens the schema file that defines the structure of the DJDB dataset.
+ Then extracts the data corresponding to the stations (such as: name, x, y, z, code).
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.Helpers.GetFileCreationDateHistogramFromFolder(System.String)">
+	<summary>
+ (this should not be here, but bref)
+ Creates an histogram with every creationTime of all the files in a given folder.
+ </summary>
+</member><member name="M:FontoManager.Database.Models.rs_ui_db.Tsmeasure.GetDateLimitQuery(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+	<summary>
+ In case the query includes limits about the minimum and the maximum date
+ </summary>
+</member><member name="T:FontoManager.GeoFunctions.Generic.LatLonWgs">
+	<summary>
+ WGS84 coordinate type.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Aet.CustomExport(System.String)">
+	<summary>
+ Specific export routing for aet.
+ </summary>
+</member><member name="M:FontoManager.FileExporter.Clients.Aet.ModifyAetFiles(System.String[])">
+	<summary>
+ 
+ Demand on June the 6th 2014:
+ 
+ === 
+ 
+ C’est possible de recevoir votre résultat pas comme ça :
+ 
+ 2014.04.725 12:00:00,6.42382400978822
+ 2014.04.25 13:00:00,6.19448788517876
+ 2014.04.25 14:00:00,6.00327669177037
+ 
+ Mais comme ça ?
+ 
+ 2014.04.25 12:00:00; Airolo-Q simulé;6.42382400978822
+ 2014.04.25 13:00:00; Airolo-Q simulé;6.19448788517876
+ 2014.04.25 14:00:00; Airolo-Q simulé;6.00327669177037
+ 
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.CreateDummyAndTrendDatasets(System.String)">
+	<summary>
+ The persistence ("dummy") type, and the exponential ("trend") type.
+ I can also recreate the datasets for the past.
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.RecreatePersistenceCurveForASingleApp(System.String,System.DateTime,System.Int32)">
+	<summary>
+ The same as createLastestPersistenceCurveForASingleApp, but iterating through the past in order to recreate the database.
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.GetPersistenceEstimationSeries(System.Collections.Generic.Dictionary{System.DateTime,System.Single},System.DateTime,System.DateTime,System.Boolean,System.Boolean)">
+	<summary>
+ Persistence interpolation. Estimation of future data from previous measure points, assuming persistence.
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.GetExponentialEstimationSeries(System.Collections.Generic.Dictionary{System.DateTime,System.Single},System.DateTime,System.DateTime,System.Boolean,System.Int32,System.Double)">
+	<summary>
+ Exponential interpolation. Estimation of future data from previous measure points, assuming exponential distribution.
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.EstimatedExponentialValue(FontoManager.ExpExtrapCoeffs,System.DateTime,System.DateTime)">
+	<summary>
+ Calculates the estimated value y(x), given a set of coefficients of an exponential function.
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.ExponentialRegression(System.Collections.Generic.Dictionary{System.DateTime,System.Single},System.DateTime)">
+	<summary>
+ 	 * Find the exponential regression for a set of data points such that
+ y = Ar^x
+ @param array pairs a list of (x,y) data points
+ @returns array A, r
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.LinearRegression(System.Collections.Generic.Dictionary{System.Double,System.Double})">
+	<summary>
+ 	 Find the linear regression for a set of data points such that
+  y = mx + b
+  @param array pairs a list of (x,y) data points
+  @returns array m, b, and the coefficient of correlation:
+ {m, b, r}
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.get24hCycleValuesFromMeasure(System.Collections.Generic.Dictionary{System.DateTime,System.Single},System.DateTime,System.Boolean)">
+	<summary>
+ Gets the 24h cycle from the last 24 of the measure previous to first_date
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.InterpolateMissing24CyleValues(System.Double[]@)">
+	<summary>
+ Interpolates the missing values from the 24h cyle value vector.
+ The interpolation is linear between the following and the past valid value.
+ Note that, as it is cyclic, the closest valid value can be at the other extreme of the vector (index -1 = index 23)
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.linear(System.Double,System.Double,System.Double,System.Double,System.Double)">
+	<summary>
+ Calculates the linear interpolation between x0 and x1 for intermediary value x.
+ </summary>
+</member><member name="M:FontoManager.SingleCurve.ExtrapolationFunctions.PointOnCurve(System.Drawing.PointF,System.Drawing.PointF,System.Drawing.PointF,System.Drawing.PointF,System.Double)">
+	<summary>
+ Calculates interpolated point between two points using Catmull-Rom Spline
+ Source: http://tehc0dez.blogspot.ch/2010/04/nice-curves-catmullrom-spline-in-c.html
+ </summary>
+	<remarks>Points calculated exist on the spline between points two and three</remarks>
+	<param name="point1">First Point</param>
+	<param name="point2">Second Point</param>
+	<param name="point3">Third Point</param>
+	<param name="point4">Fourth Point</param>
+	<returns>
+ Calculated Spline Point/// </returns>
+</member><member name="M:FontoManager.Importers.Solar.MeasuresMeteoSuisse.Import">
+	<summary>
+ Exports the measure from MeteoSuisse (SDM) into the SOLAR database.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.MeasuresMeteoSuisse.GetSolarSensorNamesDictionary">
+	<summary>
+ We use different names in the Solar database.
+ </summary>
+</member><member name="M:FontoManager.Importers.Solar.MeasuresMeteoSuisse.InsertDateValuesToSql(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.DateTime,System.String}}},System.String)">
+	<summary>
+ Once we have the values stocked and sorted in memory objects, we instert them to SQL.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.SendAlarms(System.String)">
+	<summary>
+ Main function of this class.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.SendBothEmailsAndSms(System.String[],System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Application,System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Sensor,System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Dataset,System.Collections.Generic.Dictionary{System.DateTime,System.Single}}}})">
+	<summary>
+ Sends alarms (EMAIL + SMS) to all the users that have been specified through the command line.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.SendEmailToAllAdmins(FontoManager.Features.UserInfo,System.String,System.Collections.Generic.List{System.String})">
+	<summary>
+ Builds and sents the mail to all the specified admins users.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.CreateUnifiedAdminUserInfoAndRemoveAdminsFromUserList(System.Collections.Generic.List{FontoManager.Features.UserInfo}@)">
+	<summary>
+ Group all admins in a single "userInfo":
+ We will be sending all admin emails at the same time.
+ ('admin' analyzes all apps and it would take 1 minute for each admin user)
+ (the counterpart: 'admin' can only use the default parameters for timeSpan, alarmLevel and Dataset Visibility)
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.GetAdminsOnDutyInfoAsHtml(System.Collections.Generic.List{FontoManager.Features.UserInfo})">
+	<summary>
+ Builds the HTML text showing which admins are on duty.
+ This text is shown in the email for both clients and admins.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.formatAdminInfo(System.String,System.String)">
+	<summary>
+ Formats the admin info as HTML.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.CalculateAndSendAlarmsForThisUser(System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Application,System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Sensor,System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Dataset,System.Collections.Generic.Dictionary{System.DateTime,System.Single}}}},FontoManager.Features.UserInfo,System.Boolean,System.String,System.String)">
+	<summary>
+ Creates and sends the alarm EMAIL.
+ Also creates and sends the SMS alarm.
+ Also: returns the HTML text of the email.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.BuildUserComplentaryInfoAsHtml(FontoManager.Features.UserInfo,System.String)">
+	<summary>
+ Generates some html with basic infos such as the user name, the current time, the level at which the alarms are sent etc...
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.GetAppAlarmResultsForThisUser(FontoManager.Features.UserInfo,System.Collections.Generic.KeyValuePair{FontoManager.Database.Models.rs_ui_db.Application,System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Sensor,System.Collections.Generic.Dictionary{FontoManager.Database.Models.rs_ui_db.Dataset,System.Collections.Generic.Dictionary{System.DateTime,System.Single}}}})">
+	<summary>
+ calculates and formats the alarms alarms for this specific app, for this specific user.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.transformSerieTo24hSums(System.Single[])">
+	<summary>
+ For the rainfall: we create 24 sums of the value serie.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.GetDataFromAllApps">
+	<summary>
+ Calculates the alarms of all the apps, regardless of the user.
+ Doing that we improve the calculation time, since the e-dric Admin will anyway have an overview of all the apps, and the other clients will "use" a subset of this global overview.
+ </summary>
+</member><member name="M:FontoManager.AlarmManager.BuildEmailFromHtmlTemplate(System.String,System.String,System.String,System.String)">
+	<summary>
+ Formats the alarm infos and inserts them into this specific HTML EMAIL template (with all the CSS embedded etc).
+ </summary>
+</member>
+</members>
+</doc>

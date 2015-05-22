@@ -1,0 +1,395 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RSUI
+</name>
+</assembly>
+<members>
+<member name="M:RSUI.frmCalibrator.cropResults(RSEngine.Model@,System.Windows.Forms.TreeNode@)">
+	<summary>
+ Crops all 'results' in the model. Unlike cropStatistics(), it does not compute any operation.
+ </summary>
+	<param name="model"></param>
+	<param name="parentNode"></param>
+	<remarks></remarks>
+</member><member name="M:RSUI.frmCalibrator.cropParameters(RSEngine.Model@,System.Windows.Forms.TreeNode@)">
+	<summary>
+ Crops all the Parameters for all the objects in the model
+ </summary>
+	<param name="model"></param>
+	<param name="parentNode"></param>
+	<remarks></remarks>
+</member><member name="M:RSUI.frmCalibrator.cropInitialStates(RSEngine.Model@,System.Windows.Forms.TreeNode@)">
+	<summary>
+ Crop all initial states for all the objects in the model
+ </summary>
+	<param name="model"></param>
+	<param name="parentNode"></param>
+	<remarks></remarks>
+</member><member name="M:RSUI.frmCalibrator.cropStatisticsSimple(RSEngine.Model@,System.Windows.Forms.TreeNode@,RSUI.frmCalibrator.Operation)">
+	<summary>
+ Shows only the values (sum/average/maxDiff) of each Object.Results of the model
+ </summary>
+	<param name="model"></param>
+	<param name="parentNode"></param>
+	<param name="operation"></param>
+	<remarks></remarks>
+</member><member name="M:RSUI.frmCalibrator.cropStatistics(RSEngine.Model@,System.Windows.Forms.TreeNode@,RSUI.frmCalibrator.Operation)">
+	<summary>
+ Shows only the values (sum/average/maxDiff) of each Object.Results of the model.
+ Shows also the percentage of this value compared to the sum of all the same result types in the model.
+ </summary>
+	<param name="model"></param>
+	<param name="parentNode"></param>
+	<param name="operation"></param>
+	<remarks></remarks>
+</member><member name="T:RSUI.frmCalibrator.Operation">
+	<summary>
+ Operation types
+ </summary>
+	<remarks></remarks>
+</member><member name="P:RSUI.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources._New">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.A">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Access">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Back">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Background">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.BV1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.BVSep">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Calibrator">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Capteur">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Capteur2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Check">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Clock">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Clock_1_">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.close_document">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Condinit12">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.CondLimi3">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Copy">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.DataBase">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Delete">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.delete_cross">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Deversoir">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Deversoir2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Diviser">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.DJDBTrader">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.EditAsObject">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Engine">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Evaporation">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Fleche">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Glacier">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.GroupInterface">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.GroupInterfaceAval">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Jonction">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Jonction2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.logo">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Modele">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.mousticator">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Multiplier">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Open">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Open2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Paste">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Plot">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Pluie">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Pluie2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.PluieNeige">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Pompe">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Properties">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Reach">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.ReachKinematic">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.ReachMuskin">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Rechercher">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Regard">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Regulation">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Regule">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Reservoir">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Reservoir2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Save">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.SaveAs">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.SaveSub">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Source">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Source3">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Split">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Split2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.State">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.SubModel">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Sum">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Swmm">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.TimeSerie">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.TimeSerie2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.TimeSerieST">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.ToolBox">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Transition">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.TurbineDB">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.TurbineMW">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Tuyau">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.TuyauDiffusif">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Up">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Update">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Update12">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Update3">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Zone">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.Zone3">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:RSUI.My.Resources.Resources.ZoomExtend">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:RSUI.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

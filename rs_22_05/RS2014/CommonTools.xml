@@ -1,0 +1,133 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+CommonTools
+</name>
+</assembly>
+<members>
+<member name="M:CommonTools.SqlUtils.readAllPilotVariables(System.String,System.String)">
+	<returns>A list of string() = {var_name, var_value}. var_name can be repeated multiple times.</returns>
+</member><member name="P:CommonTools.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.Copy">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.down">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.hand">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.MapPanel">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.settings">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.zoom_in">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:CommonTools.My.Resources.Resources.zoom_preview">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:CommonTools.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:CommonTools.GeoFunction.CH2WGS(System.Single@,System.Single@)">
+	<summary>
+ USAGE:
+ 
+ Dim lng As single = sta.X
+ Dim lat As single = sta.Y
+ CommonTools.GeoFunction.CH2WGS(lng, lat) 
+ 
+ </summary>
+	<param name="_x"></param>
+	<param name="_y"></param>
+	<remarks></remarks>
+</member><member name="M:CommonTools.frmShapeGraph.#ctor(System.DateTime[],System.Single[],System.String,System.String)">
+	<summary>
+ New for a single graph
+ </summary>
+	<param name="_X"></param>
+	<param name="_Y"></param>
+	<param name="_description"></param>
+	<param name="_units"></param>
+	<remarks></remarks>
+</member><member name="M:CommonTools.frmShapeGraph.#ctor(System.Collections.Generic.List{System.DateTime[]},System.Collections.Generic.List{System.Single[]},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.Drawing.Color})">
+	<summary>
+ New for multiple graphs
+ </summary>
+	<param name="_Xs"></param>
+	<param name="_Ys"></param>
+	<param name="_descriptions"></param>
+	<param name="_units"></param>
+	<param name="_colors"></param>
+	<remarks></remarks>
+</member><member name="M:CommonTools.TextTools.matchLists(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+	<summary>
+ Given list1 as original list, and list2 as a list of possible matches, returns a resultList that contains the correspondences of list1 in list2 (sorted as they are in list1)
+ </summary>
+	<param name="list1">Original list</param>
+	<param name="list2">List of possible matches</param>
+	<returns>List of strings from list2 that matches best with list1</returns>
+	<remarks></remarks>
+</member><member name="M:CommonTools.TextTools.unmatchedList(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String})">
+	<summary>
+ Retuns all the items in "list1" that are not contained in "list2"
+ </summary>
+	<param name="list1"></param>
+	<param name="list2"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:CommonTools.ExportUtils.uploadFileToFTP(System.String,System.String,System.String,System.String,System.Boolean,System.Int32)">
+	<summary>
+ Uploads a single file to the ftp
+ </summary>
+	<param name="filepath">The filename of the source file to be uploaded</param>
+	<param name="ftpAdress">Example : "ftp://ftp.server.ch/destination_file.txt"</param>
+	<param name="user">ftp Username</param>
+	<param name="passwd">ftp Password</param>
+	<param name="keepAlive">if we don't want to close the connection right after the upload</param>
+	<param name="timeOut">Usually 10000</param>
+	<remarks></remarks>
+</member><member name="M:CommonTools.ExportUtils.copyFilesFolder2Folder(System.String,System.String)">
+	<summary>
+ Copies all files in sourceFolder and pastes them in destinationFolder
+ </summary>
+	<param name="sourceFolder"></param>
+	<param name="destinationFolder"></param>
+	<remarks></remarks>
+</member><member name="M:CommonTools.ExportUtils.deleteFilesInFolder(System.String,System.String)">
+	<summary>
+ Remove all files in folderToClean provided they fit the filter pattern.
+ </summary>
+	<param name="folderToClean"></param>
+	<param name="filter">Defines the file type to be deleted. Examples: "*.*", "*.txt".</param>
+	<remarks></remarks>
+</member><member name="M:CommonTools.ExportUtils.zipFilesFromDirectory(System.String,System.String)">
+	<summary>
+ Groups all files in directoryToCompress into a zip file.
+ </summary>
+	<param name="directoryToCompress"></param>
+	<param name="destinationZipFileName"></param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

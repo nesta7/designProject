@@ -1,0 +1,8 @@
+2015-05-21 13:41:33,839 [1] ERROR FontoManager.Logger - 
+cmd="execType" "Update" "appName" "demoustication" "groups" "RESULTS" "dataset" "Simulation de contrôle new" "file" "X:\Apps\demoustication\BD RESULTS\RESULTS\Simulation de contrôle new.single" "first_date" "15.05.2015 00:00:00" "last_date" "20.05.2015 00:00:00" "update_date" "21.05.2015 13:41:29"
+dbInfo=[srv:'srv-datacenter',db='rs_ui_db']
+error=System.Exception: The dataset 'Simulation de contrôle new' (group 'RESULTS') is not present in datasettype.
+   at FontoManager.DatasetInsertionManager.GetOrCreateDatasetFromDb(String datasetPrefix) in D:\development\DatabaseManager\DatabaseManager\Functions\RsData\DatasetInsertionManager.vb:line 49
+   at FontoManager.DatasetInsertionManager.ExportDjdbDataset() in D:\development\DatabaseManager\DatabaseManager\Functions\RsData\DatasetInsertionManager.vb:line 14
+   at FontoManager.MainModule.ProcessExecution(String execType) in D:\development\DatabaseManager\DatabaseManager\MainModule.vb:line 105
+   at FontoManager.MainModule.Launch(String cmd) in D:\development\DatabaseManager\DatabaseManager\MainModule.vb:line 53

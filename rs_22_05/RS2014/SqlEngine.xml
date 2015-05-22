@@ -1,0 +1,40 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+SqlEngine
+</name>
+</assembly>
+<members>
+<member name="M:SqlEngine.cBase_DBObj.deleteMultipleMySqlIds(System.String[],System.String)">
+	<summary>
+ Speeds up the delete process by blocks of id's deleted at the sasme time.
+ </summary>
+	<param name="idArray"></param>
+	<param name="sConnStr"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="T:SqlEngine.Models.PipeType">
+	<summary>
+ Options:
+ - input
+ - output
+ - result
+ </summary>
+	<remarks></remarks>
+</member><member name="P:SqlEngine.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:SqlEngine.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:SqlEngine.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

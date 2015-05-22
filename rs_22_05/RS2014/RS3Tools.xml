@@ -1,0 +1,86 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RS3Tools
+</name>
+</assembly>
+<members>
+<member name="P:RS3Tools.Simulation.simulationConfig.hoursToKeepInPast">
+	<summary>
+  For DatasetTypes: "simulation de controle", "simulation avec mise à jour", etc... // if lenthInHours != -1 : When writing the dataset, write only dates with time greater than lastDate.AddHours(-lengthInHours)
+ </summary>
+</member><member name="M:RS3Tools.Simulation.correctGiansLackOfDatabase(System.String,System.String)">
+	<summary>
+ Created by Xavi just after Gian's departure (29.09.2013).
+ Gian's reader of the pilot from SQL breaks because the separated input database for each stuff is empty,
+ so I am creating this function to replace empty databases and setting the default input database instead.
+ </summary>
+</member><member name="M:RS3Tools.AlarmAnalyst.repairConfig">
+	<summary>
+ This function is built to programatically modify the config.
+ </summary>
+	<remarks></remarks>
+</member><member name="P:RS3Tools.alarmDataSet.id">
+	<summary>
+ DataSet Identifier. Makes the link between with the results stored in currentValues and previousAlarmStates
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:RS3Tools.alarmValues.insertValue(System.Int32,System.Single)">
+	<summary>
+ Insterts the value in the corresponding dataSet position (identified by dsId)
+ </summary>
+	<param name="dsId"></param>
+	<param name="value"></param>
+	<remarks></remarks>
+</member><member name="P:RS3Tools.alarmSensor.alarmThresholds">
+	<summary>
+ N thresholds -&gt; N+1 responses.
+ If currentVale is smaller than thresholds(0), the result is responses(0).
+ If currentValue is bigger than thresholds(i), the result is (i+1).
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:RS3Tools.UniversalAnalyst.AnalyseLEPS(System.Int32,System.Boolean)">
+	<summary>
+ Calcul des quantiles à partir des scénarios calculés, tous sauvés dans le même groupe. SEASONAL et LEPS.
+ </summary>
+	<param name="timesperday"></param>
+	<param name="isReanalyst"></param> permet le calcul en boucle de l'analyse dans plusieurs groupes différents
+ <returns></returns>
+	<remarks></remarks>
+</member><member name="T:RS3Tools.JaggedComparer">
+	<summary>
+ To order "listOfSensors".
+ </summary>
+	<remarks></remarks>
+</member><member name="M:RS3Tools.RNF.WriteRNFDataFile">
+	<summary>
+ Ecriture du ficher "entrees.properties" de RNF qui contient les données pour une simulation
+ </summary>
+	<remarks></remarks>
+</member><member name="P:RS3Tools.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:RS3Tools.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:RS3Tools.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="M:RS3Tools.UniversalSimulator.SimulateSeasonalAnalysis(RS3Tools.Simulation.simulationConfig)">
+	<summary>
+ C'est le pilote pour faire les re-analyses des prévisions saisonnières, sans faire 20 x 12 config différentes. 1 seule config suffit.
+ </summary>
+	<param name="simulationConfig"></param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>
