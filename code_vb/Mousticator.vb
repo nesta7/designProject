@@ -5,13 +5,10 @@ Public Class Mousticator
 
     Inherits HydroObject
 
-    'Private mz As Single = 677.0F
     Private mStadeLarvaireIni As Single = 1.0F, mStadeLarvaire As Single = 1.0F
-    Private mDaysFromLastEclosionIni As Single = 0, mDaysFromLastEclosion As Single = 0
+    Private mAutoriseDevIni As Single = 1, mAutoriseDev As Single = 1
     Private mDaysWithoutWaterIni As Single = 0, mDaysWithoutWater As Single = 0
-    Private mFunctionResults(2) As Single
     Private mNumberOfStepsPerDay As Single = 0
-    'Ajouté pour la matrice du modèle ?
     Private Model(4, 4) As Single
 
     'VARIABLES PARAMETERS INPUTS/OUTPUTS/RESULTS
@@ -19,20 +16,20 @@ Public Class Mousticator
     Private __TUp As String = "T"
     Private __Level As String = "Level"
     Private __StadeLarvaire As String = "StadeLarvaire"
-    Private __DaysFromLastEclosion As String = "DaysFromLastEclosion"
+    Private __AutoriseDev As String = "AutoriseDev"
     Private __DaysWithoutWater As String = "DaysWithoutWater"
 
     'PARAMETERS
     Private __z_parameter As Integer = 0
     Private __stadelarvaire_parameter As Integer = 1
-    Private __DaysFromLastEclosion_parameter As Integer = 2
+    Private __AutoriseDev_parameter As Integer = 2
     Private __DaysWithoutWater_parameter As Integer = 3
 
     'INPUT/OUTPUT/RESULT
     Private __TUp_input As Integer = 0
     Private __Level_input As Integer = 1
     Private __StadeLarvaire_result As Integer = 0
-    Private __DaysFromLastEclosion_result As Integer = 1
+    Private __AutoriseDev_result As Integer = 1
     Private __DaysWithoutWater_result As Integer = 2
 
     Public Sub New()
@@ -53,7 +50,7 @@ Public Class Mousticator
         MyBase.Parameters.Add(P)
         P = Nothing
         '2
-        P = New Parameter(ParameterTypeEnum.NotDefined, __DaysFromLastEclosion, "(-)")
+        P = New Parameter(ParameterTypeEnum.NotDefined, __AutoriseDev, "(-)")
         P.ParamValue = 0.0F
         MyBase.Parameters.Add(P)
         P = Nothing
@@ -82,7 +79,7 @@ Public Class Mousticator
         '0
         MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __StadeLarvaire, "(-)")))
         '1
-        MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __DaysFromLastEclosion, "(-)")))
+        MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __AutoriseDev, "(-)")))
         '2
         MyBase.Results.Add(New Result(New Parameter(ParameterTypeEnum.NotDefined, __DaysWithoutWater, "(-)")))
 
@@ -93,7 +90,7 @@ Public Class Mousticator
         Get
             Return CSng(MyBase.Parameters(__z_parameter).ParamValue)
         End Get
-        Set(value As Single)
+        Set(ByVal value As Single)
             MyBase.Parameters(__z_parameter).ParamValue = value
         End Set
     End Property
@@ -102,26 +99,27 @@ Public Class Mousticator
         Get
             Return CSng(MyBase.Parameters(__stadelarvaire_parameter).ParamValue)
         End Get
-        Set(value As Single)
+        Set(ByVal value As Single)
             MyBase.Parameters(__stadelarvaire_parameter).ParamValue = value
         End Set
     End Property
 
-    Public Property DaysFromLastEclosion As Integer
+    Public Property AutoriseDev As Integer
         Get
-            Return CInt(MyBase.Parameters(__DaysFromLastEclosion_parameter).ParamValue)
+            Return CInt(MyBase.Parameters(__AutoriseDev_parameter).ParamValue)
         End Get
-        Set(value As Integer)
-            MyBase.Parameters(__DaysFromLastEclosion_parameter).ParamValue = value
+        Set(ByVal value As Integer)
+            MyBase.Parameters(__AutoriseDev_parameter).ParamValue = value
         End Set
     End Property
 
     Public Overrides Sub PrepareComputation()
 
+        'Calcul du nombre d'exécution par jour du modèle
         mNumberOfStepsPerDay = 86400.0F / CType(Application.Solver, SolverEuler1).dt
 
         mStadeLarvaire = mStadeLarvaireIni
-        mDaysFromLastEclosion = mDaysFromLastEclosionIni
+        mAutoriseDev = mAutoriseDevIni
         mDaysWithoutWater = mDaysWithoutWaterIni
 
         'Row 0 : temperature associée
@@ -136,51 +134,52 @@ Public Class Mousticator
 
     Public Overrides Sub ComputeOutput()
 
-        'Evaluation du niveau et de la submersion
+        'import du niveau de l'eau et de la température
         Dim _Level As Single = CSng(MyBase.Inputs(__Level_input).Value)
         Dim _T As Single = CSng(MyBase.Inputs(__TUp_input).Value)
-
+        'declaration de la variable contenant les resultats de la fonction CalculateStadeLarvaire
         Dim mStadeLarvaireResult() As Single
-        If _Level >= Me.z Then
 
-            mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mDaysFromLastEclosion)
-            mStadeLarvaire = mStadeLarvaireResult(0)
-            mDaysFromLastEclosion = mStadeLarvaireResult(1)
+        If _Level >= Me.z Then
+            If mAutoriseDev = 1 Then
+                'Lorsqu'une inondation a lieu et si le développement est autorisé (càd, si le terrain a été 
+                'à sec pendant au moins 15 jours), on lance le calcul de développement larvaire
+                mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mAutoriseDev)
+                mStadeLarvaire = mStadeLarvaireResult(0)
+                mAutoriseDev = mStadeLarvaireResult(1)
+            End If
+            'puisqu'il y a inondation, le nombre de jours sans eau est remis à 0
             mDaysWithoutWater = 0
         Else
-            'Si les larves sont privées d'eau, elles survivent quand meme quelques jours (on choisit 5 jours, pour etre du coté de la sécurité...) mais après, elles meurent.
-
-            'Au début de l'utilisation du programme, certaines zones ne seront pas inondées. 
-            'Ce n'est pas pour autant qu'il faut autoriser un développement pendant les 5 
-            'premiers jours. => IDEE)donner a mDaysWithoutWater la valeur -1 comme valeur par 
-            'defaut. Cette(valeur)n'aura plus jamais lieu une fois que le polygone évalué aura 
-            'été inondé au moins une fois.
-            If mDaysWithoutWater <> -1.0F Then
-                mDaysWithoutWater += 1.0F / mNumberOfStepsPerDay
-
-                If mDaysWithoutWater < 5.0F Then
-                    mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mDaysFromLastEclosion)
+            'si le terrain est à sec, on incrémente la variable donnant le nombre de jours à sec
+            mDaysWithoutWater += 1.0F / mNumberOfStepsPerDay
+            If mDaysWithoutWater < 5.0F Then
+                If autoriseDev = 1 Then
+                    'Si les larves sont privées d'eau, elles survivent quand meme quelques jours 
+                    '(on choisit 5 jours, pour etre du coté de la sécurité...).
+                    mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mAutoriseDev)
                     mStadeLarvaire = mStadeLarvaireResult(0)
-                    mDaysFromLastEclosion = mStadeLarvaireResult(1)
-                Else
-                    mStadeLarvaire = 0.0F
-                    mDaysFromLastEclosion += 1.0F / mNumberOfStepsPerDay
+                    mAutoriseDev = mStadeLarvaireResult(1)
                 End If
+            ElseIf mDaysWithoutWater < 15.0F Then
+                'Après ces 5 jours, les larves meurent
+                mAutoriseDev = 0
+                mStadeLarvaire = 0
             Else
-                mStadeLarvaire = 0.0F
-                mDaysFromLastEclosion += 1.0F / mNumberOfStepsPerDay
+                'lorsque le terrain a été pendant au moins 15 jours à sec, un nouveau développement
+                'larvaire pourra avoir lieu lors de la prochaine inondation
+                mAutoriseDev = 1
             End If
         End If
 
         MyBase.IntegralCount += 1
         MyBase.IntegralOutputs(__StadeLarvaire_result) = mStadeLarvaire * MyBase.IntegralCount
-        MyBase.IntegralOutputs(__DaysFromLastEclosion_result) = mDaysFromLastEclosion * MyBase.IntegralCount
+        MyBase.IntegralOutputs(__AutoriseDev_result) = mAutoriseDev * MyBase.IntegralCount
         MyBase.IntegralOutputs(__DaysWithoutWater_result) = mDaysWithoutWater * MyBase.IntegralCount
 
     End Sub
 
-    'MAX: T représente la température de la veille
-    Function CalculateStadeLarvaire(ByVal stadeLarvaire As Single, ByVal T As Single, ByVal daysFromLastEclosion As Single) As Single()
+    Function CalculateStadeLarvaire(ByVal stadeLarvaire As Single, ByVal T As Single, ByVal autoriseDev As Single) As Single()
 
         'Declaration des variables de sortie
         Dim result As Single()
@@ -188,89 +187,66 @@ Public Class Mousticator
         Dim state_today As Integer = CInt(Math.Truncate(stadeLarvaire))
         Dim percentage_today As Single = stadeLarvaire - state_today
 
-        'catégories de temperature
-        'Dim temp() As Single = {15.0F, 20.0F, 25.0F, 30.0F, 35.0F}
-
-        'Durée stades vexans (établi à l'aide du code matlab "adaptation_albopictus_vexans.m")
-        'Dim L1() As Single = {3.4F, 2.4F, 1.5F, 0.9F, 0.7F}
-        'Dim L2() As Single = {2.0F, 1.1F, 0.9F, 0.9F, 0.5F}
-        'Dim L3() As Single = {2.8F, 1.7F, 0.9F, 0.9F, 1.0F}
-        'Dim L4() As Single = {8.1F, 3.3F, 2.4F, 2.0F, 3.0F}
-
-        'Durée stades albopictus
-        'Dim L1() As Double = {5.6, 3.0, 2.1, 1.4, 1.7}
-        'Dim L2() As Double = {3.3, 1.4, 1.2, 1.3, 1.2}
-        'Dim L3() As Double = {4.6, 2.1, 1.2, 1.4, 2.4}
-        'Dim L4() As Double = {13.4, 4.1, 3.3, 3.0, 6.8}
-
-
         Dim noCol As Integer = 4
-        'Dim Model(4, noCol) As Single
-
-        'For i = 0 To noCol
-        '    Model(0, i) = temp(i)
-        '    Model(1, i) = L1(i)
-        '    Model(2, i) = L2(i)
-        '    Model(3, i) = L3(i)
-        '    Model(4, i) = L4(i)
-        'Next
 
         Dim i As Integer
 
-        Dim percentage_incr As Single 'MAX: cette variable montre l'augmentation du pourcentage de la maturation de l'état qui avait lieu entre hier et aujourd'hui
-        Dim time_new_state As Single 'MAX: dans le cas où un changement d'état a lieu entre hier et aujourd'hui, cette variable indique le temps qui s'est écoulé depuis que ce nouvel état a lieu.
+        'percentage_incr montre l'augmentation du pourcentage de la maturation de l'état qui avait 
+        'lieu entre hier et aujourd'hui
+        Dim percentage_incr As Single
 
-
+        'dans le cas où un changement d'état a lieu entre hier et aujourd'hui, time_new_state indique 
+        'le temps qui s'est écoulé depuis que ce nouvel état a lieu.
+        Dim time_new_state As Single
 
         If T < Model(0, 0) Or T > Model(0, noCol) Then
-            'Console.WriteLine("Temperature " & T & "°C out of range [ " & Model(0, 0) & ":" & Model(0, noCol) & " ]")
+            If stadeLarvaire <> 0.0F Then
+                'les larves meurent (si elles existent) lorsque la température se trouve en dehors des limites 
+                'du modèle de développement larvaire.
+                autoriseDev = 0
+                stadeLarvaire = 0
+            End If
         Else
-
             For i = 0 To noCol - 1
                 If T >= Model(0, i) And T < Model(0, i + 1) Then
-                    'Compute a linear estimation of the require number of days to grow up
-                    'then compute the actual proportion of growth since the simulation is at a daily scale
-                    If state_today <> 0 Then
-                        percentage_incr = CSng(1.0F / mNumberOfStepsPerDay / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i))))
-                        If percentage_incr + percentage_today >= 1.0F Then
-                            If state_today = 4 Then
-                                time_new_state = 0
-                                state_today = 0
-                                percentage_today = 0
-                            Else
-                                time_new_state = (percentage_incr + percentage_today - 1) / percentage_incr
-                                state_today += 1 ' this one gets out of range
-                                percentage_today = time_new_state / mNumberOfStepsPerDay / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
-                                'If percentage_today >= 1.0F Then
-                                '    Dim break As Integer = 0
-                                '    While break = 0
-                                '        state_today = state_today + 1
-                                '        time_new_state = (percentage_today - 1) * (1 / percentage_today)
-                                '        percentage_today = time_new_state / mNumberOfStepsPerDay / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
-                                '        If percentage_today < 1.0F Then
-                                '            break = 1
-                                '        End If
-                                '    End While
-                                'End If
-                            End If
-                        Else
+                    'percentage_incr est calculé de la manière suivante: on détermine par une interpolation 
+                    'linéaire le nombre de jours nécessaires pour que le stade en cours soit complété. 
+                    'Ensuite, on divise le pas de temps d'exécution du modèle par ce résultat pour obtenir 
+                    'l'incrément de pourcentage d'accomplissement de ce stade lors de l'exécution en cours.
+                    percentage_incr = CSng(1.0F / mNumberOfStepsPerDay / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i))))
+
+
+                    If percentage_incr + percentage_today >= 1.0F Then
+                        'lorsque le pourcentage d'accomplissement dépasse 1, cela signifie qu'un nouveau stade
+                        'larvaire a été atteint.
+                        If state_today = 4 Then
+                            'Si le dernier stade vient d'etre complété, cela signifie que les larves ont atteint
+                            'le stade adulte. Il faudra 15 jours d'assèchement pour qu'un nouveau développement
+                            'débute.
                             time_new_state = 0
-                            percentage_today += percentage_incr
+                            state_today = 0
+                            percentage_today = 0
+                            autoriseDev = 0
+                        Else
+                            'calcul du temps de développement dans le nouveau stade (en vue de calculer le 
+                            'pourcentage de maturation du nouveau stade)
+                            time_new_state = (percentage_incr + percentage_today - 1) / percentage_incr
+                            'incrément de state_today pour atteindre le nouveau stade
+                            state_today += 1
+                            'calcul du pourcentage de la maturation du nouveau stade
+                            percentage_today = time_new_state / mNumberOfStepsPerDay / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i)))
                         End If
                     Else
-                        If daysFromLastEclosion >= 15.0F Then
-                            state_today = 1
-                            percentage_today = CSng(1.0F / mNumberOfStepsPerDay / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i))))
-                            daysFromLastEclosion = 0
-                        End If
+                        'lorsque le pourcentage d'accomplissement ne dépasse pas 1, cela signifie qu'on
+                        'ne change pas de stade larvaire. Il y a uniquement une augmentation de la
+                        'variable percentage_today
+                        percentage_today += percentage_incr
                     End If
                 End If
             Next
         End If
-
-        daysFromLastEclosion += 1.0F / mNumberOfStepsPerDay
         result(0) = state_today + percentage_today
-        result(1) = daysFromLastEclosion
+        result(1) = autoriseDev
 
         Return result
 
@@ -287,11 +263,11 @@ Public Class Mousticator
     Public Overrides Sub SaveFirstStep()
 
         MyBase.Results(__StadeLarvaire_result).Add(mStadeLarvaireIni)
-        MyBase.Results(__DaysFromLastEclosion_result).Add(mDaysFromLastEclosionIni)
+        MyBase.Results(__AutoriseDev_result).Add(mAutoriseDevIni)
         MyBase.Results(__DaysWithoutWater_result).Add(mDaysWithoutWaterIni)
 
         MyBase.IntegralOutputs(__StadeLarvaire_result) = 0
-        MyBase.IntegralOutputs(__DaysFromLastEclosion_result) = 0
+        MyBase.IntegralOutputs(__AutoriseDev_result) = 0
         MyBase.IntegralOutputs(__DaysWithoutWater_result) = 0
         MyBase.IntegralCount = 0
     End Sub
@@ -300,7 +276,7 @@ Public Class Mousticator
         Get
             Dim L As New List(Of Single)
             L.Add(CSng(Me.Parameters(__stadelarvaire_parameter).ParamValue))
-            L.Add(CSng(Me.Parameters(__DaysFromLastEclosion_parameter).ParamValue))
+            L.Add(CSng(Me.Parameters(__AutoriseDev_parameter).ParamValue))
             L.Add(CSng(Me.Parameters(__DaysWithoutWater_parameter).ParamValue))
             Return L
         End Get
@@ -308,20 +284,20 @@ Public Class Mousticator
 
     Public Overrides Sub DefaultStart(ByVal Coeff As Single)
         mStadeLarvaireIni = CSng(Me.Parameters(__stadelarvaire_parameter).ParamValue)
-        mDaysFromLastEclosionIni = CInt(Me.Parameters(__DaysFromLastEclosion_parameter).ParamValue)
+        mAutoriseDevIni = CInt(Me.Parameters(__AutoriseDev_parameter).ParamValue)
         mDaysWithoutWaterIni = CInt(Me.Parameters(__DaysWithoutWater_parameter).ParamValue)
     End Sub
 
     Public Overrides Sub SetStateParameters()
         Me.Parameters(__stadelarvaire_parameter).ParamValue = mStadeLarvaireIni
-        Me.Parameters(__DaysFromLastEclosion_parameter).ParamValue = mDaysFromLastEclosionIni
+        Me.Parameters(__AutoriseDev_parameter).ParamValue = mAutoriseDevIni
         Me.Parameters(__DaysWithoutWater_parameter).ParamValue = mDaysWithoutWaterIni
     End Sub
 
     Public Overrides Sub Hotstart(ByVal index As Integer, ByVal Coeff As Single, Optional ByVal UpdateRange As Single = 1000)
         'Débit initial constant dans le tronçon
         If Results(__StadeLarvaire_result).X.Length >= index + 1 Then mStadeLarvaireIni = Results(__StadeLarvaire_result).X(index)
-        If Results(__DaysFromLastEclosion_result).X.Length >= index + 1 Then mDaysFromLastEclosionIni = CInt(Results(__DaysFromLastEclosion_result).X(index))
+        If Results(__AutoriseDev_result).X.Length >= index + 1 Then mAutoriseDevIni = CInt(Results(__AutoriseDev_result).X(index))
         If Results(__DaysWithoutWater_result).X.Length >= index + 1 Then mDaysWithoutWaterIni = CInt(Results(__DaysWithoutWater_result).X(index))
     End Sub
 
