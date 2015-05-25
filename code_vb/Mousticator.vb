@@ -153,7 +153,7 @@ Public Class Mousticator
         Else
             'si le terrain est à sec, on incrémente la variable donnant le nombre de jours à sec
             mDaysWithoutWater += 1.0F / mNumberOfStepsPerDay
-            If mDaysWithoutWater < 5.0F Then
+            If mDaysWithoutWater <= 3.0F Then
                 If autoriseDev = 1 Then
                     'Si les larves sont privées d'eau, elles survivent quand meme quelques jours 
                     '(on choisit 5 jours, pour etre du coté de la sécurité...).
