@@ -6,9 +6,9 @@ Public Class Mousticator
     Inherits HydroObject
 
     Private mStadeLarvaireIni As Single = 1.0F, mStadeLarvaire As Single = 1.0F
-    Private mAutoriseDevIni As Single = 1, mAutoriseDev As Single = 1
-    Private mDaysWithoutWaterIni As Single = 0, mDaysWithoutWater As Single = 0
-    Private mNumberOfStepsPerDay As Single = 0
+    Private mAutoriseDevIni As Short = 1, mAutoriseDev As Short = 1
+    Private mDaysWithoutWaterIni As Single = 0.0F, mDaysWithoutWater As Single = 0.0F
+    Private mNumberOfStepsPerDay As Single = 0.0F
     Private Model(4, 4) As Single
 
     'VARIABLES PARAMETERS INPUTS/OUTPUTS/RESULTS
@@ -123,7 +123,7 @@ Public Class Mousticator
         mDaysWithoutWater = mDaysWithoutWaterIni
 
         'Row 0 : temperature associée
-        'Row 1-4 : durée [jour] des stades L1 à L4
+        'Row 1-4 : durée [jours] des stades L1 à L4
         Model = {{15.0F, 20.0F, 25.0F, 30.0F, 35.0F}, _
                 {3.4F, 2.4F, 1.5F, 0.9F, 0.7F}, _
                 {2.0F, 1.1F, 0.9F, 0.9F, 0.5F}, _
