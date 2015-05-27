@@ -19,11 +19,6 @@ days_tot_per_temp_albo=sum(days_per_temp_and_state_albo');
 
 days_tot_per_temp_vex=[21.5 11.75 7.75 6 6];
 
-figure(1)
-plot(temperatures, days_tot_per_temp_albo);
-hold on
-plot(temperatures, days_tot_per_temp_vex);
-
 prop_factor=(days_tot_per_temp_vex./days_tot_per_temp_albo)';
 
 days_per_temp_and_state_vex=days_per_temp_and_state_albo.*prop_factor
