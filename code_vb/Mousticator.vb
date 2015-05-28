@@ -115,7 +115,7 @@ Public Class Mousticator
 
     Public Overrides Sub PrepareComputation()
 
-        'Calcul du nombre d'exécution par jour du modèle
+        'Calcul du nombre d'exécutions par jour du modèle
         mNumberOfStepsPerDay = 86400.0F / CType(Application.Solver, SolverEuler1).dt
 
         mStadeLarvaire = mStadeLarvaireIni
@@ -142,6 +142,10 @@ Public Class Mousticator
 
         If _Level >= Me.z Then
             If mAutoriseDev = 1 Then
+                If mStadeLarvaire = 0 Then
+                    mStadeLarvaire = 1
+                End If
+
                 'Lorsqu'une inondation a lieu et si le développement est autorisé (càd, si le terrain a été 
                 'à sec pendant au moins 15 jours), on lance le calcul de développement larvaire
                 mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mAutoriseDev)
@@ -156,13 +160,13 @@ Public Class Mousticator
             If mDaysWithoutWater <= 3.0F Then
                 If autoriseDev = 1 Then
                     'Si les larves sont privées d'eau, elles survivent quand meme quelques jours 
-                    '(on choisit 5 jours, pour etre du coté de la sécurité...).
+                    '(on choisit 3 jours, pour etre du coté de la sécurité...).
                     mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mAutoriseDev)
                     mStadeLarvaire = mStadeLarvaireResult(0)
                     mAutoriseDev = mStadeLarvaireResult(1)
                 End If
             ElseIf mDaysWithoutWater < 15.0F Then
-                'Après ces 5 jours, les larves meurent
+                'Après ces 3 jours, les larves meurent
                 mAutoriseDev = 0
                 mStadeLarvaire = 0
             Else
@@ -191,12 +195,12 @@ Public Class Mousticator
 
         Dim i As Integer
 
-        'percentage_incr montre l'augmentation du pourcentage de la maturation de l'état qui avait 
-        'lieu entre hier et aujourd'hui
+        'percentage_incr montre l'augmentation du pourcentage de la maturation de l'état qui a lieu
+        'lors d'une exécution du script
         Dim percentage_incr As Single
 
-        'dans le cas où un changement d'état a lieu entre hier et aujourd'hui, time_new_state indique 
-        'le temps qui s'est écoulé depuis que ce nouvel état a lieu.
+        'dans le cas où un changement d'état a lieu, time_new_state indique le temps qui s'est écoulé 
+        'depuis que ce nouvel état a lieu.
         Dim time_new_state As Single
 
         If T < Model(0, 0) Or T > Model(0, noCol) Then
@@ -211,8 +215,8 @@ Public Class Mousticator
                 If T >= Model(0, i) And T < Model(0, i + 1) Then
                     'percentage_incr est calculé de la manière suivante: on détermine par une interpolation 
                     'linéaire le nombre de jours nécessaires pour que le stade en cours soit complété. 
-                    'Ensuite, on divise le pas de temps d'exécution du modèle par ce résultat pour obtenir 
-                    'l'incrément de pourcentage d'accomplissement de ce stade lors de l'exécution en cours.
+                    'Ensuite, on divise le pas de temps d'exécution (en jours) du modèle par ce résultat pour 
+                    'obtenir l'incrément de pourcentage d'accomplissement de ce stade lors de l'exécution en cours.
                     percentage_incr = CSng(1.0F / mNumberOfStepsPerDay / (Model(state_today, i) + (T - Model(0, i)) / (Model(0, i + 1) - Model(0, i)) * (Model(state_today, i + 1) - Model(state_today, i))))
 
 
@@ -220,7 +224,7 @@ Public Class Mousticator
                         'lorsque le pourcentage d'accomplissement dépasse 1, cela signifie qu'un nouveau stade
                         'larvaire a été atteint.
                         If state_today = 4 Then
-                            'Si le dernier stade vient d'etre complété, cela signifie que les larves ont atteint
+                            'Si le dernier stade (4) vient d'etre complété, cela signifie que les larves ont atteint
                             'le stade adulte. Il faudra 15 jours d'assèchement pour qu'un nouveau développement
                             'débute.
                             time_new_state = 0
