@@ -14,3 +14,6 @@ C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\ConsoleA
 C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.xml
 C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\ConsoleApplication1\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.Resources.resources
 C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\ConsoleApplication1\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.vbproj.GenerateResource.Cache
+C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\old\ConsoleApplication1\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.exe
+C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\old\ConsoleApplication1\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.xml
+C:\Users\max\Documents\cours MA2\design project\dossier_partage\code_vb\old\ConsoleApplication1\ConsoleApplication1\obj\x86\Debug\ConsoleApplication1.pdb

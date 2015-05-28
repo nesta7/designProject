@@ -142,8 +142,8 @@ Public Class Mousticator
 
         If _Level >= Me.z Then
             If mAutoriseDev = 1 Then
-                If mStadeLarvaire = 0 Then
-                    mStadeLarvaire = 1
+                If mStadeLarvaire = 0.0F Then
+                    mStadeLarvaire = 1.0F
                 End If
 
                 'Lorsqu'une inondation a lieu et si le développement est autorisé (càd, si le terrain a été 
