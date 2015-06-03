@@ -51,7 +51,7 @@ Public Class Mousticator
         P = Nothing
         '2
         P = New Parameter(ParameterTypeEnum.NotDefined, __AutoriseDev, "(-)")
-        P.ParamValue = 0.0F
+        P.ParamValue = 1.0F
         MyBase.Parameters.Add(P)
         P = Nothing
         '3
@@ -145,12 +145,11 @@ Public Class Mousticator
                 If mStadeLarvaire = 0.0F Then
                     mStadeLarvaire = 1.0F
                 End If
-
                 'Lorsqu'une inondation a lieu et si le développement est autorisé (càd, si le terrain a été 
                 'à sec pendant au moins 15 jours), on lance le calcul de développement larvaire
                 mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mAutoriseDev)
                 mStadeLarvaire = mStadeLarvaireResult(0)
-                mAutoriseDev = mStadeLarvaireResult(1)
+                mAutoriseDev = CShort(mStadeLarvaireResult(1))
             End If
             'puisqu'il y a inondation, le nombre de jours sans eau est remis à 0
             mDaysWithoutWater = 0
@@ -158,12 +157,15 @@ Public Class Mousticator
             'si le terrain est à sec, on incrémente la variable donnant le nombre de jours à sec
             mDaysWithoutWater += 1.0F / mNumberOfStepsPerDay
             If mDaysWithoutWater <= 3.0F Then
-                If autoriseDev = 1 Then
-                    'Si les larves sont privées d'eau, elles survivent quand meme quelques jours 
-                    '(on choisit 3 jours, pour etre du coté de la sécurité...).
-                    mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mAutoriseDev)
-                    mStadeLarvaire = mStadeLarvaireResult(0)
-                    mAutoriseDev = mStadeLarvaireResult(1)
+                If mAutoriseDev = 1 Then
+                    If mStadeLarvaire <> 0.0F Then
+                        'Si les larves sont privées d'eau, elles survivent quand meme quelques jours 
+                        '(on choisit 3 jours, pour etre du coté de la sécurité...), du moment qu'elles
+                        'ont déjà éclos.
+                        mStadeLarvaireResult = Me.CalculateStadeLarvaire(mStadeLarvaire, _T, mAutoriseDev)
+                        mStadeLarvaire = mStadeLarvaireResult(0)
+                        mAutoriseDev = mStadeLarvaireResult(1)
+                    End If
                 End If
             ElseIf mDaysWithoutWater < 15.0F Then
                 'Après ces 3 jours, les larves meurent
@@ -173,6 +175,7 @@ Public Class Mousticator
                 'lorsque le terrain a été pendant au moins 15 jours à sec, un nouveau développement
                 'larvaire pourra avoir lieu lors de la prochaine inondation
                 mAutoriseDev = 1
+                mStadelarvaire = 0
             End If
         End If
 
@@ -208,7 +211,8 @@ Public Class Mousticator
                 'les larves meurent (si elles existent) lorsque la température se trouve en dehors des limites 
                 'du modèle de développement larvaire.
                 autoriseDev = 0
-                stadeLarvaire = 0
+                state_today = 0
+                percentage_today = 0
             End If
         Else
             For i = 0 To noCol - 1
@@ -288,7 +292,7 @@ Public Class Mousticator
 
     Public Overrides Sub DefaultStart(ByVal Coeff As Single)
         mStadeLarvaireIni = CSng(Me.Parameters(__stadelarvaire_parameter).ParamValue)
-        mAutoriseDevIni = CInt(Me.Parameters(__AutoriseDev_parameter).ParamValue)
+        mAutoriseDevIni = CShort(Me.Parameters(__AutoriseDev_parameter).ParamValue)
         mDaysWithoutWaterIni = CInt(Me.Parameters(__DaysWithoutWater_parameter).ParamValue)
     End Sub
 
@@ -301,7 +305,7 @@ Public Class Mousticator
     Public Overrides Sub Hotstart(ByVal index As Integer, ByVal Coeff As Single, Optional ByVal UpdateRange As Single = 1000)
         'Débit initial constant dans le tronçon
         If Results(__StadeLarvaire_result).X.Length >= index + 1 Then mStadeLarvaireIni = Results(__StadeLarvaire_result).X(index)
-        If Results(__AutoriseDev_result).X.Length >= index + 1 Then mAutoriseDevIni = CInt(Results(__AutoriseDev_result).X(index))
+        If Results(__AutoriseDev_result).X.Length >= index + 1 Then mAutoriseDevIni = CShort(Results(__AutoriseDev_result).X(index))
         If Results(__DaysWithoutWater_result).X.Length >= index + 1 Then mDaysWithoutWaterIni = CInt(Results(__DaysWithoutWater_result).X(index))
     End Sub
 
